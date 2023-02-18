@@ -20,7 +20,7 @@ const SignUp: FC = () => {
       />
       <div className="w-80 mx-auto">
         <Input
-          id="1"
+          id="Username"
           type="text"
           name="Enter Username"
           placeholder="Enter Username"
@@ -30,7 +30,7 @@ const SignUp: FC = () => {
         />
         <div className="py-6 ">
           <Input
-            id="2"
+            id="Password"
             type="text"
             name="Enter Password"
             placeholder="Enter Password"

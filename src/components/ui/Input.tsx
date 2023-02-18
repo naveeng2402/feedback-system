@@ -29,7 +29,7 @@ const Input: FC<Inputprops> = ({
         id={id}
         type={type}
         placeholder={placeholder}
-        className="rounded-xl border-2 w-full border-blue-100 mt-1 pt-2  pl-5 pb-2.5 "
+        className="rounded-xl border-2 w-full border-blue-100 mt-1 py-2  pl-5  "
         onChange={(e) => setValue(e.target.value)}
         value={value}
       ></input>

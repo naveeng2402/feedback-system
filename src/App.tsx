@@ -21,7 +21,10 @@ function App() {
         ))}
       </div>
       <div className="m-4 flex gap-6">
-        <Button onClick={() => signIn("naveeng2404@gmail.com", "pass1234")}>
+        <Button
+          as="label"
+          onClick={() => signIn("naveeng2404@gmail.com", "pass1234")}
+        >
           <p>Sign In</p>
           <Chevron className="h-6  w-6 translate-y-0.5 fill-white transition duration-500 hover:rotate-180" />
         </Button>

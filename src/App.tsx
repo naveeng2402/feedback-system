@@ -1,6 +1,6 @@
 import { createClient, useQuery } from "urql";
 import { regs } from "@/graphql/queries/regulations";
-import { ReactComponent as Chevron } from "@/assets/icons/Chevron.svg";
+import { ReactComponent as Chevron } from "@icons/Chevron.svg";
 
 function App() {
   const [result, reExecuteQuery] = useQuery({

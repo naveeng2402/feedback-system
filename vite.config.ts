@@ -14,6 +14,7 @@ export default defineConfig({
       "@global": fileURLToPath(
         new URL("./src/components/global", import.meta.url)
       ),
+      "@icons": fileURLToPath(new URL("./src/assets/icons", import.meta.url)),
     },
   },
 });

@@ -1,22 +1,29 @@
 import { createClient, useQuery } from "urql";
 import { regs } from "@/graphql/queries/regulations";
-import { ReactComponent as Chevron } from "@icons/Chevron.svg";
+import Dropdown from "@ui/Dropdown";
+import Button from "@ui/Button";
+import SignUp from "@/pages/SignUp";
+import Input from "@ui/Input";
+import { useState } from "react";
 
 function App() {
-  const [result, reExecuteQuery] = useQuery({
-    query: regs,
-  });
+  const people = [
+    { id: 1, name: "1" },
+    { id: 2, name: "Kenton Towne" },
+    { id: 3, name: "Therese Wunsch" },
+    { id: 4, name: "Benedict Kessler" },
+    { id: 5, name: "Katelyn Rohan" },
+  ];
 
-  const { data, fetching, error } = result;
-
-  if (fetching) return <p>Loading...</p>;
-  if (error) return <p>Oh no... {error.message}</p>;
+  const [selectedValue, setSelectedValue] = useState(people[0]);
   return (
-    <div>
-      {result.data?.regulationsCollection?.edges.map((elem, idx) => (
-        <p key={elem.node.id}>{elem.node.reg}</p>
-      ))}
-      <Chevron className="m-4 h-16 w-16 fill-blue-500 transition duration-500 hover:rotate-180" />
+    <div className="w-80">
+      {/* <SignUp /> */}
+      <Dropdown
+        value={selectedValue}
+        setValue={setSelectedValue}
+        options={people}
+      />
     </div>
   );
 }

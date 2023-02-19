@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "@/assets/index.css";
 import { createClient, Provider } from "urql";
+import { AuthProvider } from "@/context/auth";
 
 const headers = {
   apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
@@ -18,7 +19,9 @@ const client = createClient({
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider value={client}>
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </Provider>
   </React.StrictMode>
 );

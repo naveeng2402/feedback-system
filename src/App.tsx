@@ -1,5 +1,6 @@
 import { createClient, useQuery } from "urql";
 import { regs } from "@/graphql/queries/regulations";
+import { ReactComponent as Chevron } from "@/assets/icons/Chevron.svg";
 
 function App() {
   const [result, reExecuteQuery] = useQuery({
@@ -15,6 +16,7 @@ function App() {
       {result.data?.regulationsCollection?.edges.map((elem, idx) => (
         <p key={elem.node.id}>{elem.node.reg}</p>
       ))}
+      <Chevron className="m-4 h-16 w-16 fill-blue-500 transition duration-500 hover:rotate-180" />
     </div>
   );
 }

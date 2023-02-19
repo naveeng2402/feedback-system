@@ -2,7 +2,7 @@ import { createClient, useQuery } from "urql";
 import { regs } from "@/graphql/queries/regulations";
 import { ReactComponent as Chevron } from "@icons/Chevron.svg";
 import { AuthContext, type IAuthContext } from "@/context/auth";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import Button from "@ui/Button";
 
@@ -13,10 +13,6 @@ function App() {
     query: regs,
   });
 
-  const { data, fetching, error } = result;
-
-  if (fetching) return <p>Loading...</p>;
-  if (error) return <p>Oh no... {error.message}</p>;
   return (
     <div className="mx-auto my-12 w-fit">
       <div className="space-y-2">
@@ -25,7 +21,10 @@ function App() {
         ))}
       </div>
       <div className="m-4 flex gap-6">
-        <Button onClick={() => signIn("naveeng2404@gmail.com", "pass1234")}>
+        <Button
+          as="label"
+          onClick={() => signIn("naveeng2404@gmail.com", "pass1234")}
+        >
           <p>Sign In</p>
           <Chevron className="h-6  w-6 translate-y-0.5 fill-white transition duration-500 hover:rotate-180" />
         </Button>

@@ -1,11 +1,11 @@
 import { FC } from "react";
 import Button from "@ui/Button";
 
-interface fcProps {
+interface FbcProps {
   data: string;
 }
 
-const FeedbackCard: FC<fcProps> = ({ data }) => {
+const FeedbackCard: FC<FbcProps> = ({ data }) => {
   return (
     <div className=" grid w-full place-items-center rounded-xl border-2 border-blue-300">
       <div className="  my-6  text-center font-bold text-blue-500 ">

@@ -7,7 +7,6 @@ interface Inputprops {
   id: string;
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
-  Class: string;
 }
 
 const Input: FC<Inputprops> = ({
@@ -17,11 +16,10 @@ const Input: FC<Inputprops> = ({
   id,
   value,
   setValue,
-  Class,
 }) => {
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor={id} className={Class}>
+      <label htmlFor={id} className="text-xl text-blue-800">
         {name}
       </label>
 
@@ -29,7 +27,7 @@ const Input: FC<Inputprops> = ({
         id={id}
         type={type}
         placeholder={placeholder}
-        className="rounded-xl border-2 w-full border-blue-100 mt-1 py-2  pl-5  "
+        className="w-full rounded-xl border-2 border-blue-100 py-4 px-5  text-blue-900  "
         onChange={(e) => setValue(e.target.value)}
         value={value}
       ></input>

@@ -4,6 +4,7 @@ import App from "./App";
 import "@/assets/index.css";
 import { createClient, Provider } from "urql";
 import { AuthProvider } from "@/context/auth";
+import { BrowserRouter } from "react-router-dom";
 
 const headers = {
   apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
@@ -20,7 +21,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider value={client}>
       <AuthProvider>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </AuthProvider>
     </Provider>
   </React.StrictMode>

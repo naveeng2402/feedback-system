@@ -41,7 +41,7 @@ const SignIn = () => {
         <p className="text-center text-sm">
           Need a Student account?{" "}
           <NavLink className="text-blue-700" to="/auth/sign-up">
-            Sign Up
+            Sign Up.
           </NavLink>
         </p>
       </div>

@@ -16,7 +16,7 @@ const AuthBase = () => {
           <h1 className="text-4xl font-semibold text-blue-800">
             Jaya Engineering College
           </h1>
-          <h2 className="">Feedback System</h2>
+          <h2 className="font-semibold">Feedback System</h2>
         </header>
         <Illustration className="max-h-[40vh] w-3/4" />
         <main className="w-full px-4">

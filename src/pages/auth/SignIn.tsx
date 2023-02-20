@@ -5,7 +5,40 @@ import { useState } from "react";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  return <div>Sign In</div>;
+
+  const signIn = () => {
+    alert(`Email: ${email}\nPass: ${pass}`);
+  };
+
+  return (
+    <div className="my-2 mx-auto max-w-sm space-y-12">
+      <div className="space-y-4">
+        <Input
+          name="Email"
+          id="email"
+          type="email"
+          placeholder=""
+          value={email}
+          setValue={setEmail}
+        />
+        <Input
+          name="Password"
+          id="pass"
+          type="password"
+          placeholder=""
+          value={pass}
+          setValue={setPass}
+        />
+      </div>
+      <Button
+        onClick={signIn}
+        size="medium"
+        className="mx-auto w-full px-8 py-4"
+      >
+        Sign In
+      </Button>
+    </div>
+  );
 };
 
 export default SignIn;

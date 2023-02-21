@@ -1,9 +1,12 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { ReactComponent as SignInIllustration } from "@/assets/illustrations/SignIn.svg";
 import { ReactComponent as SignUpIllustration } from "@/assets/illustrations/SignUp.svg";
+import { useContext } from "react";
+import { AuthContext, IAuthContext } from "@/context/auth";
 
 const AuthBase = () => {
   const location = useLocation();
+  const { signOut } = useContext(AuthContext) as IAuthContext;
   const Illustration =
     location.pathname === "/auth/sign-in"
       ? SignInIllustration
@@ -25,6 +28,13 @@ const AuthBase = () => {
       </div>
       <footer className="m-2 text-sm text-blue-800">
         2023 JEC All Rights Reserved{" "}
+        <span
+          onClick={() => {
+            signOut();
+          }}
+        >
+          signOut
+        </span>
       </footer>
     </div>
   );

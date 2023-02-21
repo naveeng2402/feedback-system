@@ -1,14 +1,22 @@
+import { AuthContext, type IAuthContext } from "@/context/auth";
 import { Button, Input } from "@ui/index";
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useContext, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
 
-  const signUp = () => {
-    alert(`Email: ${email}\nPass: ${pass}\nConfirm:${confirmPass}`);
+  const { signUp } = useContext(AuthContext) as IAuthContext;
+  const navigate = useNavigate();
+
+  const signUpHandler = () => {
+    signUp(email, pass)
+      .then((res) => {
+        alert(JSON.stringify(res));
+      })
+      .catch((err) => alert(JSON.stringify(err)));
   };
 
   return (
@@ -44,7 +52,7 @@ const SignUp = () => {
       </div>
       <div className="space-y-2">
         <Button
-          onClick={signUp}
+          onClick={signUpHandler}
           size="medium"
           className="mx-auto w-full px-8 py-4"
         >

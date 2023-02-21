@@ -1,13 +1,23 @@
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Input } from "@ui/index";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext, IAuthContext } from "@/context/auth";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
-  const signIn = () => {
-    alert(`Email: ${email}\nPass: ${pass}`);
+  const { auth, signIn } = useContext(AuthContext) as IAuthContext;
+  const navigate = useNavigate();
+
+  const signInHandler = () => {
+    signIn(email, pass)
+      .then((res) => {
+        navigate(res as string);
+      })
+      .catch((err) => {
+        alert("Catch" + JSON.stringify(err));
+      });
   };
 
   return (
@@ -32,7 +42,7 @@ const SignIn = () => {
       </div>
       <div className="space-y-2">
         <Button
-          onClick={signIn}
+          onClick={signInHandler}
           size="medium"
           className="mx-auto w-full px-8 py-4"
         >

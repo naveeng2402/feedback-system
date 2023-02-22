@@ -2,41 +2,40 @@ import { createClient, useQuery } from "urql";
 import { regs } from "@/graphql/queries/regulations";
 import { ReactComponent as Chevron } from "@icons/Chevron.svg";
 import { AuthContext, type IAuthContext } from "@/context/auth";
-import { useContext, useState } from "react";
+import { useContext, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 
 import Button from "@ui/Button";
+import ProtectedRoute from "./components/global/ProtectedRoute";
+import { AuthBase, SignIn, SignUp } from "./pages/auth";
+import DashBoard from "./pages/DashBoard";
+import Error404 from "./components/global/Error404";
 
 function App() {
-  const { auth, signIn, signOut } = useContext(AuthContext) as IAuthContext;
+  const { updateUser } = useContext(AuthContext) as IAuthContext;
 
-  const [result, reExecuteQuery] = useQuery({
-    query: regs,
-  });
+  useEffect(() => {
+    updateUser();
+  }, []);
 
   return (
-    <div className="mx-auto my-12 w-fit">
-      <div className="space-y-2">
-        {result.data?.regulationsCollection?.edges.map((elem, idx) => (
-          <p key={elem.node.id}>{elem.node.reg}</p>
-        ))}
-      </div>
-      <div className="m-4 flex gap-6">
-        <Button
-          as="label"
-          onClick={() => signIn("naveeng2404@gmail.com", "pass1234")}
-        >
-          <p>Sign In</p>
-          <Chevron className="h-6  w-6 translate-y-0.5 fill-white transition duration-500 hover:rotate-180" />
-        </Button>
-        <Button onClick={signOut} intent="inactive" className="group">
-          <p>Sign Out</p>
-          <Chevron className="h-6 w-6 translate-y-0.5 transition duration-200 group-hover:rotate-180" />
-        </Button>
-        <Button size="circle" className="group p-2">
-          <Chevron className="h-8 w-8 translate-y-[10%] transition group-hover:rotate-180" />
-        </Button>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/">
+        <Route path="auth/" element={<AuthBase />}>
+          <Route path="sign-up" element={<SignUp />} />
+          <Route path="sign-in" element={<SignIn />} />
+        </Route>
+      </Route>
+
+      <Route path="/stud/" element={<ProtectedRoute roles={["stud"]} />}>
+        <Route path="dashboard/" element={<DashBoard />} />
+      </Route>
+      <Route path="/staff/" element={<ProtectedRoute roles={["staff"]} />}>
+        <Route path="dashboard/" element={<DashBoard />} />
+      </Route>
+
+      <Route path="*" element={<Error404 />} />
+    </Routes>
   );
 }
 

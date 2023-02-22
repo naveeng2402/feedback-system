@@ -8,7 +8,7 @@ interface WCprops {
 const WarningCard: FC<WCprops> = ({ data }) => {
   return (
     <div className="flex items-center justify-start gap-4  rounded-lg bg-[#FFF3E6] px-4 py-4">
-      <Vector className="h-9 w-16" />
+      <Vector className="h-16 w-16" />
       <p className="text-[#DC7704]">{data}</p>
     </div>
   );

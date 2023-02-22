@@ -9,6 +9,7 @@ import useLocalStorage from "@/hooks/useLocalStorage";
 export type IAuth = {
   user: User | null;
   session: Session | null;
+  profile?: any;
 };
 
 export interface IAuthContext {

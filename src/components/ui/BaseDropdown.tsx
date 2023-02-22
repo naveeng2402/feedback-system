@@ -27,7 +27,7 @@ const BaseDropdown: FC<DropdownProps> = ({
         {value.text}
         <Chevron className="h-6  w-6 translate-y-0.5 transition duration-200 ui-open:rotate-180" />
       </Listbox.Button>
-      <Listbox.Options className="my-1 flex flex-col gap-2  rounded-xl border-2 border-blue-500 px-2 py-4 text-blue-900">
+      <Listbox.Options className="absolute  my-1 flex w-full flex-col gap-2 rounded-xl  border-2 border-blue-500 bg-white px-2 py-4 text-blue-900">
         {options.map((option) => (
           <Listbox.Option
             key={option.id}

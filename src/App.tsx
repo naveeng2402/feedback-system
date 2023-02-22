@@ -1,8 +1,3 @@
-import { createClient, useQuery } from "urql";
-import { regs } from "@/graphql/queries/regulations";
-import { ReactComponent as Chevron } from "@icons/Chevron.svg";
-import { AuthContext, type IAuthContext } from "@/context/auth";
-import { useContext, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import Button from "@ui/Button";
@@ -10,14 +5,9 @@ import ProtectedRoute from "./components/global/ProtectedRoute";
 import { AuthBase, SignIn, SignUp } from "./pages/auth";
 import DashBoard from "./pages/DashBoard";
 import Error404 from "./components/global/Error404";
+import StudentProfile from "./pages/auth/StudentProfile";
 
 function App() {
-  const { updateUser } = useContext(AuthContext) as IAuthContext;
-
-  useEffect(() => {
-    updateUser();
-  }, []);
-
   return (
     <Routes>
       <Route path="/">
@@ -28,6 +18,7 @@ function App() {
       </Route>
 
       <Route path="/stud/" element={<ProtectedRoute roles={["stud"]} />}>
+        <Route path="profile/" element={<StudentProfile />} />
         <Route path="dashboard/" element={<DashBoard />} />
       </Route>
       <Route path="/staff/" element={<ProtectedRoute roles={["staff"]} />}>

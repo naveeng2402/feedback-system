@@ -12,9 +12,19 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const signUpHandler = () => {
+    if (!email.endsWith("@jec.ac.in")) {
+      alert("Emails can only be within jec.ac.in");
+      return;
+    }
+
+    if (pass != confirmPass) {
+      alert("passwords did not match");
+      return;
+    }
+
     signUp(email, pass)
       .then((res) => {
-        alert(JSON.stringify(res));
+        if (typeof res === "string") navigate(res);
       })
       .catch((err) => alert(JSON.stringify(err)));
   };

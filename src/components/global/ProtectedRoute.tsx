@@ -19,6 +19,7 @@ const ProtectedRoute = ({ roles }: { roles: Roles[] }) => {
 
   const location = useLocation();
 
+  console.log(JSON.stringify(auth));
   return auth.user &&
     roles.includes(auth.user.user_metadata["role"] as Roles) ? (
     <Outlet />

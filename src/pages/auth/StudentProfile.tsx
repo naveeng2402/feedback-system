@@ -1,3 +1,4 @@
+import { WarningCard } from "@ui/index";
 import { AuthContext, IAuthContext } from "@/context/auth";
 import { deptOptionsQuery } from "@/graphql/queries/deptOptions";
 import { supabase } from "@/supabase";
@@ -48,6 +49,10 @@ const StudentProfile = () => {
         <h1 className="my-2 text-center text-4xl font-semibold text-blue-700">
           Student Profile Setup
         </h1>
+        <WarningCard
+          data="This is a one time setup incase of any
+ changes contact admin"
+        />
       </header>
       <main className="space-y-4">
         <Input

@@ -1,11 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 
-import Button from "@ui/Button";
 import ProtectedRoute from "./components/global/ProtectedRoute";
-import { AuthBase, SignIn, SignUp } from "./pages/auth";
-import DashBoard from "./pages/DashBoard";
-import Error404 from "./components/global/Error404";
+import { SignIn, SignUp } from "@/pages/auth";
+import AuthBase from "@/layouts/AuthBase";
+import DashBoard from "@/pages/stud/DashBoard";
+import Error404 from "@global/Error404";
 import StudentProfile from "./pages/auth/StudentProfile";
+import StudentBase from "./layouts/StudentBase";
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
 
       <Route path="/stud/" element={<ProtectedRoute roles={["stud"]} />}>
         <Route path="profile/" element={<StudentProfile />} />
-        <Route path="dashboard/" element={<DashBoard />} />
+        <Route element={<StudentBase />}>
+          <Route path="dashboard/" element={<DashBoard />} />
+        </Route>
       </Route>
       <Route path="/staff/" element={<ProtectedRoute roles={["staff"]} />}>
         <Route path="dashboard/" element={<DashBoard />} />

@@ -4,6 +4,7 @@ import type { FC, ReactNode } from "react";
 import type { AuthError, Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/supabase";
 import { Roles } from "@/types";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 export type IAuth = {
   user: User | null;
@@ -15,9 +16,7 @@ export interface IAuthContext {
   signUp: (
     email: string,
     password: string
-  ) => Promise<
-    AuthError | "/stud/dashboard" | "/staff/dashboard" | "/admin/dashboard"
-  >;
+  ) => Promise<AuthError | "/stud/profile">;
   signIn: (
     email: string,
     password: string
@@ -25,13 +24,15 @@ export interface IAuthContext {
     AuthError | "/stud/dashboard" | "/staff/dashboard" | "/admin/dashboard"
   >;
   signOut: () => Promise<AuthError | undefined>;
-  updateUser: () => void;
 }
 
 export const AuthContext = createContext<IAuthContext | null>(null);
 
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [auth, setAuth] = useState<IAuth>({ user: null, session: null });
+  const [auth, setAuth] = useLocalStorage<IAuth>("auth", {
+    user: null,
+    session: null,
+  });
 
   const redirect = () => {
     const role: Roles = auth.user?.user_metadata.role;
@@ -57,7 +58,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     }
     setAuth(res.data);
 
-    return redirect();
+    return "/stud/profile";
   };
 
   const signIn = async (email: string, password: string) => {
@@ -78,17 +79,8 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     setAuth({ user: null, session: null });
   };
 
-  const updateUser = async () => {
-    const session = await supabase.auth.getSession();
-
-    setAuth({
-      session: session.data.session,
-      user: session.data.session?.user as User,
-    });
-  };
-
   return (
-    <AuthContext.Provider value={{ auth, signUp, signIn, signOut, updateUser }}>
+    <AuthContext.Provider value={{ auth, signUp, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

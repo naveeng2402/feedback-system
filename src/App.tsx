@@ -7,6 +7,7 @@ import DashBoard from "@/pages/stud/DashBoard";
 import Error404 from "@global/Error404";
 import StudentProfile from "./pages/auth/StudentProfile";
 import StudentBase from "./layouts/StudentBase";
+import { FeedbackList } from "@/pages/stud";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="profile/" element={<StudentProfile />} />
         <Route element={<StudentBase />}>
           <Route path="dashboard/" element={<DashBoard />} />
+          <Route path="feedback-list/" element={<FeedbackList />} />
         </Route>
       </Route>
       <Route path="/staff/" element={<ProtectedRoute roles={["staff"]} />}>

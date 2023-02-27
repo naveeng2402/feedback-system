@@ -5,8 +5,8 @@
     "icon": ""
   },
   {
-    "text": "Home",
-    "to": "/home",
+    "text": "Staff Management",
+    "to": "/admin/staff_management",
     "icon": ""
   },
   {

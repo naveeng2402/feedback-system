@@ -10,6 +10,7 @@ import StudentBase from "./layouts/StudentBase";
 import { FeedbackList } from "@/pages/stud";
 import AdminBase, { AdminReportNav } from "./layouts/AdminBase";
 import { FeedbackResult } from "./pages/admin";
+import StaffManagement from "./pages/admin/StaffManagement";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
         </Route>
       </Route>
 
-      <Route path="/stud/" element={<ProtectedRoute roles={["stud"]} />}>
+      <Route path="/stud/" element={<ProtectedRoute roles={["admin"]} />}>
         <Route path="profile/" element={<StudentProfile />} />
         <Route element={<StudentBase />}>
           <Route path="dashboard/" element={<DashBoard />} />
@@ -33,6 +34,7 @@ function App() {
       </Route>
       <Route path="/admin/" element={<ProtectedRoute roles={["admin"]} />}>
         <Route element={<AdminBase />}>
+          <Route path="staff_management/" element={<StaffManagement />} />
           <Route path="dashboard/" element={<AdminReportNav />}>
             <Route
               path="stud_course/"

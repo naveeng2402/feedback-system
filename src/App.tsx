@@ -8,6 +8,8 @@ import Error404 from "@global/Error404";
 import StudentProfile from "./pages/auth/StudentProfile";
 import StudentBase from "./layouts/StudentBase";
 import { FeedbackList } from "@/pages/stud";
+import AdminBase, { AdminReportNav } from "./layouts/AdminBase";
+import { FeedbackResult } from "./pages/admin";
 
 function App() {
   return (
@@ -28,6 +30,20 @@ function App() {
       </Route>
       <Route path="/staff/" element={<ProtectedRoute roles={["staff"]} />}>
         <Route path="dashboard/" element={<DashBoard />} />
+      </Route>
+      <Route path="/admin/" element={<ProtectedRoute roles={["admin"]} />}>
+        <Route element={<AdminBase />}>
+          <Route path="dashboard/" element={<AdminReportNav />}>
+            <Route
+              path="stud_course/"
+              element={<FeedbackResult report="stud_course" />}
+            />
+            <Route
+              path="stud_lab/"
+              element={<FeedbackResult report="stud_lab" />}
+            />
+          </Route>
+        </Route>
       </Route>
 
       <Route path="*" element={<Error404 />} />

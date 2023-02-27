@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .nav-modal.active {
+    @apply bg-blue-100 fill-blue-900 stroke-blue-900 text-2xl font-bold text-blue-900;
+  }
+  .nav-chip.active {
+    @apply bg-blue-700 fill-white stroke-white text-white;
+  }
+}

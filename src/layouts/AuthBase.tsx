@@ -3,6 +3,7 @@ import { ReactComponent as SignInIllustration } from "@/assets/illustrations/Sig
 import { ReactComponent as SignUpIllustration } from "@/assets/illustrations/SignUp.svg";
 import { useContext } from "react";
 import { AuthContext, IAuthContext } from "@/context/auth";
+import { signUpAdmin } from "@/utils";
 
 const AuthBase = () => {
   const location = useLocation();

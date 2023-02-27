@@ -1,9 +1,10 @@
 import { Disclosure } from "@headlessui/react";
 import { FC } from "react";
 import { ReactComponent as Chevron } from "@icons/Chevron.svg";
+import RatingChip from "./RatingChip";
 
 interface FeedbackAccordionProps {
-  ratingChip: React.ReactNode;
+  overallRating: number;
   Options: OptionsProps[];
   question: string;
 }
@@ -14,7 +15,7 @@ interface OptionsProps {
 }
 
 const FeedbackAccordion: FC<FeedbackAccordionProps> = ({
-  ratingChip,
+  overallRating,
   Options,
   question,
 }) => {
@@ -26,7 +27,9 @@ const FeedbackAccordion: FC<FeedbackAccordionProps> = ({
       >
         <p className="">{question}</p>
 
-        <div className="">{ratingChip}</div>
+        <div className="">
+          <RatingChip rating={overallRating} />
+        </div>
         <Chevron className="h-6  w-6 translate-y-0.5 transition duration-200 ui-open:rotate-180" />
       </Disclosure.Button>
       <Disclosure.Panel className="text-gray-500" as="div">

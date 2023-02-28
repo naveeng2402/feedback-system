@@ -12,7 +12,7 @@ const SubjectCard: FC<SubjectCard> = ({ subjectname, professorname }) => {
     <div className="rounded-lg border-2 border-[#D0D4E3] p-4">
       <div className="flex items-center gap-8 py-4">
         <Faculty className="" />
-        <p>{subjectname}</p>
+        <p className="">{subjectname}</p>
       </div>
       <div className="mx-12">
         <div className="flex  items-center rounded-lg  border-2 border-[#B1C1FD] bg-[#B1C1FD] p-2  ">

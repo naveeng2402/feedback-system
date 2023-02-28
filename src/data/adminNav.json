@@ -2,11 +2,11 @@
   {
     "text": "Student(Course)",
     "to": "/admin/dashboard/stud_course",
-    "icon": ""
+    "icon": "Book"
   },
   {
     "text": "Student(Lab)",
     "to": "/admin/dashboard/stud_lab",
-    "icon": ""
+    "icon": "Flask"
   }
 ]

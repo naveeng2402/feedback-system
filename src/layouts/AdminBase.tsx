@@ -3,7 +3,9 @@ import adminNav from "@/data/adminNav.json";
 import { Dialog } from "@headlessui/react";
 import { ReactComponent as Hamburger } from "@icons/Hamburger.svg";
 import { ReactComponent as XMark } from "@icons/XMark.svg";
-import { FC, useState } from "react";
+import { ReactComponent as Book } from "@icons/Book.svg";
+import { ReactComponent as Flask } from "@icons/Flask.svg";
+import { FC, ReactSVGElement, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
 interface NavigationModalProps {
@@ -24,7 +26,7 @@ const NavigationModal: FC<NavigationModalProps> = ({ isOpen, setIsOpen }) => {
         >
           <XMark className="mx-4 ml-auto h-8 w-8 cursor-pointer text-blue-800" />
         </button>
-        <div className="hover justify-around gap-2 rounded-xl py-4 text-2xl text-blue-800">
+        <div className="flex flex-col justify-around gap-2 rounded-xl py-4 text-2xl text-blue-800">
           {navigationData.map((nav, i) => (
             <NavLink
               className="hover:active nav-modal block rounded-xl p-2 px-4 transition-all"
@@ -40,22 +42,30 @@ const NavigationModal: FC<NavigationModalProps> = ({ isOpen, setIsOpen }) => {
   );
 };
 
-const AdminReportNav: FC = () => (
-  <>
-    <section className="flex w-full gap-4 border-y py-2 text-gray-500">
-      {adminNav.map((nav, idx) => (
-        <NavLink
-          key={idx}
-          to={nav.to}
-          className="nav-chip rounded-lg bg-blue-200 px-4 py-2"
-        >
-          <p>{nav.text}</p>
-        </NavLink>
-      ))}
-    </section>
-    <Outlet />
-  </>
-);
+const AdminReportNav: FC = () => {
+  return (
+    <>
+      <section className="flex w-full gap-4 border-y stroke-gray-500 py-2 text-gray-500">
+        {adminNav.map((nav, idx) => (
+          <NavLink
+            key={idx}
+            to={nav.to}
+            className="nav-chip flex gap-2 rounded-lg bg-blue-200 px-4 py-2"
+          >
+            <p>{nav.text}</p>
+            {
+              {
+                Book: <Book />,
+                Flask: <Flask />,
+              }[nav.icon]
+            }
+          </NavLink>
+        ))}
+      </section>
+      <Outlet />
+    </>
+  );
+};
 
 const AdminBase: FC = () => {
   const [navOpen, setNavOpen] = useState(false);

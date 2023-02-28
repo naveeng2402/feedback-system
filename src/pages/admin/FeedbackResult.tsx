@@ -1,8 +1,12 @@
 import { BaseDropdown, Button } from "@/components/ui";
 import { Dialog } from "@headlessui/react";
 import FeedbackCard from "@ui/FeedbackCard";
-import { ReactComponent as XMark } from "@icons/XMark.svg";
+import { ReactComponent as Filter } from "@icons/Filter.svg";
 import { FC, useState } from "react";
+import FeedbackAccordion from "@/components/ui/FeedbackAccordion";
+import { ReactComponent as Good } from "@icons/Good.svg";
+import { ReactComponent as Plus } from "@icons/Plus.svg";
+import { NavLink } from "react-router-dom";
 
 interface FeedbackResultProps {
   report: "stud_course" | "stud_lab";
@@ -50,9 +54,29 @@ const FeedbackResult: FC<FeedbackResultProps> = ({ report }) => {
           intent="inactive"
           className="mx-4 ml-auto block p-2"
         >
-          Filter
+          <span>Filter</span>
+          <Filter className="translate-y-0.5 stroke-blue-800" />
         </Button>
       </div>
+
+      <section>Feedback Detail</section>
+
+      <main className="w-full">
+        <FeedbackAccordion
+          Options={[{ score: "12", icon: <Good /> }]}
+          overallRating={3}
+          question="lorem ipsum dolor sit amet"
+        />
+      </main>
+
+      <Button
+        as={NavLink}
+        to="/admin/create_feedback"
+        size="circle"
+        className="absolute bottom-0 right-0 mx-8 my-16 stroke-white p-4"
+      >
+        <Plus />
+      </Button>
 
       <FilterModal isOpen={filterOpen} setIsOpen={setFilterOpen} />
     </>

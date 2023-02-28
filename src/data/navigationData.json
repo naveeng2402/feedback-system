@@ -1,7 +1,7 @@
 [
   {
     "text": "Home",
-    "to": "/home",
+    "to": "/admin/dashboard/stud_course",
     "icon": ""
   },
   {

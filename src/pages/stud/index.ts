@@ -1,2 +1,3 @@
 import DashBoard from "./DashBoard";
-export { DashBoard };
+import FeedbackList from "./FeedbackList";
+export { DashBoard, FeedbackList };

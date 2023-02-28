@@ -22,7 +22,7 @@ const StaffDetails: FC<StaffDetailsProps> = ({
         <p className="font-sans font-bold text-[#556085]">{professorname}</p>
       </div>
       <div className="grid grid-cols-2 px-4 py-2 font-semibold text-[#556085]">
-        <p>Staff ID: {staffid}</p>
+        <p className="">Staff ID: {staffid}</p>
         <p>Department: {dept}</p>
       </div>
     </div>

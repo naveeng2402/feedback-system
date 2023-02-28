@@ -7,6 +7,7 @@ interface FeedbackAccordionProps {
   overallRating: number;
   Options: OptionsProps[];
   question: string;
+  questionNumber: string;
 }
 
 interface OptionsProps {
@@ -17,23 +18,21 @@ interface OptionsProps {
 const FeedbackAccordion: FC<FeedbackAccordionProps> = ({
   overallRating,
   Options,
+  questionNumber,
   question,
 }) => {
   return (
-    <Disclosure as="div" className="rounded-lg border-2 border-blue-600  px-1 ">
-      <Disclosure.Button
-        as="div"
-        className="flex items-center justify-evenly gap-2"
-      >
-        <p className="">{question}</p>
-
-        <div className="">
+    <Disclosure as="div" className="rounded-lg border-2 border-[#D0D4E3]  p-4 ">
+      <Disclosure.Button as="div" className="flex gap-4 py-2">
+        <p>{questionNumber}</p>
+        <p className="flex-grow text-[#192860]">{question}</p>
+        <div className="h-fit">
           <RatingChip rating={overallRating} />
         </div>
         <Chevron className="h-6  w-6 translate-y-0.5 transition duration-200 ui-open:rotate-180" />
       </Disclosure.Button>
       <Disclosure.Panel className="text-gray-500" as="div">
-        <div className=" mx-4 flex items-center gap-4 py-2">
+        <div className=" mx-4 flex items-center justify-center gap-4 py-2">
           {Options.map((option) => {
             return (
               <div>

@@ -5,14 +5,14 @@ interface RatingChipProps extends VariantProps<typeof RatingChipCVA> {
   rating: number;
 }
 
-const RatingChipCVA = cva("rounded-lg border-2 border-green-600   px-2", {
+const RatingChipCVA = cva("rounded-lg border-2  px-4", {
   variants: {
     intent: {
-      Excellent: "bg-green-200",
-      VeryGood: "bg-green-400",
-      Good: "bg-blue-400",
-      Fair: "bg-blue-500",
-      Poor: "bg-red-500",
+      Excellent: "bg-[#A7DDB3] border-[#4FBA66] text-[#286736]",
+      VeryGood: "bg-[#A7DDB3] border-[#4FBA66] text-[#286736]",
+      Good: "bg-[#E0EDFF] border-[#B1C1FD] text-[#6B6B6B]",
+      Fair: "bg-[#F3A5AA] border-[#EA5D66] text-[#7E1018]",
+      Poor: "bg-[#F3A5AA] border-[#EA5D66] text-[#7E1018]",
     },
   },
   defaultVariants: {
@@ -36,7 +36,7 @@ const RatingChip: FC<RatingChipProps> = ({ rating }) => {
   }
   return (
     <div className={RatingChipCVA({ intent })}>
-      <h1>{rating}/5</h1>
+      <p>{rating}/5</p>
     </div>
   );
 };

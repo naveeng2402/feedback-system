@@ -7,7 +7,7 @@ interface FeedbackDetails {
   Semester: number;
   Section: string;
   Department: string;
-  year: string;
+  yearButton: React.ReactNode;
 }
 
 const FeedbackDetails: FC<FeedbackDetails> = ({
@@ -17,13 +17,13 @@ const FeedbackDetails: FC<FeedbackDetails> = ({
   Semester,
   Section,
   Department,
-  year,
+  yearButton,
 }) => {
   return (
     <div className="rounded-xl border-2 border-[#B1C1FD] bg-[#E0EDFF] p-4 ">
       <div className=" p-2 font-semibold text-[#556085]">
-        <p className="text-base">{ProfessorName}</p>
-        <p>{SubjectName}</p>
+        <p className="text-lg">{ProfessorName}</p>
+        <p className="text-sm">{SubjectName}</p>
       </div>
       <div className=" grid grid-cols-2 gap-y-2 py-4 px-2 font-bold text-blue-700">
         <p>Batch: {batch}</p>
@@ -31,7 +31,7 @@ const FeedbackDetails: FC<FeedbackDetails> = ({
         <p>Section: {Section}</p>
         <p>Department: {Department}</p>
       </div>
-      <p className="px-2 text-[#486CEC]">{year}</p>
+      <p className="px-2 text-[#486CEC]">{yearButton}</p>
     </div>
   );
 };

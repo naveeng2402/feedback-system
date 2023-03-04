@@ -2,16 +2,16 @@ import { FC } from "react";
 
 interface StaffDetailsProps {
   designation: string;
-  professorname: string;
-  staffid: string;
-  dept: string;
+  professorName: string;
+  staffId: string;
+  department: string;
 }
 
 const StaffDetails: FC<StaffDetailsProps> = ({
   designation,
-  professorname,
-  staffid,
-  dept,
+  professorName,
+  staffId,
+  department,
 }) => {
   return (
     <div className="rounded-lg border-2 border-[#B1C1FD] bg-[#E0EDFF]">
@@ -19,11 +19,11 @@ const StaffDetails: FC<StaffDetailsProps> = ({
         <p className="rounded-lg border-2 border-[#B1C1FD] px-1 text-[#6B6B6B]">
           {designation}
         </p>
-        <p className="font-sans font-bold text-[#556085]">{professorname}</p>
+        <p className="font-sans font-bold text-[#556085]">{professorName}</p>
       </div>
       <div className="grid grid-cols-2 px-4 py-2 font-semibold text-[#556085]">
-        <p className="">Staff ID: {staffid}</p>
-        <p>Department: {dept}</p>
+        <p className="">Staff ID: {staffId}</p>
+        <p>Department: {department}</p>
       </div>
     </div>
   );

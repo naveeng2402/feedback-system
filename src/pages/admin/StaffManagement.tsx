@@ -1,9 +1,11 @@
 import { BaseDropdown, Button, Input } from "@ui/index";
+import { ReactComponent as Plus } from "@icons/Plus.svg";
 import { deptOptionsQuery } from "@/graphql/queries/deptOptions";
 import { Dialog } from "@headlessui/react";
 import { FC, useMemo, useState } from "react";
 import { useQuery } from "urql";
 import { useStaffListQuery } from "@/graphql/queries/staffList";
+import { type AdminUserAttributes, createClient } from "@supabase/supabase-js";
 
 interface CreateStaffModalProps {
   isOpen: boolean;
@@ -27,12 +29,55 @@ const CreateStaffModal: FC<CreateStaffModalProps> = ({ isOpen, setIsOpen }) => {
       : [{ id: "", text: "Select Dept" }];
   }, [streamsRes]);
 
+  const designationOptions = [
+    { id: "AP", text: "Assistant Professor" },
+    { id: "P", text: "Professor" },
+    { id: "HOD", text: "Head Of the Department" },
+  ];
+
   const [stream, setStream] = useState(streams[0]);
+  const [designation, setDesignation] = useState(designationOptions[0]);
+
+  const createStaff = async () => {
+    const adminClient = createClient(
+      import.meta.env.VITE_SUPABASE_URL,
+      import.meta.env.VITE_SUPABASE_SERVICE_KEY,
+      {
+        auth: {
+          autoRefreshToken: false,
+          persistSession: false,
+        },
+      }
+    );
+
+    const { data, error } = await adminClient.auth.admin.createUser({
+      email,
+      password: pass,
+      user_metadata: {
+        role: "staff",
+        name,
+        staff_no: staffNo,
+        dept_id: stream.id,
+        designation: designation.id,
+      },
+      email_confirm: true,
+    });
+
+    error && window.alert(error.message);
+
+    if (error === null) {
+      setEmail("");
+      setName("");
+      setDesignation(designationOptions[0]);
+      setPass("");
+      setStaffNo("");
+    }
+  };
 
   return (
     <Dialog open={isOpen} onClose={setIsOpen} className="fixed inset-0">
       <Dialog.Overlay className="fixed inset-0 bg-gray-700/80" />
-      <Dialog.Panel className="absolute inset-8 top-1/2 h-fit -translate-y-1/2 space-y-8 rounded-3xl bg-white p-4 text-gray-50 sm:w-fit">
+      <Dialog.Panel className="absolute inset-8 top-1/2 h-fit -translate-y-1/2 space-y-8 rounded-3xl bg-white p-4 text-gray-50 ">
         <h2 className="text-3xl text-blue-800">Add Staff</h2>
 
         <div className="space-y-2 px-4">
@@ -51,6 +96,12 @@ const CreateStaffModal: FC<CreateStaffModalProps> = ({ isOpen, setIsOpen }) => {
             placeholder="email"
             id="email"
             type="email"
+          />
+          <BaseDropdown
+            label="Designation"
+            options={designationOptions}
+            value={designation}
+            setValue={setDesignation}
           />
           <BaseDropdown
             label="Stream"
@@ -84,7 +135,14 @@ const CreateStaffModal: FC<CreateStaffModalProps> = ({ isOpen, setIsOpen }) => {
           >
             Close
           </Button>
-          <Button className="w-full">Apply</Button>
+          <Button
+            onClick={() => {
+              createStaff();
+            }}
+            className="w-full"
+          >
+            Create
+          </Button>
         </div>
       </Dialog.Panel>
     </Dialog>
@@ -102,9 +160,9 @@ const StaffManagement = () => {
 
   return (
     <div className="w-full">
-      <div className="mx-4">
-        <Button onClick={() => setModalOpen(true)} className="ml-auto">
-          Add Staff
+      <div className="fixed bottom-0 right-0 my-24 mx-12">
+        <Button size="circle" onClick={() => setModalOpen(true)}>
+          <Plus className="m-6 h-8 w-8" />
         </Button>
       </div>
 

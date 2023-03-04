@@ -15,7 +15,7 @@ const NavigationModal: FC<NavigationModalProps> = ({ isOpen, setIsOpen }) => {
   return (
     <Dialog open={isOpen} onClose={setIsOpen} className="fixed inset-0">
       <Dialog.Overlay className="fixed inset-0 bg-gray-700/80" />
-      <Dialog.Panel className="relative flex h-screen w-2/3 flex-col gap-4 rounded-tr-3xl rounded-br-3xl bg-white p-2 text-gray-50 sm:w-fit">
+      <Dialog.Panel className="relative flex h-screen w-2/3 flex-col gap-4 rounded-tr-3xl rounded-br-3xl bg-white p-2 text-gray-50 ">
         <button
           className="p-2 pb-0"
           onClick={(e) => {

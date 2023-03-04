@@ -39,5 +39,6 @@ export const useStaffListQuery = () => {
     loading: fetching,
     error,
     data: dataNorm,
+    reExecuteQuery,
   };
 };

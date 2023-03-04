@@ -24,7 +24,7 @@ const NavigationModal: FC<NavigationModalProps> = ({ isOpen, setIsOpen }) => {
         >
           <XMark className="mx-4 ml-auto h-8 w-8 cursor-pointer text-blue-800" />
         </button>
-        <div className="hover justify-around gap-2 rounded-xl py-4 text-2xl text-blue-800">
+        <div className="hover flex flex-col justify-around gap-2 rounded-xl py-4 text-2xl text-blue-800">
           {navigationData.map((nav, i) => (
             <NavLink
               className="hover:active nav-modal block rounded-xl p-2 px-4 transition-all"

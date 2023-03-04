@@ -1,11 +1,13 @@
 import { BaseDropdown, Button, Input } from "@ui/index";
 import { ReactComponent as Plus } from "@icons/Plus.svg";
+import { ReactComponent as Search } from "@icons/Search.svg";
 import { deptOptionsQuery } from "@/graphql/queries/deptOptions";
 import { Dialog } from "@headlessui/react";
-import { FC, useMemo, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { useQuery } from "urql";
 import { useStaffListQuery } from "@/graphql/queries/staffList";
-import { type AdminUserAttributes, createClient } from "@supabase/supabase-js";
+import { createClient } from "@supabase/supabase-js";
+import StaffDetails from "@ui/StaffDetails";
 
 interface CreateStaffModalProps {
   isOpen: boolean;
@@ -71,6 +73,7 @@ const CreateStaffModal: FC<CreateStaffModalProps> = ({ isOpen, setIsOpen }) => {
       setDesignation(designationOptions[0]);
       setPass("");
       setStaffNo("");
+      setIsOpen(false);
     }
   };
 
@@ -151,25 +154,66 @@ const CreateStaffModal: FC<CreateStaffModalProps> = ({ isOpen, setIsOpen }) => {
 
 const StaffManagement = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [staffList, setStaffList] = useState<any[] | undefined | null>([]);
 
   const {
     data: staffListData,
     error: staffListErr,
     loading,
+    reExecuteQuery,
   } = useStaffListQuery();
+
+  useEffect(() => {
+    reExecuteQuery();
+  }, [modalOpen]);
+
+  useEffect(() => {
+    searchValue === ""
+      ? setStaffList(staffListData)
+      : setStaffList(
+          staffListData?.filter((val) =>
+            val.name?.toLowerCase()?.includes(searchValue.toLowerCase().trim())
+          )
+        );
+  }, [searchValue, staffListData]);
 
   return (
     <div className="w-full">
+      <div className="mx-4 my-8 flex overflow-hidden rounded-lg border-2 border-gray-300 fill-gray-400 text-gray-500 focus-within:border-blue-800/50 focus-within:fill-blue-800/90 focus-within:text-blue-800">
+        <input
+          type="text"
+          className="w-full border-none border-transparent px-4 py-2 outline-none focus:ring-0 "
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
+        <Search className="m-2 h-8 w-8 border-none border-transparent fill-inherit" />
+      </div>
+
       <div className="fixed bottom-0 right-0 my-24 mx-12">
         <Button size="circle" onClick={() => setModalOpen(true)}>
           <Plus className="m-6 h-8 w-8" />
         </Button>
       </div>
 
-      <main>
-        {staffListData?.map((val) => (
-          <p>{JSON.stringify(val)}</p>
-        ))}
+      <main className="my-4 mx-4 grid gap-6">
+        {staffList === undefined ||
+        staffList == null ||
+        staffList.length === 0 ? (
+          <p className="w-full text-center text-xl font-semibold text-blue-900">
+            No Staffs Available
+          </p>
+        ) : (
+          staffList?.map((val) => (
+            <StaffDetails
+              key={val.id}
+              designation={val.designation as string}
+              professorName={val.name as string}
+              staffId={val.staffNo as string}
+              department={val.department as string}
+            />
+          ))
+        )}
       </main>
 
       <CreateStaffModal isOpen={modalOpen} setIsOpen={setModalOpen} />

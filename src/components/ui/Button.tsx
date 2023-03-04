@@ -10,7 +10,7 @@ interface ButtonOwnProps<E extends ElementType>
 type ButtonProps<E extends ElementType> = ButtonOwnProps<E> &
   Omit<ComponentProps<E>, keyof ButtonOwnProps<E>>;
 
-const ButtonCVA = cva("rounded-lg flex items-center justify-center", {
+const ButtonCVA = cva("flex items-center justify-center", {
   variants: {
     intent: {
       primary: "bg-blue-700 text-white fill-white",
@@ -18,8 +18,8 @@ const ButtonCVA = cva("rounded-lg flex items-center justify-center", {
         "bg-blue-100 border border-blue-500 fill-blue-700 text-blue-800",
     },
     size: {
-      small: "text-xl py-1 px-2 gap-2",
-      medium: "text-xl py-2 px-4 gap-2",
+      small: "rounded-lg text-xl py-1 px-2 gap-2",
+      medium: "rounded-lg text-xl py-2 px-4 gap-2",
       circle: "rounded-full",
     },
   },

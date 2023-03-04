@@ -1,52 +1,12 @@
 [
   {
     "text": "Home",
-    "to": "/home",
+    "to": "/admin/dashboard",
     "icon": ""
   },
   {
     "text": "Staff Management",
     "to": "/admin/staff_management",
-    "icon": ""
-  },
-  {
-    "text": "Home",
-    "to": "/home",
-    "icon": ""
-  },
-  {
-    "text": "Home",
-    "to": "/home",
-    "icon": ""
-  },
-  {
-    "text": "Home",
-    "to": "/home",
-    "icon": ""
-  },
-  {
-    "text": "Home",
-    "to": "/home",
-    "icon": ""
-  },
-  {
-    "text": "Home",
-    "to": "/home",
-    "icon": ""
-  },
-  {
-    "text": "Home",
-    "to": "/home",
-    "icon": ""
-  },
-  {
-    "text": "Home",
-    "to": "/home",
-    "icon": ""
-  },
-  {
-    "text": "Home",
-    "to": "/home",
     "icon": ""
   }
 ]

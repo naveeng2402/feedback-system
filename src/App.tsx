@@ -36,7 +36,7 @@ function App() {
       <Route path="/admin/" element={<ProtectedRoute roles={["admin"]} />}>
         <Route element={<AdminBase />}>
           <Route path="staff_management/" element={<StaffManagement />} />
-          <Route path="dashboard/" element={<AdminReportNav />}>
+          <Route path="reports/" element={<AdminReportNav />}>
             <Route
               path="stud_course/"
               element={<FeedbackResult report="stud_course" />}

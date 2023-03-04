@@ -17,7 +17,7 @@ const FilterModal: FC<FilterModalProps> = ({ isOpen, setIsOpen }) => {
   return (
     <Dialog open={isOpen} onClose={setIsOpen} className="fixed inset-0">
       <Dialog.Overlay className="fixed inset-0 bg-gray-700/80" />
-      <Dialog.Panel className="relative ml-auto flex h-screen w-3/4 flex-col gap-4 rounded-tl-3xl rounded-bl-3xl bg-white p-2 pt-8 text-gray-50 sm:w-fit">
+      <Dialog.Panel className="relative ml-auto flex h-screen w-3/4 flex-col gap-4 rounded-tl-3xl rounded-bl-3xl bg-white p-2 pt-8 text-gray-50 ">
         <h2 className="text-4xl text-blue-800">Filters</h2>
 
         <div className="">

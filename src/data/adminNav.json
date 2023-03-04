@@ -1,12 +1,12 @@
 [
   {
     "text": "Student(Course)",
-    "to": "/admin/dashboard/stud_course",
+    "to": "/admin/reports/stud_course",
     "icon": ""
   },
   {
     "text": "Student(Lab)",
-    "to": "/admin/dashboard/stud_lab",
+    "to": "/admin/reports/stud_lab",
     "icon": ""
   }
 ]

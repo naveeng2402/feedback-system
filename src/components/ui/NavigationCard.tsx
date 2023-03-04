@@ -1,15 +1,15 @@
 import { FC } from "react";
-// import { ReactComponent as Faculty } from '@icons/Faculty.svg'
+
 interface NavigationCardProps {
-  Icon: React.ReactNode;
-  Navigationto: string;
+  icons: React.ReactNode;
+  navigationto: string;
 }
 
-const NavigationCard: FC<NavigationCardProps> = ({ Icon, Navigationto }) => {
+const NavigationCard: FC<NavigationCardProps> = ({ icons, navigationto }) => {
   return (
     <div className="flex flex-col gap-6 rounded-lg border-2 border-[#B1C1FD] bg-[#E0EDFF] p-4 shadow-[#b1c1fd]  ">
-      {Icon}
-      {Navigationto}
+      {icons}
+      {navigationto}
     </div>
   );
 };

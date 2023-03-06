@@ -1,0 +1,42 @@
+import { FC } from "react";
+import { ReactComponent as LandingPageIllustration } from "@/assets/illustrations/LandingPage.svg";
+import FeedbackCard from "@ui/FeedbackCard";
+
+const LandingPage: FC = () => {
+  return (
+    <div className="my-8  flex min-h-[96vh] flex-col items-center justify-center gap-4 p-2">
+      <header className="space-y-4 text-center text-2xl text-blue-800">
+        <h1 className="text-4xl font-semibold text-blue-800">
+          Jaya Engineering College
+        </h1>
+      </header>
+      <main className="w-full space-y-4 px-4">
+        <LandingPageIllustration className="w-full" />
+
+        <h2 className="text-2xl font-semibold text-blue-800">
+          Feedback System
+        </h2>
+        <p className="text-gray-700">
+          <span className="mb-2 block text-lg font-semibold">
+            Welcome to the Jaya Engineering College Feedback System!
+          </span>
+          As an employer or alumni of a college or university, you understand
+          the value of feedback in improving the educational experience for
+          future students. This platform allows you to provide valuable insights
+          and feedback on your experience as a student, helping the college or
+          university to enhance their offerings and better prepare students for
+          their future careers. Your feedback can help shape the education of
+          the next generation of students, and we are excited to have you as a
+          part of this important process.
+        </p>
+
+        <section className="space-y-4">
+          <FeedbackCard title="Alumni Feedback Form" action={() => {}} />
+          <FeedbackCard title="Employer Feedback Form" action={() => {}} />
+        </section>
+      </main>
+    </div>
+  );
+};
+
+export default LandingPage;

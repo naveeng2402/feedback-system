@@ -11,7 +11,7 @@ import { FeedbackList } from "@/pages/stud";
 import AdminBase, { AdminReportNav } from "./layouts/AdminBase";
 import { FeedbackResult } from "./pages/admin";
 import StaffManagement from "./pages/admin/StaffManagement";
-// import StaffInput from "./components/ui/StaffInput";
+import LandingPage from "./pages/common/LandingPage";
 
 function App() {
   return (
@@ -21,9 +21,10 @@ function App() {
           <Route path="sign-up" element={<SignUp />} />
           <Route path="sign-in" element={<SignIn />} />
         </Route>
+        <Route path="" element={<LandingPage />} />
       </Route>
 
-      <Route path="/stud/" element={<ProtectedRoute roles={["admin"]} />}>
+      <Route path="/stud/" element={<ProtectedRoute roles={["stud"]} />}>
         <Route path="profile/" element={<StudentProfile />} />
         <Route element={<StudentBase />}>
           <Route path="dashboard/" element={<DashBoard />} />

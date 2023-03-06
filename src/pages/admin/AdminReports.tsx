@@ -49,7 +49,7 @@ const AdminReports: FC = ({}) => {
               <div className="mx-4 flex items-center justify-start gap-6  rounded-xl border-2 border-[#D0D4E3] px-4 font-bold text-[#3E4B79]">
                 {value.icon}
                 <div className="py-3">
-                  <h1>{value.Heading}</h1>
+                  <h5>{value.Heading}</h5>
                   <p>{value.description}</p>
                 </div>
               </div>

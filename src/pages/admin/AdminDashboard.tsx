@@ -17,7 +17,7 @@ const AdminDashboard: FC = ({}) => {
         <h1 className="flex-grow text-3xl font-bold text-[#192860]">Admin</h1>
 
         <Button className="flex gap-2 py-2 px-2">
-          <p>log out</p>
+          <span>log out</span>
           <Logout />
         </Button>
       </div>

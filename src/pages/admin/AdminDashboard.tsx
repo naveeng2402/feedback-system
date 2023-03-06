@@ -24,22 +24,14 @@ const AdminDashboard: FC = ({}) => {
 
       <Admin className="mx-auto pb-4" />
 
-      <div className="grid grid-cols-2 place-items-center gap-y-3  py-6 px-4 ">
-        <div className="w-36">
-          <NavigationCard icons={<Reports />} navigationTo="View Reports" />
-        </div>
-        <div className="w-36">
-          <NavigationCard
-            icons={<Faculty />}
-            navigationTo="Add staff & designation"
-          />
-        </div>
-        <div className="w-36">
-          <NavigationCard icons={<Graph />} navigationTo="View Staff Reports" />
-        </div>
-        <div className="w-36">
-          <NavigationCard icons={<Publish />} navigationTo="Publish Forms" />
-        </div>
+      <div className="mx-6 grid grid-cols-2 place-items-center gap-x-10  gap-y-8 py-6 ">
+        <NavigationCard icons={<Reports />} navigationTo="View Reports" />
+        <NavigationCard
+          icons={<Faculty />}
+          navigationTo="Add staff & designation"
+        />
+        <NavigationCard icons={<Graph />} navigationTo="View Staff Reports" />
+        <NavigationCard icons={<Publish />} navigationTo="Publish Forms" />
       </div>
     </div>
   );

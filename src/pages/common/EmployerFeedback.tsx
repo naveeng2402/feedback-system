@@ -4,7 +4,11 @@ import FairIcon from "@icons/Poor.png";
 import GoodIcon from "@icons/VeryGood.png";
 import ExcellentIcon from "@icons/Excellent.png";
 import { useEmployerFeedbackQuery } from "@/graphql/queries/employerFeedbackQuery";
-import { useMemo, useState } from "react";
+import { Dispatch, FC, SetStateAction, useMemo, useState } from "react";
+import { insertEmployerResponse } from "@/graphql/mutations/insertEmployerResponse";
+import { useMutation } from "urql";
+import { Dialog } from "@headlessui/react";
+import { useNavigate } from "react-router-dom";
 
 const EmployerFeedback = () => {
   const { data, loading } = useEmployerFeedbackQuery();
@@ -35,7 +39,7 @@ const EmployerFeedback = () => {
   useMemo(() => {
     let val = {};
     data?.forEach((ques) => {
-      val = { ...val, [ques.id]: 3 };
+      val = { ...val, [ques.id]: 0 };
     });
 
     setReviews(val);
@@ -44,6 +48,10 @@ const EmployerFeedback = () => {
   const isSubmittable = useMemo(
     () => Object.values(reviews).includes(0),
     [reviews]
+  );
+
+  const [empRes, insertEmployerResponseFn] = useMutation(
+    insertEmployerResponse
   );
 
   const handleSubmit = () => {
@@ -56,6 +64,12 @@ const EmployerFeedback = () => {
       alert("Please Enter Company Name");
       return;
     }
+
+    insertEmployerResponseFn({ company, employer_name: empName }).then(
+      (respRes) => {
+        if (respRes.error) console.error(respRes.error);
+      }
+    );
   };
 
   return (

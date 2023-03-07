@@ -1,8 +1,10 @@
 import { FC } from "react";
 import { ReactComponent as LandingPageIllustration } from "@/assets/illustrations/LandingPage.svg";
 import FeedbackCard from "@ui/FeedbackCard";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage: FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="my-8  flex min-h-[96vh] flex-col items-center justify-center gap-4 p-2">
       <header className="space-y-4 text-center text-2xl text-blue-800">
@@ -32,7 +34,12 @@ const LandingPage: FC = () => {
 
         <section className="space-y-4">
           <FeedbackCard title="Alumni Feedback Form" action={() => {}} />
-          <FeedbackCard title="Employer Feedback Form" action={() => {}} />
+          <FeedbackCard
+            title="Employer Feedback Form"
+            action={() => {
+              navigate("/employer-feedback");
+            }}
+          />
         </section>
       </main>
     </div>

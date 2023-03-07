@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 import { RadioGroup } from "@headlessui/react";
 
 interface OptionProps {
@@ -7,15 +7,22 @@ interface OptionProps {
   image: string;
 }
 
-interface QCprops {
+interface QuestionsCardProps {
   question: string;
   options: OptionProps[];
   value: number;
-  // setValue: React.Dispatch<React.SetStateAction<number>>;
-  setValue: any;
+  setValue:
+    | React.Dispatch<React.SetStateAction<number>>
+    | ((value: number) => void)
+    | (() => void);
 }
 
-const MyRadioGroup: FC<QCprops> = ({ question, options, value, setValue }) => {
+const MyRadioGroup: FC<QuestionsCardProps> = ({
+  question,
+  options,
+  value,
+  setValue,
+}) => {
   return (
     <RadioGroup
       value={value}

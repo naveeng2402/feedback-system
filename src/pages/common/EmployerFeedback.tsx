@@ -37,7 +37,7 @@ const ThankYouModal: FC<ThankYouModalProps> = ({ isOpen, setIsOpen }) => {
 };
 
 const EmployerFeedback = () => {
-  const { data, loading } = useEmployerFeedbackQuery();
+  const { data, loading } = useEmployerFeedbackQuery(); // gets the question from supabase
 
   const [empName, setEmpName] = useState("");
   const [company, setCompany] = useState("");
@@ -63,20 +63,23 @@ const EmployerFeedback = () => {
 
   const [reviews, setReviews] = useState({});
 
+  // construct the state that contains question id and its answer
   useMemo(() => {
     let val = {};
     data?.forEach((ques) => {
-      val = { ...val, [ques.id]: 2 };
+      val = { ...val, [ques.id]: 0 };
     });
 
     setReviews(val);
   }, [data]);
 
+  // determine if all the questions are answered and enable the submit button
   const isSubmittable = useMemo(
     () => Object.values(reviews).includes(0),
     [reviews]
   );
 
+  // graphql mutations for insertion
   const [empRes, insertEmployerResponseFn] = useMutation(
     insertEmployerResponse
   );

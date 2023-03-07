@@ -15,3 +15,11 @@ export const insertEmployerResponse = graphql(`
     }
   }
 `);
+
+export const insertEmployerAnswers = graphql(`
+  mutation MyMutation($objects: [employer_answersInsertInput!]!) {
+    insertIntoemployer_answersCollection(objects: $objects) {
+      affectedCount
+    }
+  }
+`);

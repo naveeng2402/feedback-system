@@ -5,7 +5,10 @@ import GoodIcon from "@icons/VeryGood.png";
 import ExcellentIcon from "@icons/Excellent.png";
 import { useEmployerFeedbackQuery } from "@/graphql/queries/employerFeedbackQuery";
 import { Dispatch, FC, SetStateAction, useMemo, useState } from "react";
-import { insertEmployerResponse } from "@/graphql/mutations/insertEmployerResponse";
+import {
+  insertEmployerResponse,
+  insertEmployerAnswers,
+} from "@/graphql/mutations/insertEmployerResponse";
 import { useMutation } from "urql";
 import { Dialog } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
@@ -53,6 +56,7 @@ const EmployerFeedback = () => {
   const [empRes, insertEmployerResponseFn] = useMutation(
     insertEmployerResponse
   );
+  const [empAns, insertEmployerAnswersFn] = useMutation(insertEmployerAnswers);
 
   const handleSubmit = () => {
     if (empName === "") {
@@ -68,6 +72,19 @@ const EmployerFeedback = () => {
     insertEmployerResponseFn({ company, employer_name: empName }).then(
       (respRes) => {
         if (respRes.error) console.error(respRes.error);
+
+        const empResponseId: number =
+          respRes.data?.insertIntoemployer_responseCollection?.records[0].id;
+
+        const empAnsVars = Object.entries(reviews).map((val) => ({
+          employer_res_id: empResponseId,
+          question_id: parseInt(val[0]),
+          answer: val[1] as number,
+        }));
+
+        insertEmployerAnswersFn({ objects: empAnsVars }).then((ansRes) => {
+          if (ansRes.error) console.error(ansRes.error);
+        });
       }
     );
   };

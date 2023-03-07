@@ -8,6 +8,8 @@ import { useQuery } from "urql";
 import { useStaffListQuery } from "@/graphql/queries/staffList";
 import { createClient } from "@supabase/supabase-js";
 import StaffDetails from "@ui/StaffDetails";
+import { NavLink } from "react-router-dom";
+import { ReactComponent as LeftArrow } from "@icons/LeftArrow.svg";
 
 interface CreateStaffModalProps {
   isOpen: boolean;
@@ -180,6 +182,12 @@ const StaffManagement = () => {
 
   return (
     <div className="w-full">
+      <header className="my-8 flex items-center justify-start gap-6 px-6">
+        <NavLink to="/admin/dashboard">
+          <LeftArrow />
+        </NavLink>
+        <h1 className="text-3xl font-bold">Staff Management</h1>
+      </header>
       <div className="mx-4 my-8 flex overflow-hidden rounded-lg border-2 border-gray-300 fill-gray-400 text-gray-500 focus-within:border-blue-800/50 focus-within:fill-blue-800/90 focus-within:text-blue-800">
         <input
           type="text"

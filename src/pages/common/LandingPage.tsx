@@ -1,12 +1,18 @@
 import { FC } from "react";
 import { ReactComponent as LandingPageIllustration } from "@/assets/illustrations/LandingPage.svg";
+import { ReactComponent as Logout } from "@icons/Logout.svg";
 import FeedbackCard from "@ui/FeedbackCard";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui";
 
 const LandingPage: FC = () => {
   const navigate = useNavigate();
   return (
     <div className="my-8  flex min-h-[96vh] flex-col items-center justify-center gap-4 p-2">
+      <Button as={NavLink} to="/auth/sign-in" className="ml-auto mr-6">
+        <Logout />
+        Login
+      </Button>
       <header className="space-y-4 text-center text-2xl text-blue-800">
         <h1 className="text-4xl font-semibold text-blue-800">
           Jaya Engineering College

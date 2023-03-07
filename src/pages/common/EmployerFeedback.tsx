@@ -11,7 +11,7 @@ import {
 } from "@/graphql/mutations/insertEmployerResponse";
 import { useMutation } from "urql";
 import { Dialog } from "@headlessui/react";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 interface ThankYouModalProps {
   isOpen: boolean;
@@ -19,7 +19,6 @@ interface ThankYouModalProps {
 }
 
 const ThankYouModal: FC<ThankYouModalProps> = ({ isOpen, setIsOpen }) => {
-  const navigate = useNavigate();
   return (
     <Dialog open={isOpen} onClose={() => {}} className="fixed inset-0">
       <Dialog.Overlay className="fixed inset-0 bg-gray-700/80" />
@@ -28,7 +27,7 @@ const ThankYouModal: FC<ThankYouModalProps> = ({ isOpen, setIsOpen }) => {
           <span>Thank You</span> <span>For Your Feedback!!!</span>
         </h2>
 
-        <Button className="mx-auto" onClick={() => navigate("/")}>
+        <Button className="mx-auto w-fit px-8" as={NavLink} to="/">
           Okay
         </Button>
       </Dialog.Panel>

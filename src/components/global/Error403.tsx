@@ -1,8 +1,24 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { ReactComponent as E403 } from "@icons/E403.svg";
 import Button from "@ui/Button";
+import { AuthContext, IAuthContext } from "@/context/auth";
+import { NavLink } from "react-router-dom";
 
-const Error404: FC = () => {
+const Error403: FC = () => {
+  const { auth } = useContext(AuthContext) as IAuthContext;
+  let redirect: string = "";
+
+  switch (auth.user?.user_metadata.role) {
+    case "stud":
+      redirect = "/stud/dashboard";
+      break;
+    case "admin":
+      redirect = "/admin/dashboard/";
+      break;
+    default:
+      break;
+  }
+
   return (
     <div className="">
       <div className="grid place-items-center pt-56">
@@ -15,10 +31,12 @@ const Error404: FC = () => {
         </p>
       </div>
       <div className="grid place-items-center py-10">
-        <Button className="">Go Back</Button>
+        <Button as={NavLink} to={redirect}>
+          Go Back
+        </Button>
       </div>
     </div>
   );
 };
 
-export default Error404;
+export default Error403;

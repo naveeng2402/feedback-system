@@ -14,7 +14,6 @@ const StudentBase: FC = () => {
           <Outlet />
         </main>
       </div>
-      <Outlet />
     </div>
   );
 };

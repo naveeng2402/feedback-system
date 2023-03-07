@@ -19,7 +19,7 @@ const ProtectedRoute = ({ roles }: { roles: Roles[] }) => {
 
   const location = useLocation();
 
-  console.log(JSON.stringify(auth));
+  // console.log(JSON.stringify(auth));
   return auth.user &&
     roles.includes(auth.user.user_metadata["role"] as Roles) ? (
     <Outlet />
@@ -27,7 +27,7 @@ const ProtectedRoute = ({ roles }: { roles: Roles[] }) => {
     <Error403 />
   ) : (
     // <Navigate to="/error" state={{ from: location }} replace />
-    <Navigate to="/auth/sign-up" state={{ from: location }} replace />
+    <Navigate to="/auth/sign-in" state={{ from: location }} replace />
   );
 };
 

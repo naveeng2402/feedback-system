@@ -1,7 +1,7 @@
 import navigationData from "@/data/navigationData.json";
 import adminNav from "@/data/adminNav.json";
 import { Dialog } from "@headlessui/react";
-import { ReactComponent as Hamburger } from "@icons/Hamburger.svg";
+import { ReactComponent as LeftArrow } from "@icons/LeftArrow.svg";
 import { ReactComponent as XMark } from "@icons/XMark.svg";
 import { FC, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
@@ -68,14 +68,14 @@ const AdminBase: FC = () => {
             onClick={() => setNavOpen(true)}
             className="absolute top-1/2 left-4 -translate-y-1/2"
           >
-            <Hamburger className="h-8 w-8" />
+            <NavLink to="/admin/dashboard">
+              <LeftArrow className="h-8 w-8" />
+            </NavLink>
           </button>
           <h1>Feedback System</h1>
         </header>
         <Outlet />
       </div>
-
-      <NavigationModal isOpen={navOpen} setIsOpen={setNavOpen} />
     </div>
   );
 };

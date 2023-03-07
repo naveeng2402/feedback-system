@@ -13,6 +13,8 @@ import { FeedbackResult } from "./pages/admin";
 import StaffManagement from "./pages/admin/StaffManagement";
 import LandingPage from "./pages/common/LandingPage";
 import EmployerFeedback from "./pages/common/EmployerFeedback";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminReports from "./pages/admin/AdminReports";
 
 function App() {
   return (
@@ -37,8 +39,10 @@ function App() {
         <Route path="dashboard/" element={<DashBoard />} />
       </Route>
       <Route path="/admin/" element={<ProtectedRoute roles={["admin"]} />}>
+        <Route path="dashboard/" element={<AdminDashboard />} />
+        <Route path="report-list/" element={<AdminReports />} />
+        <Route path="staff_management/" element={<StaffManagement />} />
         <Route element={<AdminBase />}>
-          <Route path="staff_management/" element={<StaffManagement />} />
           <Route path="reports/" element={<AdminReportNav />}>
             <Route
               path="stud_course/"

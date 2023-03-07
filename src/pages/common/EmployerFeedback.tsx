@@ -30,30 +30,33 @@ const EmployerFeedback = () => {
     },
   ];
 
-  const [reviews, setReviews] = useState({
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0,
-    7: 0,
-    8: 0,
-    9: 0,
-    10: 0,
-    11: 0,
-    12: 0,
-    13: 0,
-    14: 0,
-    15: 0,
-  });
+  const [reviews, setReviews] = useState({});
+
+  useMemo(() => {
+    let val = {};
+    data?.forEach((ques) => {
+      val = { ...val, [ques.id]: 3 };
+    });
+
+    setReviews(val);
+  }, [data]);
 
   const isSubmittable = useMemo(
     () => Object.values(reviews).includes(0),
     [reviews]
   );
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    if (empName === "") {
+      alert("Please Enter Employer Name");
+      return;
+    }
+
+    if (company === "") {
+      alert("Please Enter Company Name");
+      return;
+    }
+  };
 
   return (
     <div className="my-8 ">
@@ -93,7 +96,7 @@ const EmployerFeedback = () => {
                 // @ts-ignore
                 value={reviews[pos]}
                 setValue={(value: number) => {
-                  setReviews({ ...reviews, [pos]: value });
+                  setReviews({ ...reviews, [questions.id]: value });
                 }}
               />
             );

@@ -13,11 +13,35 @@ import { useMutation } from "urql";
 import { Dialog } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
 
+interface ThankYouModalProps {
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+const ThankYouModal: FC<ThankYouModalProps> = ({ isOpen, setIsOpen }) => {
+  const navigate = useNavigate();
+  return (
+    <Dialog open={isOpen} onClose={() => {}} className="fixed inset-0">
+      <Dialog.Overlay className="fixed inset-0 bg-gray-700/80" />
+      <Dialog.Panel className="absolute inset-8 mx-auto my-auto h-fit max-w-xl space-y-8 rounded-3xl bg-white p-4 text-gray-50 ">
+        <h2 className="flex flex-col space-y-4 text-center text-3xl text-blue-800">
+          <span>Thank You</span> <span>For Your Feedback!!!</span>
+        </h2>
+
+        <Button className="mx-auto" onClick={() => navigate("/")}>
+          Okay
+        </Button>
+      </Dialog.Panel>
+    </Dialog>
+  );
+};
+
 const EmployerFeedback = () => {
   const { data, loading } = useEmployerFeedbackQuery();
 
   const [empName, setEmpName] = useState("");
   const [company, setCompany] = useState("");
+  const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
 
   const options = [
     {
@@ -42,7 +66,7 @@ const EmployerFeedback = () => {
   useMemo(() => {
     let val = {};
     data?.forEach((ques) => {
-      val = { ...val, [ques.id]: 0 };
+      val = { ...val, [ques.id]: 2 };
     });
 
     setReviews(val);
@@ -84,6 +108,8 @@ const EmployerFeedback = () => {
 
         insertEmployerAnswersFn({ objects: empAnsVars }).then((ansRes) => {
           if (ansRes.error) console.error(ansRes.error);
+
+          setIsThankYouModalOpen(true);
         });
       }
     );
@@ -142,6 +168,11 @@ const EmployerFeedback = () => {
       >
         Submit Feedback
       </Button>
+
+      <ThankYouModal
+        isOpen={isThankYouModalOpen}
+        setIsOpen={setIsThankYouModalOpen}
+      />
     </div>
   );
 };

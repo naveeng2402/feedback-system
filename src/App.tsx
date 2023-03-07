@@ -12,6 +12,7 @@ import AdminBase, { AdminReportNav } from "./layouts/AdminBase";
 import { FeedbackResult } from "./pages/admin";
 import StaffManagement from "./pages/admin/StaffManagement";
 import LandingPage from "./pages/common/LandingPage";
+import EmployerFeedback from "./pages/common/EmployerFeedback";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="sign-up" element={<SignUp />} />
           <Route path="sign-in" element={<SignIn />} />
         </Route>
+        <Route path="/employer-feedback" element={<EmployerFeedback />} />
         <Route path="" element={<LandingPage />} />
       </Route>
 

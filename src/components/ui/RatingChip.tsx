@@ -42,4 +42,3 @@ const RatingChip: FC<RatingChipProps> = ({ rating }) => {
 };
 
 export default RatingChip;
-// subjects,dept_subjects,questions

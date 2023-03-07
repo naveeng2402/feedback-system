@@ -13,7 +13,8 @@ type ButtonProps<E extends ElementType> = ButtonOwnProps<E> &
 const ButtonCVA = cva("flex items-center justify-center", {
   variants: {
     intent: {
-      primary: "bg-blue-700 text-white fill-white",
+      primary:
+        "bg-blue-700 text-white fill-white disabled:bg-blue-100 disabled:text-blue-500 disabled:border-2 disabled:border-blue-500 disabled:cursor-not-allowed",
       inactive:
         "bg-blue-100 border border-blue-500 fill-blue-700 text-blue-800",
     },

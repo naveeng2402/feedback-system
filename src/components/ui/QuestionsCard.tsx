@@ -1,42 +1,45 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { RadioGroup } from "@headlessui/react";
 
-// import { CheckIcon } from '@heroicons/react/20/solid'
-
-// const plans = ["Excellent", "Very Good", "Good", "Bad", "Average"];
 interface OptionProps {
-  id: number;
+  score: number;
   review: string;
   image: string;
 }
+
 interface QCprops {
-  label: string;
-  Options: OptionProps[];
-  value: OptionProps;
-  setValue: React.Dispatch<React.SetStateAction<OptionProps>>;
+  question: string;
+  options: OptionProps[];
+  value: number;
+  // setValue: React.Dispatch<React.SetStateAction<number>>;
+  setValue: any;
 }
 
-const MyRadioGroup: FC<QCprops> = ({ label, Options, value, setValue }) => {
+const MyRadioGroup: FC<QCprops> = ({ question, options, value, setValue }) => {
   return (
     <RadioGroup
-      as="div"
-      className="space-y-4"
       value={value}
       onChange={setValue}
+      as="div"
+      className="space-y-4"
     >
-      <RadioGroup.Label>{label}</RadioGroup.Label>
-      <div className="space-y-2">
-        {Options.map((plan) => (
+      <RadioGroup.Label className="text-xl font-semibold text-[#192860]">
+        {question}
+      </RadioGroup.Label>
+      <div className="space-y-1">
+        {options.map((option) => (
           <RadioGroup.Option
-            key={plan.id}
-            value={plan}
-            as="div"
-            className="mx-4 flex items-center justify-start gap-2  rounded-lg px-2 ui-active:bg-blue-300  "
+            className="flex items-center gap-4 rounded-xl border-[#90B9F1] px-4 py-2 ui-checked:border-2 ui-checked:bg-[#BED5F5]/50"
+            key={option.score}
+            value={option.score}
           >
-            <div className="h-3 w-3 rounded-full border-2 border-blue-900  ui-active:border-4 ui-active:border-blue-700"></div>
-            {/* <CheckIcon className="hidden ui-checked:block" /> */}
-            <img src={plan.image} alt="image" className="" />
-            {plan.review}
+            <div className="flex h-6 w-6 items-center justify-center rounded-full border-[3px] border-[#D0D4E3] bg-white ui-checked:border-[#90B9F1]">
+              <div className="h-3 w-3 rounded-full bg-[#0059D2] ui-not-checked:hidden"></div>
+            </div>
+            <img src={option.image} alt={option.review} className="h-12 w-12" />
+            <RadioGroup.Description className="text-[#192860] ui-checked:font-semibold">
+              {option.review}
+            </RadioGroup.Description>
           </RadioGroup.Option>
         ))}
       </div>

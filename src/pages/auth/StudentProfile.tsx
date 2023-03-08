@@ -36,7 +36,7 @@ const StudentProfile = () => {
         roll_no,
         name,
         dept_id: stream.id,
-        isNewUser: true,
+        isNewUser: false,
       })
       .eq("id", auth.user?.id)
       .select();

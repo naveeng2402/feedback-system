@@ -33,9 +33,9 @@ const StudentProfile = () => {
       .from("student_profile")
       .update({
         batch: parseInt(batch),
-        roll_no,
+        roll_no:parseInt(roll_no),
         name,
-        dept_id: stream.id,
+        dept_id: parseInt(stream.id),
         isNewUser: false,
       })
       .eq("id", auth.user?.id)

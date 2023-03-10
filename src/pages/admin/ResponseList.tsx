@@ -1,6 +1,9 @@
+import { Button } from "@/components/ui";
 import { supabase } from "@/supabase";
-import { FC } from "react";
+import { FC, useState } from "react";
+import { ReactComponent as Filter } from "@icons/Filter.svg";
 import { useParams } from "react-router-dom";
+import FilterModal from "@/components/ui/FeedbackModal";
 
 interface ResponseListItemProps {
   name: string;
@@ -25,6 +28,9 @@ const ResponseListItem: FC<ResponseListItemProps> = ({
 const ResponseList: FC = () => {
   const { response } = useParams();
 
+  const [filterOpen, setFilterOpen] = useState(false);
+  const openModal = () => setFilterOpen(true);
+
   const data = {
     company: "Google",
     date: "24-02-2023",
@@ -32,9 +38,28 @@ const ResponseList: FC = () => {
   };
 
   return (
-    <main className="mx-4 my-4">
-      <ResponseListItem {...data} />
-    </main>
+    <>
+      <Button
+        onClick={openModal}
+        className="my-4 ml-auto mr-4"
+        intent="inactive"
+      >
+        Filters
+        <Filter className="h-6 w-6" />
+      </Button>
+
+      <main className="mx-4 my-4">
+        <ResponseListItem {...data} />
+      </main>
+
+      <FilterModal
+        isOpen={filterOpen}
+        setIsOpen={setFilterOpen}
+        onApply={() => setFilterOpen(false)}
+      >
+        <p>Hello from Response List Page</p>
+      </FilterModal>
+    </>
   );
 };
 

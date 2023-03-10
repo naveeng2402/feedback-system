@@ -1,82 +1,79 @@
-import navigationData from "@/data/navigationData.json";
-import adminNav from "@/data/adminNav.json";
-import { Dialog } from "@headlessui/react";
+import reportsNav from "@/data/reportsNav.json";
+import responseNav from "@/data/responsesNav.json";
 import { ReactComponent as LeftArrow } from "@icons/LeftArrow.svg";
-import { ReactComponent as XMark } from "@icons/XMark.svg";
-import { FC, useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { FC, useEffect, useState } from "react";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 
-interface NavigationModalProps {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+interface INavLinks {
+  text: string;
+  icon: string;
+  to: string;
 }
 
-const NavigationModal: FC<NavigationModalProps> = ({ isOpen, setIsOpen }) => {
+const AdminReportNav: FC = () => {
+  const { pathname } = useLocation();
+  const [navLinks, setNavLinks] = useState<INavLinks[]>();
+
+  useEffect(() => {
+    if (pathname.includes("/admin/reports/")) {
+      setNavLinks(reportsNav);
+    } else if (pathname.includes("/admin/response-list/")) {
+      setNavLinks(responseNav);
+    }
+  }, [pathname]);
+
   return (
-    <Dialog open={isOpen} onClose={setIsOpen} className="fixed inset-0">
-      <Dialog.Overlay className="fixed inset-0 bg-gray-700/80" />
-      <Dialog.Panel className="relative flex h-screen w-2/3 flex-col gap-4 rounded-tr-3xl rounded-br-3xl bg-white p-2 text-gray-50 ">
-        <button
-          className="p-2 pb-0"
-          onClick={(e) => {
-            setIsOpen(false);
-          }}
-        >
-          <XMark className="mx-4 ml-auto h-8 w-8 cursor-pointer text-blue-800" />
-        </button>
-        <div className="hover flex flex-col justify-around gap-2 rounded-xl py-4 text-2xl text-blue-800">
-          {navigationData.map((nav, i) => (
-            <NavLink
-              className="hover:active nav-modal block rounded-xl p-2 px-4 transition-all"
-              to={nav.to}
-              key={i}
-            >
-              {nav.text}
-            </NavLink>
-          ))}
-        </div>
-      </Dialog.Panel>
-    </Dialog>
+    <>
+      <section className="flex w-full gap-4 border-y py-2 px-4 text-gray-500">
+        {navLinks?.map((nav, idx) => (
+          <NavLink
+            key={idx}
+            to={nav.to}
+            className="nav-chip rounded-lg bg-blue-200 px-4 py-2"
+          >
+            <p>{nav.text}</p>
+          </NavLink>
+        ))}
+      </section>
+      <Outlet />
+    </>
   );
 };
 
-const AdminReportNav: FC = () => (
-  <>
-    <section className="flex w-full gap-4 border-y py-2 text-gray-500">
-      {adminNav.map((nav, idx) => (
-        <NavLink
-          key={idx}
-          to={nav.to}
-          className="nav-chip rounded-lg bg-blue-200 px-4 py-2"
-        >
-          <p>{nav.text}</p>
-        </NavLink>
-      ))}
-    </section>
-    <Outlet />
-  </>
-);
-
 const AdminBase: FC = () => {
-  const [navOpen, setNavOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    switch (pathname) {
+      case "/admin/report-list/":
+        setTitle("Reports");
+        break;
+      case "/admin/staff_management":
+        setTitle("Staff Management");
+        break;
+
+      default:
+        break;
+    }
+
+    if (pathname.includes("/admin/reports")) {
+      setTitle("Reports");
+    } else if (pathname.includes("/admin/response-list/")) {
+      setTitle("Responses");
+    }
+  }, [pathname]);
 
   return (
-    <div className="mt-8">
-      <div className="flex  min-h-[96vh] flex-col items-center justify-start gap-4 p-2 ">
-        <header className="relative flex w-full items-center justify-center text-center text-4xl text-blue-800">
-          <button
-            onClick={() => setNavOpen(true)}
-            className="absolute top-1/2 left-4 -translate-y-1/2"
-          >
-            <NavLink to="/admin/dashboard">
-              <LeftArrow className="h-8 w-8" />
-            </NavLink>
-          </button>
-          <h1>Feedback System</h1>
-        </header>
-        <Outlet />
-      </div>
-    </div>
+    <>
+      <header className="my-8 flex items-center justify-start gap-6 px-6">
+        <NavLink to="/admin/dashboard">
+          <LeftArrow />
+        </NavLink>
+        <h1 className="text-3xl font-bold">{title}</h1>
+      </header>
+      <Outlet />
+    </>
   );
 };
 

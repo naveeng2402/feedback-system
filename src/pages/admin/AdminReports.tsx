@@ -37,28 +37,19 @@ const AdminReports: FC = ({}) => {
   ];
 
   return (
-    <div>
-      <header className="flex items-center justify-start gap-6 py-7 px-6">
-        <NavLink to="/admin/dashboard">
-          <LeftArrow />
-        </NavLink>
-        <h1 className="text-3xl font-bold">Reports</h1>
-      </header>
-
-      <main className="space-y-4">
-        {data.map((value) => {
-          return (
-            <div className="mx-4 flex items-center justify-start gap-6  rounded-xl border-2 border-[#D0D4E3] stroke-[#407BFF] px-4 font-bold text-[#3E4B79]">
-              {value.icon}
-              <div className="py-3">
-                <h5 className="text-xl">{value.Heading}</h5>
-                <p className="font-normal">{value.description}</p>
-              </div>
+    <main className="space-y-4">
+      {data.map((value) => {
+        return (
+          <div className="mx-4 flex items-center justify-start gap-6  rounded-xl border-2 border-[#D0D4E3] stroke-[#407BFF] px-4 font-bold text-[#3E4B79]">
+            {value.icon}
+            <div className="py-3">
+              <h5 className="text-xl">{value.Heading}</h5>
+              <p className="font-normal">{value.description}</p>
             </div>
-          );
-        })}
-      </main>
-    </div>
+          </div>
+        );
+      })}
+    </main>
   );
 };
 

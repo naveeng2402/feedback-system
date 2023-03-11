@@ -1,5 +1,5 @@
 import { Disclosure } from "@headlessui/react";
-import { DetailedHTMLProps, FC, ImgHTMLAttributes } from "react";
+import { FC } from "react";
 import { ReactComponent as Chevron } from "@icons/Chevron.svg";
 import RatingChip from "./RatingChip";
 
@@ -37,7 +37,6 @@ const FeedbackAccordion: FC<FeedbackAccordionProps> = ({
             return (
               <div>
                 <div>
-                  {/* {option.icon} */}
                   <img src={option.icon} alt="icon" />
                   <h1 className="mx-2">{option.score}</h1>
                 </div>

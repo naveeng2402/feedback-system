@@ -1,17 +1,10 @@
 import strftime from "@/strftime";
 import { supabase } from "@/supabase";
+import { ResponseListQueryResult } from "@/types";
 import { useEffect, useState } from "react";
 
 export const useEmployerResponseQuery = (fromYear: number, toYear: number) => {
-  const [data, setData] = useState<
-    {
-      id: number;
-      employer_name: string;
-      company: string;
-      created_at: string;
-      avg_answer: number;
-    }[]
-  >([]);
+  const [data, setData] = useState<ResponseListQueryResult[]>([]);
   const getDate = (timestamp: string) =>
     strftime("%d-%m-%Y", new Date(timestamp));
 
@@ -26,8 +19,11 @@ export const useEmployerResponseQuery = (fromYear: number, toYear: number) => {
           alert(res.error.message);
           return;
         }
-        const dataNorm = res.data.map((val) => ({
-          ...val,
+        const dataNorm: ResponseListQueryResult[] = res.data.map((val) => ({
+          id: val.id,
+          title: val.employer_name,
+          subtitle: val.company,
+          avg_answer: val.avg_answer,
           created_at: getDate(val.created_at),
         }));
 

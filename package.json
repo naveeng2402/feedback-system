@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "codegen": "graphql-codegen",
+    "codegen:graphql": "graphql-codegen",
+    "codegen:supabase": "supabase gen types typescript --project-id \"uncwjombmjfpeoigszsb\" --schema public > src/supabase_types.d.ts",
+    "codegen": "run-s codegen:*",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -17,6 +19,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.1",
+    "supabase": "^1.42.5",
     "urql": "^3.0.3"
   },
   "devDependencies": {
@@ -28,6 +31,7 @@
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.13",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.4.21",
     "prettier": "^2.8.4",
     "prettier-plugin-tailwindcss": "^0.2.2",

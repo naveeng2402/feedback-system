@@ -37,6 +37,7 @@ const ResponseListItem: FC<ResponseListItemProps> = ({
 );
 
 const ResponseList: FC = () => {
+  // Handling different urls
   const { responseType } = useParams();
   const navigate = useNavigate();
   const { queryHook, optionsHook } = (() => {
@@ -60,6 +61,7 @@ const ResponseList: FC = () => {
     }
   })();
 
+  // Component Logic
   const [fromYear, setFromYear] = useState({ id: "2023", text: "2023" });
   const [toYear, setToYear] = useState({ id: "2023", text: "2023" });
 

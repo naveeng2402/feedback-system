@@ -3,6 +3,8 @@ import type { ComponentProps, ElementType, ReactNode, FC } from "react";
 
 interface RatingChipProps extends VariantProps<typeof RatingChipCVA> {
   rating: number;
+  total?: number;
+  className?: string;
 }
 
 const RatingChipCVA = cva("rounded-lg border-2  px-4", {
@@ -20,23 +22,28 @@ const RatingChipCVA = cva("rounded-lg border-2  px-4", {
   },
 });
 
-const RatingChip: FC<RatingChipProps> = ({ rating }) => {
+const RatingChip: FC<RatingChipProps> = ({ rating, total, className }) => {
   let intent: VariantProps<typeof RatingChipCVA>["intent"];
+  const _total = total || 5;
 
-  if (rating >= 4 && rating <= 5) {
+  const percentage = (100 * rating) / _total;
+
+  if (percentage >= 60 && percentage <= 100) {
     intent = "Excellent";
-  } else if (rating >= 3 && rating < 4) {
+  } else if (percentage >= 50 && percentage < 40) {
     intent = "VeryGood";
-  } else if (rating > 2 && rating < 3) {
+  } else if (percentage >= 40 && percentage < 30) {
     intent = "Good";
-  } else if (rating > 1 && rating <= 2) {
+  } else if (percentage >= 30 && percentage < 20) {
     intent = "Fair";
   } else {
     intent = "Poor";
   }
   return (
-    <div className={RatingChipCVA({ intent })}>
-      <p>{rating}/5</p>
+    <div className={RatingChipCVA({ intent, className })}>
+      <p>
+        {rating}/{_total}
+      </p>
     </div>
   );
 };

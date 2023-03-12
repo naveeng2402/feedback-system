@@ -3,6 +3,7 @@ import { FC, useEffect, useState } from "react";
 import { ReactComponent as Filter } from "@icons/Filter.svg";
 import { useParams } from "react-router-dom";
 import FilterModal from "@/components/ui/FilterModal";
+import { useEmployerResponseQuery } from "@/graphql/queries/employerResponseList";
 
 interface ResponseListItemProps {
   name: string;
@@ -25,13 +26,8 @@ const ResponseListItem: FC<ResponseListItemProps> = ({
 );
 
 const ResponseList: FC = () => {
-  const { response } = useParams();
+  const { responseType } = useParams();
 
-  const data = {
-    company: "Google",
-    date: "24-02-2023",
-    name: "Rishika SV",
-  };
   const options = ["2023", "2022", "2021", "2020"].map((year) => ({
     id: year,
     text: year,
@@ -39,6 +35,11 @@ const ResponseList: FC = () => {
 
   const [fromYear, setFromYear] = useState(options[0]);
   const [toYear, setToYear] = useState(options[0]);
+
+  const responses = useEmployerResponseQuery(
+    parseInt(fromYear.text),
+    parseInt(toYear.text)
+  );
 
   const [title, setTitle] = useState(options[0].text);
   useEffect(() => {
@@ -70,8 +71,15 @@ const ResponseList: FC = () => {
         </Button>
       </div>
 
-      <main className="mx-4 my-4">
-        <ResponseListItem {...data} />
+      <main className="mx-4 my-4 space-y-2">
+        {responses?.map((resp) => (
+          <ResponseListItem
+            key={resp.id}
+            name={resp.employer_name}
+            company={resp.company}
+            date={resp.created_at}
+          />
+        ))}
       </main>
 
       <FilterModal

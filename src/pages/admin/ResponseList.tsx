@@ -1,7 +1,7 @@
 import { BaseDropdown, Button } from "@/components/ui";
 import { FC, useEffect, useState } from "react";
 import { ReactComponent as Filter } from "@icons/Filter.svg";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { ReactComponent as Star } from "@icons/star.svg";
 import FilterModal from "@/components/ui/FilterModal";
 import {
@@ -101,13 +101,18 @@ const ResponseList: FC = () => {
 
       <main className="mx-4 my-4 space-y-2">
         {responses?.map((resp) => (
-          <ResponseListItem
+          <NavLink
             key={resp.id}
-            title={resp.title}
-            subtitle={resp.subtitle}
-            date={resp.created_at}
-            badge={resp.avg_answer}
-          />
+            className="block"
+            to={`/admin/response-result/${responseType}/${resp.id}`}
+          >
+            <ResponseListItem
+              title={resp.title}
+              subtitle={resp.subtitle}
+              date={resp.created_at}
+              badge={resp.avg_answer}
+            />
+          </NavLink>
         ))}
       </main>
 

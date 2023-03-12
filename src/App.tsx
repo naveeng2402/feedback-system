@@ -17,6 +17,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminReports from "./pages/admin/AdminReports";
 import ResponseList from "./pages/admin/ResponseList";
 import Error403 from "./components/global/Error403";
+import ResponseResult from "./pages/admin/ResponseResult";
 
 function App() {
   return (
@@ -45,6 +46,10 @@ function App() {
         <Route element={<AdminBase />}>
           <Route path="report-list/" element={<AdminReports />} />
           <Route path="staff_management/" element={<StaffManagement />} />
+          <Route
+            path="response-result/:responseType/:id"
+            element={<ResponseResult />}
+          />
           <Route element={<AdminReportNav />}>
             <Route
               path="response-list/:responseType"

@@ -35,30 +35,29 @@ const ThankYouModal: FC<ThankYouModalProps> = ({ isOpen, setIsOpen }) => {
   );
 };
 
+const EmployerFeedbackOptions = [
+  {
+    score: 1,
+    image: FairIcon,
+    review: "Fair",
+  },
+  {
+    score: 2,
+    image: GoodIcon,
+    review: "Good",
+  },
+  {
+    score: 3,
+    image: ExcellentIcon,
+    review: "Excellent",
+  },
+];
 const EmployerFeedback = () => {
   const { data, loading } = useEmployerFeedbackQuery(); // gets the question from supabase
 
   const [empName, setEmpName] = useState("");
   const [company, setCompany] = useState("");
   const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
-
-  const options = [
-    {
-      score: 1,
-      image: FairIcon,
-      review: "Fair",
-    },
-    {
-      score: 2,
-      image: GoodIcon,
-      review: "Good",
-    },
-    {
-      score: 3,
-      image: ExcellentIcon,
-      review: "Excellent",
-    },
-  ];
 
   const [reviews, setReviews] = useState({});
 
@@ -150,7 +149,7 @@ const EmployerFeedback = () => {
             return (
               <QuestionsCard
                 key={questions.id}
-                options={options}
+                options={EmployerFeedbackOptions}
                 question={`${idx + 1}. ${questions.question}` as string}
                 // @ts-ignore
                 value={reviews[pos]}
@@ -180,3 +179,4 @@ const EmployerFeedback = () => {
 };
 
 export default EmployerFeedback;
+export { EmployerFeedbackOptions };

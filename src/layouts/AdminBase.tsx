@@ -61,13 +61,17 @@ const AdminBase: FC = () => {
       setTitle("Reports");
     } else if (pathname.includes("/admin/response-list/")) {
       setTitle("Responses");
+    } else if (pathname.includes("/admin/response-result/")) {
+      setTitle("Response Result");
     }
   }, [pathname]);
 
   return (
     <>
       <header className="my-8 flex items-center justify-start gap-6 px-6">
-        <NavLink to="/admin/dashboard">
+        {/* 
+        //@ts-ignore */}
+        <NavLink to={-1}>
           <LeftArrow />
         </NavLink>
         <h1 className="text-3xl font-bold">{title}</h1>

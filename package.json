@@ -7,6 +7,7 @@
     "build": "tsc && vite build",
     "codegen:graphql": "graphql-codegen",
     "codegen:supabase": "supabase gen types typescript --project-id \"uncwjombmjfpeoigszsb\" --schema public > src/supabase_types.d.ts",
+    "codegen": "run-s codegen:*",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -30,6 +31,7 @@
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.13",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.4.21",
     "prettier": "^2.8.4",
     "prettier-plugin-tailwindcss": "^0.2.2",

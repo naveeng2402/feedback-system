@@ -96,7 +96,7 @@ const ResponseResult: FC = () => {
         className="mx-4 my-8 ml-auto w-fit"
       />
 
-      <main className="mx-4 space-y-4">
+      <main className="mx-4 my-8 space-y-4">
         {data.answers?.map((value, idx) => (
           <ResponseResultAnswer key={idx} {...value} />
         ))}

@@ -8,6 +8,10 @@ import {
   useEmployerResponseQuery,
   useEmployerResponseYearOptionsQuery,
 } from "@/graphql/queries/employerResponseList";
+import {
+  useAlumniResponseQuery,
+  useAlumniResponseYearOptionsQuery,
+} from "@/graphql/queries/alumniResponseList";
 
 interface ResponseListItemProps {
   title: string;
@@ -49,8 +53,8 @@ const ResponseList: FC = () => {
         };
       case "alumni":
         return {
-          queryHook: () => {},
-          optionsHook: () => [{ id: "2023", text: "2023" }],
+          queryHook: useAlumniResponseQuery,
+          optionsHook: useAlumniResponseYearOptionsQuery,
         };
       default:
         navigate("errors/404");

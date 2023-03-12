@@ -2,7 +2,7 @@ import { BaseDropdown, Button } from "@/components/ui";
 import { FC, useEffect, useState } from "react";
 import { ReactComponent as Filter } from "@icons/Filter.svg";
 import { useParams } from "react-router-dom";
-import FilterModal from "@/components/ui/FeedbackModal";
+import FilterModal from "@/components/ui/FilterModal";
 
 interface ResponseListItemProps {
   name: string;

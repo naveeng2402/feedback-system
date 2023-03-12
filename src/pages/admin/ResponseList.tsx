@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui";
-import { supabase } from "@/supabase";
+import { BaseDropdown, Button } from "@/components/ui";
 import { FC, useState } from "react";
 import { ReactComponent as Filter } from "@icons/Filter.svg";
 import { useParams } from "react-router-dom";
@@ -28,13 +27,30 @@ const ResponseListItem: FC<ResponseListItemProps> = ({
 const ResponseList: FC = () => {
   const { response } = useParams();
 
-  const [filterOpen, setFilterOpen] = useState(false);
-  const openModal = () => setFilterOpen(true);
-
   const data = {
     company: "Google",
     date: "24-02-2023",
     name: "Rishika SV",
+  };
+  const options = ["2023", "2022", "2021", "2020"].map((year) => ({
+    id: year,
+    text: year,
+  }));
+
+  const [fromYear, setFromYear] = useState(options[0]);
+  const [toYear, setToYear] = useState(options[0]);
+
+  const [filterOpen, setFilterOpen] = useState(false);
+  const openModal = () => setFilterOpen(true);
+  const onModalApply = () => {
+    if (parseInt(fromYear.id) > parseInt(toYear.id)) {
+      alert("Invalid Range");
+      return;
+    }
+
+    //TODO call the api with new params
+
+    setFilterOpen(false);
   };
 
   return (
@@ -55,9 +71,22 @@ const ResponseList: FC = () => {
       <FilterModal
         isOpen={filterOpen}
         setIsOpen={setFilterOpen}
-        onApply={() => setFilterOpen(false)}
+        onApply={onModalApply}
       >
-        <p>Hello from Response List Page</p>
+        <div className="space-y-2">
+          <BaseDropdown
+            label="From"
+            value={fromYear}
+            setValue={setFromYear}
+            options={options}
+          />
+          <BaseDropdown
+            label="To"
+            value={toYear}
+            setValue={setToYear}
+            options={options}
+          />
+        </div>
       </FilterModal>
     </>
   );

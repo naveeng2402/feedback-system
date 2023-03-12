@@ -362,7 +362,23 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_employer_response_list: {
+        Args: {
+          from_year: number
+          to_year: number
+        }
+        Returns: {
+          id: number
+          employer_name: string
+          company: string
+          created_at: string
+          avg_answer: number
+        }[]
+      }
+      get_employer_response_year_options_function: {
+        Args: Record<PropertyKey, never>
+        Returns: string[]
+      }
     }
     Enums: {
       [_ in never]: never

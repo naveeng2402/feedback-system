@@ -1,46 +1,74 @@
 import { BaseDropdown, Button } from "@/components/ui";
 import { FC, useEffect, useState } from "react";
 import { ReactComponent as Filter } from "@icons/Filter.svg";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { ReactComponent as Star } from "@icons/star.svg";
 import FilterModal from "@/components/ui/FilterModal";
+import {
+  useEmployerResponseQuery,
+  useEmployerResponseYearOptionsQuery,
+} from "@/graphql/queries/employerResponseList";
 
 interface ResponseListItemProps {
-  name: string;
-  company: string;
+  title: string;
+  subtitle: string;
   date: string;
+  badge: number;
 }
 
 const ResponseListItem: FC<ResponseListItemProps> = ({
-  company,
+  subtitle,
   date,
-  name,
+  title,
+  badge,
 }) => (
   <div className=" space-y-1 rounded-md border-2 border-[#B1C1FD] bg-[#E0EDFF]/50 p-4  text-[#556085] shadow transition-all hover:scale-[101%] hover:bg-[#E0EDFF] hover:shadow-md">
-    <h3 className="text-lg font-semibold ">{name}</h3>
+    <div className="flex gap-2">
+      <h3 className="grow text-lg font-semibold">{title}</h3>
+      <p className="flex items-center gap-1 rounded-full border-2 border-blue-300 bg-blue-200/50 px-2 font-semibold text-blue-600 ">
+        {badge} <Star className="h-4 w-4" />
+      </p>
+    </div>
     <div className="text- flex">
-      <p className="grow ">{company}</p>
+      <p className="grow ">{subtitle}</p>
       <p className="min-w-fit">{date}</p>
     </div>
   </div>
 );
 
 const ResponseList: FC = () => {
-  const { response } = useParams();
+  // Handling different urls
+  const { responseType } = useParams();
+  const navigate = useNavigate();
+  const { queryHook, optionsHook } = (() => {
+    switch (responseType) {
+      case "employer":
+        return {
+          queryHook: useEmployerResponseQuery,
+          optionsHook: useEmployerResponseYearOptionsQuery,
+        };
+      case "alumni":
+        return {
+          queryHook: () => {},
+          optionsHook: () => [{ id: "2023", text: "2023" }],
+        };
+      default:
+        navigate("errors/404");
+        return {
+          queryHook: useEmployerResponseQuery,
+          optionsHook: useEmployerResponseYearOptionsQuery,
+        };
+    }
+  })();
 
-  const data = {
-    company: "Google",
-    date: "24-02-2023",
-    name: "Rishika SV",
-  };
-  const options = ["2023", "2022", "2021", "2020"].map((year) => ({
-    id: year,
-    text: year,
-  }));
+  // Component Logic
+  const [fromYear, setFromYear] = useState({ id: "2023", text: "2023" });
+  const [toYear, setToYear] = useState({ id: "2023", text: "2023" });
 
-  const [fromYear, setFromYear] = useState(options[0]);
-  const [toYear, setToYear] = useState(options[0]);
+  const responses = queryHook(parseInt(fromYear.text), parseInt(toYear.text));
+  const yearOptions = optionsHook();
 
-  const [title, setTitle] = useState(options[0].text);
+  const [title, setTitle] = useState("2023");
   useEffect(() => {
     fromYear.text === toYear.text && setTitle(fromYear.text);
     fromYear.text !== toYear.text &&
@@ -54,9 +82,6 @@ const ResponseList: FC = () => {
       alert("Invalid Range");
       return;
     }
-
-    //TODO call the api with new params
-
     setFilterOpen(false);
   };
 
@@ -70,8 +95,16 @@ const ResponseList: FC = () => {
         </Button>
       </div>
 
-      <main className="mx-4 my-4">
-        <ResponseListItem {...data} />
+      <main className="mx-4 my-4 space-y-2">
+        {responses?.map((resp) => (
+          <ResponseListItem
+            key={resp.id}
+            title={resp.title}
+            subtitle={resp.subtitle}
+            date={resp.created_at}
+            badge={resp.avg_answer}
+          />
+        ))}
       </main>
 
       <FilterModal
@@ -84,13 +117,13 @@ const ResponseList: FC = () => {
             label="From"
             value={fromYear}
             setValue={setFromYear}
-            options={options}
+            options={yearOptions}
           />
           <BaseDropdown
             label="To"
             value={toYear}
             setValue={setToYear}
-            options={options}
+            options={yearOptions}
           />
         </div>
       </FilterModal>

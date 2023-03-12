@@ -3,7 +3,10 @@ import { FC, useEffect, useState } from "react";
 import { ReactComponent as Filter } from "@icons/Filter.svg";
 import { useParams } from "react-router-dom";
 import FilterModal from "@/components/ui/FilterModal";
-import { useEmployerResponseQuery } from "@/graphql/queries/employerResponseList";
+import {
+  useEmployerResponseQuery,
+  useEmployerResponseYearOptionsQuery,
+} from "@/graphql/queries/employerResponseList";
 
 interface ResponseListItemProps {
   name: string;
@@ -28,20 +31,16 @@ const ResponseListItem: FC<ResponseListItemProps> = ({
 const ResponseList: FC = () => {
   const { responseType } = useParams();
 
-  const options = ["2023", "2022", "2021", "2020"].map((year) => ({
-    id: year,
-    text: year,
-  }));
-
-  const [fromYear, setFromYear] = useState(options[0]);
-  const [toYear, setToYear] = useState(options[0]);
+  const [fromYear, setFromYear] = useState({ id: "2023", text: "2023" });
+  const [toYear, setToYear] = useState({ id: "2023", text: "2023" });
 
   const responses = useEmployerResponseQuery(
     parseInt(fromYear.text),
     parseInt(toYear.text)
   );
+  const yearOptions = useEmployerResponseYearOptionsQuery();
 
-  const [title, setTitle] = useState(options[0].text);
+  const [title, setTitle] = useState("2023");
   useEffect(() => {
     fromYear.text === toYear.text && setTitle(fromYear.text);
     fromYear.text !== toYear.text &&
@@ -55,9 +54,6 @@ const ResponseList: FC = () => {
       alert("Invalid Range");
       return;
     }
-
-    //TODO call the api with new params
-
     setFilterOpen(false);
   };
 
@@ -92,13 +88,13 @@ const ResponseList: FC = () => {
             label="From"
             value={fromYear}
             setValue={setFromYear}
-            options={options}
+            options={yearOptions}
           />
           <BaseDropdown
             label="To"
             value={toYear}
             setValue={setToYear}
-            options={options}
+            options={yearOptions}
           />
         </div>
       </FilterModal>

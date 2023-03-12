@@ -11,7 +11,7 @@ export const useEmployerResponseQuery = (fromYear: number, toYear: number) => {
       created_at: string;
       avg_answer: number;
     }[]
-  >();
+  >([]);
   const getDate = (timestamp: string) =>
     strftime("%d-%m-%Y", new Date(timestamp));
 
@@ -36,4 +36,26 @@ export const useEmployerResponseQuery = (fromYear: number, toYear: number) => {
   }, [fromYear, toYear]);
 
   return data;
+};
+
+export const useEmployerResponseYearOptionsQuery = () => {
+  const [years, setYears] = useState<
+    {
+      id: string;
+      text: string;
+    }[]
+  >([]);
+  useEffect(() => {
+    supabase.rpc("get_employer_response_year_options_function").then((res) => {
+      if (res.error) {
+        alert(res.error.message);
+        return;
+      }
+      const dataNorm = res.data.map((year) => ({ id: year, text: year }));
+
+      setYears(dataNorm);
+    });
+  }, []);
+
+  return years;
 };

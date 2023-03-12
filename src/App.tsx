@@ -15,6 +15,7 @@ import LandingPage from "./pages/common/LandingPage";
 import EmployerFeedback from "./pages/common/EmployerFeedback";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminReports from "./pages/admin/AdminReports";
+import ResponseList from "./pages/admin/ResponseList";
 
 function App() {
   return (
@@ -40,18 +41,21 @@ function App() {
       </Route>
       <Route path="/admin/" element={<ProtectedRoute roles={["admin"]} />}>
         <Route path="dashboard/" element={<AdminDashboard />} />
-        <Route path="report-list/" element={<AdminReports />} />
-        <Route path="staff_management/" element={<StaffManagement />} />
         <Route element={<AdminBase />}>
-          <Route path="reports/" element={<AdminReportNav />}>
-            <Route
-              path="stud_course/"
-              element={<FeedbackResult report="stud_course" />}
-            />
-            <Route
-              path="stud_lab/"
-              element={<FeedbackResult report="stud_lab" />}
-            />
+          <Route path="report-list/" element={<AdminReports />} />
+          <Route path="staff_management/" element={<StaffManagement />} />
+          <Route element={<AdminReportNav />}>
+            <Route path="response-list/:response" element={<ResponseList />} />
+            <Route path="reports/">
+              <Route
+                path="stud_course/"
+                element={<FeedbackResult report="stud_course" />}
+              />
+              <Route
+                path="stud_lab/"
+                element={<FeedbackResult report="stud_lab" />}
+              />
+            </Route>
           </Route>
         </Route>
       </Route>

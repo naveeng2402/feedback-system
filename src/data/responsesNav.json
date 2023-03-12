@@ -1,0 +1,12 @@
+[
+  {
+    "text": "Employer",
+    "to": "/admin/response-list/employer",
+    "icon": ""
+  },
+  {
+    "text": "Alumni",
+    "to": "/admin/response-list/alumni",
+    "icon": ""
+  }
+]

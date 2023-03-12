@@ -8,6 +8,7 @@ import { ReactComponent as Faculty } from "@icons/Faculty.svg";
 import { ReactComponent as Graph } from "@icons/Graph.svg";
 import { ReactComponent as Publish } from "@icons/Publish.svg";
 import { ReactComponent as Reports } from "@icons/Reports.svg";
+import { ReactComponent as Response } from "@icons/Response.svg";
 import { AuthContext, IAuthContext } from "@/context/auth";
 import { NavLink } from "react-router-dom";
 
@@ -29,8 +30,14 @@ const AdminDashboard: FC = ({}) => {
       <Admin className="mx-auto pb-4" />
 
       <div className="mx-6 grid grid-cols-2 place-items-center gap-x-10  gap-y-8 py-6 ">
-        <NavLink to="/admin/report-list/" className="h-full w-full">
+        <NavLink to="/admin/reports/stud_course" className="h-full w-full">
           <NavigationCard icons={<Reports />} navigationTo="View Reports" />
+        </NavLink>
+        <NavLink to="/admin/response-list/employer" className="h-full w-full">
+          <NavigationCard
+            icons={<Response className="h-8 w-8" />}
+            navigationTo="View Responses"
+          />
         </NavLink>
         <NavLink to="/admin/staff_management">
           <NavigationCard

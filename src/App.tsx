@@ -16,6 +16,7 @@ import EmployerFeedback from "./pages/common/EmployerFeedback";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminReports from "./pages/admin/AdminReports";
 import ResponseList from "./pages/admin/ResponseList";
+import Error403 from "./components/global/Error403";
 
 function App() {
   return (
@@ -45,7 +46,10 @@ function App() {
           <Route path="report-list/" element={<AdminReports />} />
           <Route path="staff_management/" element={<StaffManagement />} />
           <Route element={<AdminReportNav />}>
-            <Route path="response-list/:response" element={<ResponseList />} />
+            <Route
+              path="response-list/:responseType"
+              element={<ResponseList />}
+            />
             <Route path="reports/">
               <Route
                 path="stud_course/"
@@ -60,6 +64,10 @@ function App() {
         </Route>
       </Route>
 
+      <Route path="errors">
+        <Route path="403" element={<Error403 />} />
+        <Route path="404" element={<Error404 />} />
+      </Route>
       <Route path="*" element={<Error404 />} />
     </Routes>
   );

@@ -38,6 +38,12 @@ export const useEmployerResponseResultQuery = (id: number) => {
   const dataNorm = useMemo(() => {
     if (fetching)
       return { cardTitle: "", cardSubtitle: "", date: "", answers: [] };
+    if (
+      fetching === false &&
+      data?.employer_responseCollection?.edges.length === 0
+    ) {
+      return { cardTitle: "", cardSubtitle: "", date: "", answers: [] };
+    }
     const res = data?.employer_responseCollection?.edges[0].node;
     const cardDetails = {
       cardTitle: res?.employer_name,

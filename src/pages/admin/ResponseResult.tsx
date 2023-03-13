@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { EmployerFeedbackOptions } from "@/pages/common/EmployerFeedback";
 import { useEmployerResponseResultQuery } from "@/graphql/queries/employerReponseResultQuery";
@@ -82,25 +82,43 @@ const ResponseResult: FC = () => {
     return a + (b.answer as number);
   }, 0) as number;
 
+  const [isErr, setIsErr] = useState(false);
+  useEffect(() => {
+    if (
+      loading === false &&
+      JSON.stringify({
+        cardTitle: "",
+        cardSubtitle: "",
+        date: "",
+        answers: [],
+      }) === JSON.stringify(data)
+    )
+      setIsErr(true);
+  }, [loading]);
+
   return (
     <>
-      <ResponseResultHeader
-        cardTitle={data.cardTitle as string}
-        cardSubtitle={data.cardSubtitle as string}
-        date={data.date}
-      />
-
-      <RatingChip
-        rating={totalRatingScored}
-        total={3 * (data.answers?.length as number)}
-        className="mx-4 my-8 ml-auto w-fit"
-      />
-
-      <main className="mx-4 my-8 space-y-4">
-        {data.answers?.map((value, idx) => (
-          <ResponseResultAnswer key={idx} {...value} />
-        ))}
-      </main>
+      {isErr ? (
+        <Error404 />
+      ) : (
+        <>
+          <ResponseResultHeader
+            cardTitle={data.cardTitle as string}
+            cardSubtitle={data.cardSubtitle as string}
+            date={data.date}
+          />
+          <RatingChip
+            rating={totalRatingScored}
+            total={3 * (data.answers?.length as number)}
+            className="mx-4 my-8 ml-auto w-fit"
+          />
+          <main className="mx-4 my-8 space-y-4">
+            {data.answers?.map((value, idx) => (
+              <ResponseResultAnswer key={idx} {...value} />
+            ))}
+          </main>
+        </>
+      )}
     </>
   );
 };

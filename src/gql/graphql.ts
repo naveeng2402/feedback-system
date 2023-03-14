@@ -106,6 +106,10 @@ export type IntFilter = {
 /** The root type for creating and mutating data */
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Deletes zero or more records from the `alumni_answers` collection */
+  deleteFromalumni_answersCollection: Alumni_AnswersDeleteResponse;
+  /** Deletes zero or more records from the `alumni_response` collection */
+  deleteFromalumni_responseCollection: Alumni_ResponseDeleteResponse;
   /** Deletes zero or more records from the `answer` collection */
   deleteFromanswerCollection: AnswerDeleteResponse;
   /** Deletes zero or more records from the `departments` collection */
@@ -136,6 +140,10 @@ export type Mutation = {
   deleteFromstudent_profileCollection: Student_ProfileDeleteResponse;
   /** Deletes zero or more records from the `subject` collection */
   deleteFromsubjectCollection: SubjectDeleteResponse;
+  /** Adds one or more `alumni_answers` records to the collection */
+  insertIntoalumni_answersCollection?: Maybe<Alumni_AnswersInsertResponse>;
+  /** Adds one or more `alumni_response` records to the collection */
+  insertIntoalumni_responseCollection?: Maybe<Alumni_ResponseInsertResponse>;
   /** Adds one or more `answer` records to the collection */
   insertIntoanswerCollection?: Maybe<AnswerInsertResponse>;
   /** Adds one or more `departments` records to the collection */
@@ -166,6 +174,10 @@ export type Mutation = {
   insertIntostudent_profileCollection?: Maybe<Student_ProfileInsertResponse>;
   /** Adds one or more `subject` records to the collection */
   insertIntosubjectCollection?: Maybe<SubjectInsertResponse>;
+  /** Updates zero or more records in the `alumni_answers` collection */
+  updatealumni_answersCollection: Alumni_AnswersUpdateResponse;
+  /** Updates zero or more records in the `alumni_response` collection */
+  updatealumni_responseCollection: Alumni_ResponseUpdateResponse;
   /** Updates zero or more records in the `answer` collection */
   updateanswerCollection: AnswerUpdateResponse;
   /** Updates zero or more records in the `departments` collection */
@@ -196,6 +208,20 @@ export type Mutation = {
   updatestudent_profileCollection: Student_ProfileUpdateResponse;
   /** Updates zero or more records in the `subject` collection */
   updatesubjectCollection: SubjectUpdateResponse;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationDeleteFromalumni_AnswersCollectionArgs = {
+  atMost?: Scalars['Int'];
+  filter?: InputMaybe<Alumni_AnswersFilter>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationDeleteFromalumni_ResponseCollectionArgs = {
+  atMost?: Scalars['Int'];
+  filter?: InputMaybe<Alumni_ResponseFilter>;
 };
 
 
@@ -305,6 +331,18 @@ export type MutationDeleteFromsubjectCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
+export type MutationInsertIntoalumni_AnswersCollectionArgs = {
+  objects: Array<Alumni_AnswersInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationInsertIntoalumni_ResponseCollectionArgs = {
+  objects: Array<Alumni_ResponseInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
 export type MutationInsertIntoanswerCollectionArgs = {
   objects: Array<AnswerInsertInput>;
 };
@@ -391,6 +429,22 @@ export type MutationInsertIntostudent_ProfileCollectionArgs = {
 /** The root type for creating and mutating data */
 export type MutationInsertIntosubjectCollectionArgs = {
   objects: Array<SubjectInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationUpdatealumni_AnswersCollectionArgs = {
+  atMost?: Scalars['Int'];
+  filter?: InputMaybe<Alumni_AnswersFilter>;
+  set: Alumni_AnswersUpdateInput;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationUpdatealumni_ResponseCollectionArgs = {
+  atMost?: Scalars['Int'];
+  filter?: InputMaybe<Alumni_ResponseFilter>;
+  set: Alumni_ResponseUpdateInput;
 };
 
 
@@ -541,6 +595,10 @@ export type PageInfo = {
 /** The root type for querying data */
 export type Query = {
   __typename?: 'Query';
+  /** A pagable collection of type `alumni_answers` */
+  alumni_answersCollection?: Maybe<Alumni_AnswersConnection>;
+  /** A pagable collection of type `alumni_response` */
+  alumni_responseCollection?: Maybe<Alumni_ResponseConnection>;
   /** A pagable collection of type `answer` */
   answerCollection?: Maybe<AnswerConnection>;
   /** A pagable collection of type `departments` */
@@ -573,6 +631,28 @@ export type Query = {
   student_profileCollection?: Maybe<Student_ProfileConnection>;
   /** A pagable collection of type `subject` */
   subjectCollection?: Maybe<SubjectConnection>;
+};
+
+
+/** The root type for querying data */
+export type QueryAlumni_AnswersCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']>;
+  before?: InputMaybe<Scalars['Cursor']>;
+  filter?: InputMaybe<Alumni_AnswersFilter>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<Alumni_AnswersOrderBy>>;
+};
+
+
+/** The root type for querying data */
+export type QueryAlumni_ResponseCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']>;
+  before?: InputMaybe<Scalars['Cursor']>;
+  filter?: InputMaybe<Alumni_ResponseFilter>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<Alumni_ResponseOrderBy>>;
 };
 
 
@@ -776,6 +856,157 @@ export type UuidFilter = {
   in?: InputMaybe<Array<Scalars['UUID']>>;
   is?: InputMaybe<FilterIs>;
   neq?: InputMaybe<Scalars['UUID']>;
+};
+
+export type Alumni_Answers = Node & {
+  __typename?: 'alumni_answers';
+  alumni_res_id?: Maybe<Scalars['BigInt']>;
+  answer?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['Datetime']>;
+  id: Scalars['BigInt'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID'];
+  question_id?: Maybe<Scalars['BigInt']>;
+};
+
+export type Alumni_AnswersConnection = {
+  __typename?: 'alumni_answersConnection';
+  edges: Array<Alumni_AnswersEdge>;
+  pageInfo: PageInfo;
+};
+
+export type Alumni_AnswersDeleteResponse = {
+  __typename?: 'alumni_answersDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int'];
+  /** Array of records impacted by the mutation */
+  records: Array<Alumni_Answers>;
+};
+
+export type Alumni_AnswersEdge = {
+  __typename?: 'alumni_answersEdge';
+  cursor: Scalars['String'];
+  node: Alumni_Answers;
+};
+
+export type Alumni_AnswersFilter = {
+  alumni_res_id?: InputMaybe<BigIntFilter>;
+  answer?: InputMaybe<IntFilter>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  id?: InputMaybe<BigIntFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  question_id?: InputMaybe<BigIntFilter>;
+};
+
+export type Alumni_AnswersInsertInput = {
+  alumni_res_id?: InputMaybe<Scalars['BigInt']>;
+  answer?: InputMaybe<Scalars['Int']>;
+  created_at?: InputMaybe<Scalars['Datetime']>;
+  question_id?: InputMaybe<Scalars['BigInt']>;
+};
+
+export type Alumni_AnswersInsertResponse = {
+  __typename?: 'alumni_answersInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int'];
+  /** Array of records impacted by the mutation */
+  records: Array<Alumni_Answers>;
+};
+
+export type Alumni_AnswersOrderBy = {
+  alumni_res_id?: InputMaybe<OrderByDirection>;
+  answer?: InputMaybe<OrderByDirection>;
+  created_at?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  question_id?: InputMaybe<OrderByDirection>;
+};
+
+export type Alumni_AnswersUpdateInput = {
+  alumni_res_id?: InputMaybe<Scalars['BigInt']>;
+  answer?: InputMaybe<Scalars['Int']>;
+  created_at?: InputMaybe<Scalars['Datetime']>;
+  question_id?: InputMaybe<Scalars['BigInt']>;
+};
+
+export type Alumni_AnswersUpdateResponse = {
+  __typename?: 'alumni_answersUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int'];
+  /** Array of records impacted by the mutation */
+  records: Array<Alumni_Answers>;
+};
+
+export type Alumni_Response = Node & {
+  __typename?: 'alumni_response';
+  alumni_name?: Maybe<Scalars['String']>;
+  company?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['Datetime']>;
+  id: Scalars['BigInt'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID'];
+};
+
+export type Alumni_ResponseConnection = {
+  __typename?: 'alumni_responseConnection';
+  edges: Array<Alumni_ResponseEdge>;
+  pageInfo: PageInfo;
+};
+
+export type Alumni_ResponseDeleteResponse = {
+  __typename?: 'alumni_responseDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int'];
+  /** Array of records impacted by the mutation */
+  records: Array<Alumni_Response>;
+};
+
+export type Alumni_ResponseEdge = {
+  __typename?: 'alumni_responseEdge';
+  cursor: Scalars['String'];
+  node: Alumni_Response;
+};
+
+export type Alumni_ResponseFilter = {
+  alumni_name?: InputMaybe<StringFilter>;
+  company?: InputMaybe<StringFilter>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  id?: InputMaybe<BigIntFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+};
+
+export type Alumni_ResponseInsertInput = {
+  alumni_name?: InputMaybe<Scalars['String']>;
+  company?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['Datetime']>;
+};
+
+export type Alumni_ResponseInsertResponse = {
+  __typename?: 'alumni_responseInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int'];
+  /** Array of records impacted by the mutation */
+  records: Array<Alumni_Response>;
+};
+
+export type Alumni_ResponseOrderBy = {
+  alumni_name?: InputMaybe<OrderByDirection>;
+  company?: InputMaybe<OrderByDirection>;
+  created_at?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+};
+
+export type Alumni_ResponseUpdateInput = {
+  alumni_name?: InputMaybe<Scalars['String']>;
+  company?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['Datetime']>;
+};
+
+export type Alumni_ResponseUpdateResponse = {
+  __typename?: 'alumni_responseUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int'];
+  /** Array of records impacted by the mutation */
+  records: Array<Alumni_Response>;
 };
 
 export type Answer = Node & {
@@ -2176,6 +2407,11 @@ export type MyMutationMutationVariables = Exact<{
 
 export type MyMutationMutation = { __typename?: 'Mutation', insertIntoemployer_answersCollection?: { __typename?: 'employer_answersInsertResponse', affectedCount: number } | null };
 
+export type AlumniFeedbackQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AlumniFeedbackQueryQuery = { __typename?: 'Query', questionCollection?: { __typename?: 'questionConnection', edges: Array<{ __typename?: 'questionEdge', node: { __typename?: 'question', question_no?: number | null, question?: string | null, no_of_options?: number | null, id: any, question_optionsCollection?: { __typename?: 'question_optionsConnection', edges: Array<{ __typename?: 'question_optionsEdge', node: { __typename?: 'question_options', option?: string | null, value?: number | null, id: any } }> } | null } }> } | null };
+
 export type AlumniResponseResultQueryQueryVariables = Exact<{
   id?: InputMaybe<Scalars['BigInt']>;
 }>;
@@ -2213,6 +2449,7 @@ export type StaffListQueryQuery = { __typename?: 'Query', staff_profileCollectio
 
 export const InsertEmployerResponseDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertEmployerResponse"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"company"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"employer_name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insertIntoemployer_responseCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"company"},"value":{"kind":"Variable","name":{"kind":"Name","value":"company"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"employer_name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"employer_name"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affectedCount"}},{"kind":"Field","name":{"kind":"Name","value":"records"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"company"}},{"kind":"Field","name":{"kind":"Name","value":"employer_name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<InsertEmployerResponseMutation, InsertEmployerResponseMutationVariables>;
 export const MyMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"MyMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"objects"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"employer_answersInsertInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insertIntoemployer_answersCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"Variable","name":{"kind":"Name","value":"objects"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affectedCount"}}]}}]}}]} as unknown as DocumentNode<MyMutationMutation, MyMutationMutationVariables>;
+export const AlumniFeedbackQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AlumniFeedbackQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"questionCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"feedback_type"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"StringValue","value":"A","block":false}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"question_no"},"value":{"kind":"EnumValue","value":"AscNullsFirst"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"question_no"}},{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"question_optionsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"option"}},{"kind":"Field","name":{"kind":"Name","value":"value"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"no_of_options"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]} as unknown as DocumentNode<AlumniFeedbackQueryQuery, AlumniFeedbackQueryQueryVariables>;
 export const AlumniResponseResultQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AlumniResponseResultQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"BigInt"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"employer_responseCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"employer_name"}},{"kind":"Field","name":{"kind":"Name","value":"company"}},{"kind":"Field","name":{"kind":"Name","value":"employer_answersCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"question"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"question_no"}},{"kind":"Field","name":{"kind":"Name","value":"question"}}]}},{"kind":"Field","name":{"kind":"Name","value":"answer"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}}]}}]}}]}}]}}]} as unknown as DocumentNode<AlumniResponseResultQueryQuery, AlumniResponseResultQueryQueryVariables>;
 export const MyQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MyQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"departmentsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"short_name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<MyQueryQuery, MyQueryQueryVariables>;
 export const EmployerFeedbackQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"EmployerFeedbackQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"questionCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"feedback_type"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"StringValue","value":"E","block":false}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"question_no"},"value":{"kind":"EnumValue","value":"AscNullsLast"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"question_no"}},{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"no_of_options"}}]}}]}}]}}]}}]} as unknown as DocumentNode<EmployerFeedbackQueryQuery, EmployerFeedbackQueryQueryVariables>;

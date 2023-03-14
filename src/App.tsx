@@ -18,6 +18,7 @@ import AdminReports from "./pages/admin/AdminReports";
 import ResponseList from "./pages/admin/ResponseList";
 import Error403 from "./components/global/Error403";
 import ResponseResult from "./pages/admin/ResponseResult";
+import AlumniFeedback from "./pages/common/AlumniFeedback";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="sign-in" element={<SignIn />} />
         </Route>
         <Route path="/employer-feedback" element={<EmployerFeedback />} />
+        <Route path="/alumni-feedback" element={<AlumniFeedback />} />
         <Route path="" element={<LandingPage />} />
       </Route>
 

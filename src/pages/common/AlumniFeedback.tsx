@@ -1,9 +1,8 @@
-import { Button, Input } from "@ui/index";
+import { BaseDropdown, Button, Input } from "@ui/index";
 import QuestionsCard from "@ui/QuestionsCard";
 import FairIcon from "@icons/Poor.png";
 import GoodIcon from "@icons/VeryGood.png";
 import ExcellentIcon from "@icons/Excellent.png";
-import { useEmployerFeedbackQuery } from "@/graphql/queries/employerFeedbackQuery";
 import { Dispatch, FC, SetStateAction, useMemo, useState } from "react";
 import {
   insertEmployerResponse,
@@ -14,6 +13,7 @@ import { Dialog } from "@headlessui/react";
 import { NavLink } from "react-router-dom";
 import { useAlumniFeedbackQuery } from "@/graphql/queries/alumniFeedbackQuery";
 import { EmployerFeedbackOptions } from "./EmployerFeedback";
+import { useDeptsQuery } from "@/graphql/queries/deptOptions";
 
 interface ThankYouModalProps {
   isOpen: boolean;
@@ -76,8 +76,11 @@ const AlumniFeedback = () => {
     }
   };
 
+  const { data: deptOptions } = useDeptsQuery();
+
   const [alumniName, setAlumniName] = useState("");
   const [batch, setBatch] = useState("");
+  const [dept, setDept] = useState(deptOptions[0]);
   const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
 
   const [reviews, setReviews] = useState({});
@@ -134,11 +137,19 @@ const AlumniFeedback = () => {
             value={batch}
             setValue={setBatch}
           />
+          <BaseDropdown
+            label="Department"
+            value={dept}
+            setValue={setDept}
+            options={deptOptions}
+          />
         </section>
 
         <section className="space-y-4 rounded-lg border-2 border-gray-500/30 p-4">
+          <h2 className="text-center text-3xl font-semibold text-blue-900/80">
+            PEOs
+          </h2>
           {data.peo?.map((questions, idx) => {
-            // const pos = idx + 1;
             return (
               <ReactiveQuestionCard
                 key={questions.id}
@@ -162,6 +173,9 @@ const AlumniFeedback = () => {
         </section>
 
         <section className="space-y-4 rounded-lg border-2 border-gray-500/30 p-4">
+          <h2 className="text-center text-3xl font-semibold text-blue-900/80">
+            POs
+          </h2>
           {data.po?.map((questions) => {
             // const pos = idx + 1;
             return (

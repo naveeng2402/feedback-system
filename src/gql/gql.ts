@@ -13,6 +13,8 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
+    "\n  mutation InsertIntoAlumniResponse(\n    $alumni_name: String!\n    $batch: String!\n    $dept_id: BigInt!\n  ) {\n    insertIntoalumni_responseCollection(\n      objects: { alumni_name: $alumni_name, batch: $batch, dept_id: $dept_id }\n    ) {\n      records {\n        id\n        alumni_name\n      }\n      affectedCount\n    }\n  }\n": types.InsertIntoAlumniResponseDocument,
+    "\n  mutation InsertIntoAlumniAnswers($objects: [alumni_answersInsertInput!]!) {\n    insertIntoalumni_answersCollection(objects: $objects) {\n      affectedCount\n    }\n  }\n": types.InsertIntoAlumniAnswersDocument,
     "\n  mutation InsertEmployerResponse($company: String!, $employer_name: String!) {\n    insertIntoemployer_responseCollection(\n      objects: { company: $company, employer_name: $employer_name }\n    ) {\n      affectedCount\n      records {\n        company\n        employer_name\n        id\n      }\n    }\n  }\n": types.InsertEmployerResponseDocument,
     "\n  mutation MyMutation($objects: [employer_answersInsertInput!]!) {\n    insertIntoemployer_answersCollection(objects: $objects) {\n      affectedCount\n    }\n  }\n": types.MyMutationDocument,
     "\n  query AlumniFeedbackQuery {\n    questionCollection(\n      filter: { feedback_type: { eq: \"A\" } }\n      orderBy: { question_no: AscNullsFirst }\n    ) {\n      edges {\n        node {\n          question_no\n          question\n          question_optionsCollection {\n            edges {\n              node {\n                option\n                value\n                id\n              }\n            }\n          }\n          no_of_options\n          id\n        }\n      }\n    }\n  }\n": types.AlumniFeedbackQueryDocument,
@@ -38,6 +40,14 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation InsertIntoAlumniResponse(\n    $alumni_name: String!\n    $batch: String!\n    $dept_id: BigInt!\n  ) {\n    insertIntoalumni_responseCollection(\n      objects: { alumni_name: $alumni_name, batch: $batch, dept_id: $dept_id }\n    ) {\n      records {\n        id\n        alumni_name\n      }\n      affectedCount\n    }\n  }\n"): (typeof documents)["\n  mutation InsertIntoAlumniResponse(\n    $alumni_name: String!\n    $batch: String!\n    $dept_id: BigInt!\n  ) {\n    insertIntoalumni_responseCollection(\n      objects: { alumni_name: $alumni_name, batch: $batch, dept_id: $dept_id }\n    ) {\n      records {\n        id\n        alumni_name\n      }\n      affectedCount\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation InsertIntoAlumniAnswers($objects: [alumni_answersInsertInput!]!) {\n    insertIntoalumni_answersCollection(objects: $objects) {\n      affectedCount\n    }\n  }\n"): (typeof documents)["\n  mutation InsertIntoAlumniAnswers($objects: [alumni_answersInsertInput!]!) {\n    insertIntoalumni_answersCollection(objects: $objects) {\n      affectedCount\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -35,20 +35,23 @@ export interface Database {
       alumni_response: {
         Row: {
           alumni_name: string | null
-          company: string | null
+          batch: string | null
           created_at: string | null
+          dept_id: number | null
           id: number
         }
         Insert: {
           alumni_name?: string | null
-          company?: string | null
+          batch?: string | null
           created_at?: string | null
+          dept_id?: number | null
           id?: number
         }
         Update: {
           alumni_name?: string | null
-          company?: string | null
+          batch?: string | null
           created_at?: string | null
+          dept_id?: number | null
           id?: number
         }
       }

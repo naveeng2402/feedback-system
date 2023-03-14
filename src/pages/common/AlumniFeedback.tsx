@@ -5,9 +5,9 @@ import GoodIcon from "@icons/VeryGood.png";
 import ExcellentIcon from "@icons/Excellent.png";
 import { Dispatch, FC, SetStateAction, useMemo, useState } from "react";
 import {
-  insertEmployerResponse,
-  insertEmployerAnswers,
-} from "@/graphql/mutations/insertEmployerResponse";
+  insertAlumniAnswers,
+  insertAlumniResponse,
+} from "@/graphql/mutations/insertAlumniResponse";
 import { useMutation } from "urql";
 import { Dialog } from "@headlessui/react";
 import { NavLink } from "react-router-dom";
@@ -105,12 +105,52 @@ const AlumniFeedback = () => {
   );
 
   // graphql mutations for insertion
-  const [empRes, insertEmployerResponseFn] = useMutation(
-    insertEmployerResponse
-  );
-  const [empAns, insertEmployerAnswersFn] = useMutation(insertEmployerAnswers);
+  const [alumniRes, insertAlumniResponseFn] = useMutation(insertAlumniResponse);
+  const [alumniAns, insertAlumniAnswersFn] = useMutation(insertAlumniAnswers);
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    // Validations
+    if (alumniName === "") {
+      alert("Please Enter Your Name");
+      return;
+    }
+    if (batch === "") {
+      alert("Please Enter Your Batch");
+      return;
+    }
+    if (/^[1-2][0,9][0-9][0-9]$/.test(batch) === false) {
+      alert("Please Enter a Valid Batch");
+      return;
+    }
+    if (dept.id === "") {
+      alert("Please Select Your Department");
+      return;
+    }
+
+    insertAlumniResponseFn({
+      alumni_name: alumniName,
+      batch,
+      dept_id: parseInt(dept.id),
+    }).then((respRes) => {
+      if (respRes.error) {
+        console.error(respRes.error);
+        return;
+      }
+      const alumniResponseId: number =
+        respRes.data?.insertIntoalumni_responseCollection?.records[0].id;
+      const alumniAnsVars = Object.entries(reviews).map((val) => ({
+        alumni_res_id: alumniResponseId,
+        question_id: parseInt(val[0]),
+        answer: val[1] as number,
+      }));
+
+      insertAlumniAnswersFn({ objects: alumniAnsVars }).then((ansRes) => {
+        if (ansRes.error) console.error(ansRes.error);
+
+        setIsThankYouModalOpen(true);
+      });
+    });
+  };
 
   return (
     <div className="my-8 ">

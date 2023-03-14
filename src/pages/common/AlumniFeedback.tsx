@@ -1,19 +1,19 @@
-import { Button, Input } from "@ui/index";
+import { BaseDropdown, Button, Input } from "@ui/index";
 import QuestionsCard from "@ui/QuestionsCard";
 import FairIcon from "@icons/Poor.png";
 import GoodIcon from "@icons/VeryGood.png";
 import ExcellentIcon from "@icons/Excellent.png";
-import { useEmployerFeedbackQuery } from "@/graphql/queries/employerFeedbackQuery";
 import { Dispatch, FC, SetStateAction, useMemo, useState } from "react";
 import {
-  insertEmployerResponse,
-  insertEmployerAnswers,
-} from "@/graphql/mutations/insertEmployerResponse";
+  insertAlumniAnswers,
+  insertAlumniResponse,
+} from "@/graphql/mutations/insertAlumniResponse";
 import { useMutation } from "urql";
 import { Dialog } from "@headlessui/react";
 import { NavLink } from "react-router-dom";
 import { useAlumniFeedbackQuery } from "@/graphql/queries/alumniFeedbackQuery";
 import { EmployerFeedbackOptions } from "./EmployerFeedback";
+import { useDeptsQuery } from "@/graphql/queries/deptOptions";
 
 interface ThankYouModalProps {
   isOpen: boolean;
@@ -76,8 +76,11 @@ const AlumniFeedback = () => {
     }
   };
 
+  const { data: deptOptions } = useDeptsQuery();
+
   const [alumniName, setAlumniName] = useState("");
   const [batch, setBatch] = useState("");
+  const [dept, setDept] = useState(deptOptions[0]);
   const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
 
   const [reviews, setReviews] = useState({});
@@ -102,12 +105,52 @@ const AlumniFeedback = () => {
   );
 
   // graphql mutations for insertion
-  const [empRes, insertEmployerResponseFn] = useMutation(
-    insertEmployerResponse
-  );
-  const [empAns, insertEmployerAnswersFn] = useMutation(insertEmployerAnswers);
+  const [alumniRes, insertAlumniResponseFn] = useMutation(insertAlumniResponse);
+  const [alumniAns, insertAlumniAnswersFn] = useMutation(insertAlumniAnswers);
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    // Validations
+    if (alumniName === "") {
+      alert("Please Enter Your Name");
+      return;
+    }
+    if (batch === "") {
+      alert("Please Enter Your Batch");
+      return;
+    }
+    if (/^[1-2][0,9][0-9][0-9]$/.test(batch) === false) {
+      alert("Please Enter a Valid Batch");
+      return;
+    }
+    if (dept.id === "") {
+      alert("Please Select Your Department");
+      return;
+    }
+
+    insertAlumniResponseFn({
+      alumni_name: alumniName,
+      batch,
+      dept_id: parseInt(dept.id),
+    }).then((respRes) => {
+      if (respRes.error) {
+        console.error(respRes.error);
+        return;
+      }
+      const alumniResponseId: number =
+        respRes.data?.insertIntoalumni_responseCollection?.records[0].id;
+      const alumniAnsVars = Object.entries(reviews).map((val) => ({
+        alumni_res_id: alumniResponseId,
+        question_id: parseInt(val[0]),
+        answer: val[1] as number,
+      }));
+
+      insertAlumniAnswersFn({ objects: alumniAnsVars }).then((ansRes) => {
+        if (ansRes.error) console.error(ansRes.error);
+
+        setIsThankYouModalOpen(true);
+      });
+    });
+  };
 
   return (
     <div className="my-8 ">
@@ -134,11 +177,19 @@ const AlumniFeedback = () => {
             value={batch}
             setValue={setBatch}
           />
+          <BaseDropdown
+            label="Department"
+            value={dept}
+            setValue={setDept}
+            options={deptOptions}
+          />
         </section>
 
         <section className="space-y-4 rounded-lg border-2 border-gray-500/30 p-4">
+          <h2 className="text-center text-3xl font-semibold text-blue-900/80">
+            PEOs
+          </h2>
           {data.peo?.map((questions, idx) => {
-            // const pos = idx + 1;
             return (
               <ReactiveQuestionCard
                 key={questions.id}
@@ -162,6 +213,9 @@ const AlumniFeedback = () => {
         </section>
 
         <section className="space-y-4 rounded-lg border-2 border-gray-500/30 p-4">
+          <h2 className="text-center text-3xl font-semibold text-blue-900/80">
+            POs
+          </h2>
           {data.po?.map((questions) => {
             // const pos = idx + 1;
             return (

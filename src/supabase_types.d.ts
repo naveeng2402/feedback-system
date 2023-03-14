@@ -9,6 +9,49 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      alumni_answers: {
+        Row: {
+          alumni_res_id: number | null
+          answer: number | null
+          created_at: string | null
+          id: number
+          question_id: number | null
+        }
+        Insert: {
+          alumni_res_id?: number | null
+          answer?: number | null
+          created_at?: string | null
+          id?: number
+          question_id?: number | null
+        }
+        Update: {
+          alumni_res_id?: number | null
+          answer?: number | null
+          created_at?: string | null
+          id?: number
+          question_id?: number | null
+        }
+      }
+      alumni_response: {
+        Row: {
+          alumni_name: string | null
+          company: string | null
+          created_at: string | null
+          id: number
+        }
+        Insert: {
+          alumni_name?: string | null
+          company?: string | null
+          created_at?: string | null
+          id?: number
+        }
+        Update: {
+          alumni_name?: string | null
+          company?: string | null
+          created_at?: string | null
+          id?: number
+        }
+      }
       answer: {
         Row: {
           answer: number | null

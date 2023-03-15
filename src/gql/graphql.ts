@@ -861,11 +861,13 @@ export type UuidFilter = {
 export type Alumni_Answers = Node & {
   __typename?: 'alumni_answers';
   alumni_res_id?: Maybe<Scalars['BigInt']>;
+  alumni_response?: Maybe<Alumni_Response>;
   answer?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['Datetime']>;
   id: Scalars['BigInt'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID'];
+  question?: Maybe<Question>;
   question_id?: Maybe<Scalars['BigInt']>;
 };
 
@@ -938,6 +940,7 @@ export type Alumni_AnswersUpdateResponse = {
 
 export type Alumni_Response = Node & {
   __typename?: 'alumni_response';
+  alumni_answersCollection?: Maybe<Alumni_AnswersConnection>;
   alumni_name?: Maybe<Scalars['String']>;
   batch?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['Datetime']>;
@@ -946,6 +949,16 @@ export type Alumni_Response = Node & {
   id: Scalars['BigInt'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID'];
+};
+
+
+export type Alumni_ResponseAlumni_AnswersCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']>;
+  before?: InputMaybe<Scalars['Cursor']>;
+  filter?: InputMaybe<Alumni_AnswersFilter>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<Alumni_AnswersOrderBy>>;
 };
 
 export type Alumni_ResponseConnection = {
@@ -1645,6 +1658,7 @@ export type Feedback_QuestionsUpdateResponse = {
 
 export type Question = Node & {
   __typename?: 'question';
+  alumni_answersCollection?: Maybe<Alumni_AnswersConnection>;
   answerCollection?: Maybe<AnswerConnection>;
   created_at?: Maybe<Scalars['Datetime']>;
   employer_answersCollection?: Maybe<Employer_AnswersConnection>;
@@ -1657,6 +1671,16 @@ export type Question = Node & {
   question?: Maybe<Scalars['String']>;
   question_no?: Maybe<Scalars['Int']>;
   question_optionsCollection?: Maybe<Question_OptionsConnection>;
+};
+
+
+export type QuestionAlumni_AnswersCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']>;
+  before?: InputMaybe<Scalars['Cursor']>;
+  filter?: InputMaybe<Alumni_AnswersFilter>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<Alumni_AnswersOrderBy>>;
 };
 
 

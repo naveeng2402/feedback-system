@@ -43,6 +43,7 @@ const ResponseListItem: FC<ResponseListItemProps> = ({
 const ResponseList: FC = () => {
   // Handling different urls
   const { responseType } = useParams();
+
   const navigate = useNavigate();
   const { queryHook, optionsHook } = (() => {
     switch (responseType) {
@@ -69,8 +70,12 @@ const ResponseList: FC = () => {
   const [fromYear, setFromYear] = useState({ id: "2023", text: "2023" });
   const [toYear, setToYear] = useState({ id: "2023", text: "2023" });
 
-  const responses = queryHook(parseInt(fromYear.text), parseInt(toYear.text));
-  const yearOptions = optionsHook();
+  const responses = queryHook(
+    parseInt(fromYear.text),
+    parseInt(toYear.text),
+    responseType
+  );
+  const yearOptions = optionsHook(responseType);
 
   const [title, setTitle] = useState("2023");
   useEffect(() => {

@@ -408,6 +408,24 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
+      get_alumni_response_list: {
+        Args: {
+          from_year: number
+          to_year: number
+        }
+        Returns: {
+          id: number
+          alumni_name: string
+          batch: string
+          dept: string
+          created_at: string
+          avg_answer: number
+        }[]
+      }
+      get_alumni_response_year_options_function: {
+        Args: Record<PropertyKey, never>
+        Returns: string[]
+      }
       get_employer_response_list: {
         Args: {
           from_year: number

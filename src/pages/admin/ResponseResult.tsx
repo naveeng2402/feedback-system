@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { EmployerFeedbackOptions } from "@/pages/common/EmployerFeedback";
 import { useEmployerResponseResultQuery } from "@/graphql/queries/employerReponseResultQuery";
+import { useAlumniResponseResultQuery } from "@/graphql/queries/alumniReponseResultQuery";
 import Error404 from "@/components/global/Error404";
 import { Nullable } from "@/types";
 import RatingChip from "@/components/ui/RatingChip";
@@ -28,7 +29,7 @@ const ResponseResultHeader: FC<ResponseResultHeaderProps> = ({
 interface ResponseResultAnswerProps {
   questionNo: Nullable<number>;
   question: Nullable<string>;
-  answer: Nullable<number>;
+  answer: Nullable<number | string>;
 }
 const ResponseResultAnswer: FC<ResponseResultAnswerProps> = ({
   questionNo,
@@ -67,7 +68,7 @@ const ResponseResult: FC = () => {
         };
       case "alumni":
         return {
-          queryHook: useEmployerResponseResultQuery,
+          queryHook: useAlumniResponseResultQuery,
         };
       default:
         navigate("errors/404");
@@ -77,7 +78,8 @@ const ResponseResult: FC = () => {
     }
   })();
 
-  const { data, loading } = useEmployerResponseResultQuery(parseInt(id));
+  const { data, loading } = queryHook(parseInt(id));
+  // @ts-ignore
   const totalRatingScored = data.answers?.reduce((a, b) => {
     return a + (b.answer as number);
   }, 0) as number;

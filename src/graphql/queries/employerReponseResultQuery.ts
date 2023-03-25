@@ -54,6 +54,7 @@ export const useEmployerResponseResultQuery = (id: number) => {
       questionNo: val.node.question?.question_no,
       question: val.node.question?.question,
       answer: val.node.answer,
+      review: undefined,
     }));
 
     return { ...cardDetails, answers };

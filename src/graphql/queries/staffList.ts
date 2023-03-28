@@ -42,3 +42,29 @@ export const useStaffListQuery = () => {
     reExecuteQuery,
   };
 };
+
+export const useStaffOptions = () => {
+  const [res, reExecuteQuery] = useQuery({ query: staffListQuery });
+  const { fetching, error, data } = res;
+  const dataNorm = useMemo(() => {
+    if (
+      fetching ||
+      (fetching === false && data?.staff_profileCollection?.edges.length === 0)
+    )
+      return [
+        {
+          id: "",
+          text: "Select Staff",
+        },
+      ];
+
+    const res = data?.staff_profileCollection?.edges;
+
+    return res?.map((item) => ({
+      id: item.node.id as string,
+      text: `${item.node.name} (${item.node.departments?.short_name})`,
+    }));
+  }, [data]);
+
+  return { data: dataNorm!, fetching, error };
+};

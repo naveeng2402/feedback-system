@@ -52,6 +52,9 @@ const AdminBase: FC = () => {
       case "/admin/staff_management":
         setTitle("Staff Management");
         break;
+      case "/admin/publish-feedback":
+        setTitle("Publish Feedback");
+        break;
 
       default:
         break;

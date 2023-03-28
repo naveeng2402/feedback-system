@@ -260,17 +260,17 @@ export interface Database {
         Row: {
           created_at: string
           id: number
-          reg: number | null
+          reg: number
         }
         Insert: {
           created_at?: string
           id?: number
-          reg?: number | null
+          reg: number
         }
         Update: {
           created_at?: string
           id?: number
-          reg?: number | null
+          reg?: number
         }
       }
       response: {

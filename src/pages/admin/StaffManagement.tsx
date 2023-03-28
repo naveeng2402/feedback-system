@@ -83,71 +83,73 @@ const CreateStaffModal: FC<CreateStaffModalProps> = ({ isOpen, setIsOpen }) => {
     <Dialog open={isOpen} onClose={setIsOpen} className="fixed inset-0">
       <Dialog.Overlay className="fixed inset-0 bg-gray-700/80" />
       <Dialog.Panel className="absolute inset-8 top-1/2 h-fit -translate-y-1/2 space-y-8 rounded-3xl bg-white p-4 text-gray-50 ">
-        <h2 className="text-3xl text-blue-800">Add Staff</h2>
+        <div className="flex flex-col">
+          <h2 className=" text-3xl text-blue-800">Add Staff</h2>
 
-        <div className="space-y-2 px-4">
-          <Input
-            value={name}
-            setValue={setName}
-            name="Name"
-            placeholder="name"
-            id="text"
-            type="text"
-          />
-          <Input
-            value={email}
-            setValue={setEmail}
-            name="Email"
-            placeholder="email"
-            id="email"
-            type="email"
-          />
-          <BaseDropdown
-            label="Designation"
-            options={designationOptions}
-            value={designation}
-            setValue={setDesignation}
-          />
-          <BaseDropdown
-            label="Stream"
-            options={streams}
-            value={stream}
-            setValue={setStream}
-          />
-          <Input
-            value={pass}
-            setValue={setPass}
-            name="Password"
-            placeholder="pass"
-            id="pass"
-            type="password"
-          />
-          <Input
-            value={staffNo}
-            setValue={setStaffNo}
-            name="Staff No."
-            placeholder="staff no"
-            id="staff_no"
-            type="text"
-          />
-        </div>
+          <div className="max-h-[40vh] flex-grow space-y-2 overflow-y-scroll py-4 px-4">
+            <Input
+              value={name}
+              setValue={setName}
+              name="Name"
+              placeholder="name"
+              id="text"
+              type="text"
+            />
+            <Input
+              value={email}
+              setValue={setEmail}
+              name="Email"
+              placeholder="email"
+              id="email"
+              type="email"
+            />
+            <BaseDropdown
+              label="Designation"
+              options={designationOptions}
+              value={designation}
+              setValue={setDesignation}
+            />
+            <BaseDropdown
+              label="Stream"
+              options={streams}
+              value={stream}
+              setValue={setStream}
+            />
+            <Input
+              value={pass}
+              setValue={setPass}
+              name="Password"
+              placeholder="pass"
+              id="pass"
+              type="password"
+            />
+            <Input
+              value={staffNo}
+              setValue={setStaffNo}
+              name="Staff No."
+              placeholder="staff no"
+              id="staff_no"
+              type="text"
+            />
+          </div>
 
-        <div className="mt-auto mb-4 flex w-full gap-4 px-2">
-          <Button
-            onClick={() => setIsOpen(false)}
-            className="w-full"
-            intent="inactive"
-          >
-            Close
-          </Button>
-          <Button
-            onClick={() => {
-              createStaff();
-            }}
-            className="w-full"
-          >
-            Create
-          </Button>
+          <div className="mt-auto mb-4 flex w-full gap-4  px-2 py-4">
+            <Button
+              onClick={() => setIsOpen(false)}
+              className="w-full"
+              intent="inactive"
+            >
+              Close
+            </Button>
+            <Button
+              onClick={() => {
+                createStaff();
+              }}
+              className="w-full"
+            >
+              Create
+            </Button>
+          </div>
         </div>
       </Dialog.Panel>
     </Dialog>

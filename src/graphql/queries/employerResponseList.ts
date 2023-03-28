@@ -3,7 +3,11 @@ import { supabase } from "@/supabase";
 import { ResponseListQueryResult } from "@/types";
 import { useEffect, useState } from "react";
 
-export const useEmployerResponseQuery = (fromYear: number, toYear: number) => {
+export const useEmployerResponseQuery = (
+  fromYear: number,
+  toYear: number,
+  id?: string | number
+) => {
   const [data, setData] = useState<ResponseListQueryResult[]>([]);
   const getDate = (timestamp: string) =>
     strftime("%d-%m-%Y", new Date(timestamp));
@@ -29,12 +33,12 @@ export const useEmployerResponseQuery = (fromYear: number, toYear: number) => {
 
         setData(dataNorm);
       });
-  }, [fromYear, toYear]);
+  }, [fromYear, toYear, id]);
 
   return data;
 };
 
-export const useEmployerResponseYearOptionsQuery = () => {
+export const useEmployerResponseYearOptionsQuery = (id?: string | number) => {
   const [years, setYears] = useState<
     {
       id: string;
@@ -51,7 +55,7 @@ export const useEmployerResponseYearOptionsQuery = () => {
 
       setYears(dataNorm);
     });
-  }, []);
+  }, [id]);
 
   return years;
 };

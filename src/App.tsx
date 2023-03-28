@@ -17,6 +17,9 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminReports from "./pages/admin/AdminReports";
 import ResponseList from "./pages/admin/ResponseList";
 import Error403 from "./components/global/Error403";
+import ResponseResult from "./pages/admin/ResponseResult";
+import AlumniFeedback from "./pages/common/AlumniFeedback";
+import PublishFeedback from "./pages/admin/PublishFeedback";
 
 function App() {
   return (
@@ -27,6 +30,7 @@ function App() {
           <Route path="sign-in" element={<SignIn />} />
         </Route>
         <Route path="/employer-feedback" element={<EmployerFeedback />} />
+        <Route path="/alumni-feedback" element={<AlumniFeedback />} />
         <Route path="" element={<LandingPage />} />
       </Route>
 
@@ -45,6 +49,11 @@ function App() {
         <Route element={<AdminBase />}>
           <Route path="report-list/" element={<AdminReports />} />
           <Route path="staff_management/" element={<StaffManagement />} />
+          <Route path="publish-feedback" element={<PublishFeedback />} />
+          <Route
+            path="response-result/:responseType/:id"
+            element={<ResponseResult />}
+          />
           <Route element={<AdminReportNav />}>
             <Route
               path="response-list/:responseType"

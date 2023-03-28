@@ -9,6 +9,52 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      alumni_answers: {
+        Row: {
+          alumni_res_id: number | null
+          answer: number | null
+          created_at: string | null
+          id: number
+          question_id: number | null
+        }
+        Insert: {
+          alumni_res_id?: number | null
+          answer?: number | null
+          created_at?: string | null
+          id?: number
+          question_id?: number | null
+        }
+        Update: {
+          alumni_res_id?: number | null
+          answer?: number | null
+          created_at?: string | null
+          id?: number
+          question_id?: number | null
+        }
+      }
+      alumni_response: {
+        Row: {
+          alumni_name: string | null
+          batch: string | null
+          created_at: string | null
+          dept_id: number | null
+          id: number
+        }
+        Insert: {
+          alumni_name?: string | null
+          batch?: string | null
+          created_at?: string | null
+          dept_id?: number | null
+          id?: number
+        }
+        Update: {
+          alumni_name?: string | null
+          batch?: string | null
+          created_at?: string | null
+          dept_id?: number | null
+          id?: number
+        }
+      }
       answer: {
         Row: {
           answer: number | null
@@ -214,17 +260,17 @@ export interface Database {
         Row: {
           created_at: string
           id: number
-          reg: number | null
+          reg: number
         }
         Insert: {
           created_at?: string
           id?: number
-          reg?: number | null
+          reg: number
         }
         Update: {
           created_at?: string
           id?: number
-          reg?: number | null
+          reg?: number
         }
       }
       response: {
@@ -362,6 +408,24 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
+      get_alumni_response_list: {
+        Args: {
+          from_year: number
+          to_year: number
+        }
+        Returns: {
+          id: number
+          alumni_name: string
+          batch: string
+          dept: string
+          created_at: string
+          avg_answer: number
+        }[]
+      }
+      get_alumni_response_year_options_function: {
+        Args: Record<PropertyKey, never>
+        Returns: string[]
+      }
       get_employer_response_list: {
         Args: {
           from_year: number

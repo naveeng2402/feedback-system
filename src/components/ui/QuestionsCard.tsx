@@ -17,12 +17,22 @@ interface QuestionsCardProps {
     | (() => void);
 }
 
+const checkIfDuplicateExists = (arr: any[]) => {
+  return new Set(arr).size !== arr.length;
+};
+
 const MyRadioGroup: FC<QuestionsCardProps> = ({
   question,
   options,
   value,
   setValue,
 }) => {
+  if (checkIfDuplicateExists(options.map((val) => val.score))) {
+    options = options.map((val, idx) => {
+      const score = val.score + idx * 10;
+      return { image: val.image, review: val.review, score: score };
+    });
+  }
   return (
     <RadioGroup
       value={value}
@@ -34,10 +44,10 @@ const MyRadioGroup: FC<QuestionsCardProps> = ({
         {question}
       </RadioGroup.Label>
       <div className="space-y-1">
-        {options.map((option) => (
+        {options.map((option, idx) => (
           <RadioGroup.Option
             className="flex items-center gap-4 rounded-xl border-[#90B9F1] px-4 py-2 ui-checked:border-2 ui-checked:bg-[#BED5F5]/50"
-            key={option.score}
+            key={idx}
             value={option.score}
           >
             <div className="flex h-6 w-6 items-center justify-center rounded-full border-[3px] border-[#D0D4E3] bg-white ui-checked:border-[#90B9F1]">

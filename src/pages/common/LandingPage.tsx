@@ -39,7 +39,12 @@ const LandingPage: FC = () => {
         </p>
 
         <section className="space-y-4">
-          <FeedbackCard title="Alumni Feedback Form" action={() => {}} />
+          <FeedbackCard
+            title="Alumni Feedback Form"
+            action={() => {
+              navigate("/alumni-feedback");
+            }}
+          />
           <FeedbackCard
             title="Employer Feedback Form"
             action={() => {

@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { Listbox } from "@headlessui/react";
 import { ReactComponent as Chevron } from "@icons/Chevron.svg";
 
-interface OptionProps {
+export interface OptionProps {
   id: string;
   text: string;
 }

@@ -194,9 +194,9 @@ const StaffManagement = () => {
         <Search className="m-2 h-8 w-8 border-none border-transparent fill-inherit" />
       </div>
 
-      <div className="fixed bottom-0 right-0 mx-12 mb-10">
+      <div className="fixed bottom-0 right-0 mx-8 mb-10">
         <Button size="circle" onClick={() => setModalOpen(true)}>
-          <Plus className="m-2 h-6 w-6" />
+          <Plus className="m-4 h-6 w-6" />
         </Button>
       </div>
 

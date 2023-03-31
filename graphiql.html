@@ -69,7 +69,14 @@
 
     <script>
       var fetcher = GraphiQL.createFetcher({
-        url: "https://uncwjombmjfpeoigszsb.supabase.co/graphql/v1?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVuY3dqb21ibWpmcGVvaWdzenNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzM1MDkyNjYsImV4cCI6MTk4OTA4NTI2Nn0.Dd4CtPhHFEpJ2RIvgdVLDvMFx9wdY0enMK6KkTmYwnY",
+        url: "https://uncwjombmjfpeoigszsb.supabase.co/graphql/v1",
+        headers: {
+          "content-type": "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVuY3dqb21ibWpmcGVvaWdzenNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzM1MDkyNjYsImV4cCI6MTk4OTA4NTI2Nn0.Dd4CtPhHFEpJ2RIvgdVLDvMFx9wdY0enMK6KkTmYwnY",
+          apikey:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVuY3dqb21ibWpmcGVvaWdzenNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzM1MDkyNjYsImV4cCI6MTk4OTA4NTI2Nn0.Dd4CtPhHFEpJ2RIvgdVLDvMFx9wdY0enMK6KkTmYwnY",
+        },
       });
 
       function GraphiQLWithExplorer() {

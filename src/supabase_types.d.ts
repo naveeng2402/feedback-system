@@ -171,20 +171,29 @@ export interface Database {
         Row: {
           batch: number
           created_at: string | null
+          department_id: number
           id: number
-          sem: number | null
+          regulation_id: number
+          section: string | null
+          sem: number
         }
         Insert: {
           batch: number
           created_at?: string | null
+          department_id: number
           id?: number
-          sem?: number | null
+          regulation_id: number
+          section?: string | null
+          sem: number
         }
         Update: {
           batch?: number
           created_at?: string | null
+          department_id?: number
           id?: number
-          sem?: number | null
+          regulation_id?: number
+          section?: string | null
+          sem?: number
         }
       }
       feedback_questions: {
@@ -296,24 +305,24 @@ export interface Database {
       staff_mapping: {
         Row: {
           created_at: string | null
-          feedback_id: number | null
+          feedback_id: number
           id: number
-          staff_id: string | null
-          sub_id: number | null
+          staff_id: string
+          sub_id: number
         }
         Insert: {
           created_at?: string | null
-          feedback_id?: number | null
+          feedback_id: number
           id?: number
-          staff_id?: string | null
-          sub_id?: number | null
+          staff_id: string
+          sub_id: number
         }
         Update: {
           created_at?: string | null
-          feedback_id?: number | null
+          feedback_id?: number
           id?: number
-          staff_id?: string | null
-          sub_id?: number | null
+          staff_id?: string
+          sub_id?: number
         }
       }
       staff_profile: {

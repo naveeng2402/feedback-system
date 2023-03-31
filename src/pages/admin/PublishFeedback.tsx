@@ -10,6 +10,8 @@ import {
 import BaseCombobox from "@/components/ui/Combobox";
 import { useRegulationsQuery } from "@/graphql/queries/regulations";
 import { useDeptSubjectQuery } from "@/graphql/queries/deptSubjectQuery";
+import { supabase } from "@/supabase";
+import { useNavigate } from "react-router-dom";
 
 interface StaffMappingProps {
   subjectName: string;
@@ -52,6 +54,7 @@ const PublishFeedback: FC = () => {
     id: (val + 1).toString(),
     text: (val + 1).toString(),
   }));
+  const navigate = useNavigate();
 
   const [batch, setBatch] = useState("2024");
   const [dept, setDept] = useState(deptOptions[0]);
@@ -75,19 +78,21 @@ const PublishFeedback: FC = () => {
 
   useEffect(() => {
     setShowStaffMapping(false);
+    const newStaffMapping: IStaffMapping = {};
+
     deptSubject?.forEach((e) => {
-      staffMapping[e.subCode.trim()] = { id: "", text: "" };
+      newStaffMapping[e.id.trim()] = { id: "", text: "" };
     });
     delete staffMapping[""];
+
+    setStaffMapping(newStaffMapping);
   }, [deptSubject]);
 
   useEffect(() => {
-    if (
-      Object.values(staffMapping).filter((mapping) => mapping.id === "")
-        .length === 0
-    ) {
-      setIsPublishDisabled(false);
-    }
+    const condition =
+      Object.values(staffMapping).length !== 0 &&
+      Object.values(staffMapping).filter((item) => item.id === "").length === 0;
+    condition ? setIsPublishDisabled(false) : setIsPublishDisabled(true);
   }, [staffMapping]);
 
   const handleAssignStaffs = () => {
@@ -95,7 +100,32 @@ const PublishFeedback: FC = () => {
   };
 
   const handlePublish = () => {
-    alert("Published");
+    supabase
+      .from("feedback")
+      .insert([
+        {
+          batch: parseInt(batch),
+          department_id: parseInt(dept.id),
+          regulation_id: parseInt(regulation.id),
+          sem: parseInt(sem.id),
+          section: section,
+        },
+      ])
+      .select()
+      .then((res) => {
+        const data = Object.entries(staffMapping).map(([subId, staff]) => ({
+          feedback_id: res.data![0].id,
+          staff_id: staff.id,
+          sub_id: parseInt(subId),
+        }));
+        supabase
+          .from("staff_mapping")
+          .insert(data)
+          .then(() => {
+            alert("Feedback Published Successfully");
+            navigate("/admin/dashboard");
+          });
+      });
   };
 
   return (
@@ -153,14 +183,14 @@ const PublishFeedback: FC = () => {
               ?.filter((sub) => sub.isTheory === true)
               .map((subject) => (
                 <StaffMapping
-                  key={subject.subCode}
+                  key={subject.id}
                   subjectName={`${subject.subName} (${subject.subCode})`}
                   staffOptions={staffOptions}
-                  value={staffMapping[subject.subCode.trim()]}
+                  value={staffMapping[subject.id.trim()]}
                   setValue={(e: OptionProps) => {
                     setStaffMapping((prev) => ({
                       ...prev,
-                      [subject.subCode.trim()]: e,
+                      [subject.id.trim()]: e,
                     }));
                   }}
                 />
@@ -172,14 +202,14 @@ const PublishFeedback: FC = () => {
               ?.filter((sub) => sub.isTheory === false)
               .map((subject) => (
                 <StaffMapping
-                  key={subject.subCode}
+                  key={subject.id}
                   subjectName={`${subject.subName} (${subject.subCode})`}
                   staffOptions={staffOptions}
-                  value={staffMapping[subject.subCode.trim()]}
+                  value={staffMapping[subject.id.trim()]}
                   setValue={(e: OptionProps) => {
                     setStaffMapping((prev) => ({
                       ...prev,
-                      [subject.subCode.trim()]: e,
+                      [subject.id.trim()]: e,
                     }));
                   }}
                 />

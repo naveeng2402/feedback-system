@@ -1113,6 +1113,7 @@ export type Departments = Node & {
   alumni_responseCollection?: Maybe<Alumni_ResponseConnection>;
   created_at?: Maybe<Scalars['Datetime']>;
   dept_subjectCollection?: Maybe<Dept_SubjectConnection>;
+  feedbackCollection?: Maybe<FeedbackConnection>;
   id: Scalars['BigInt'];
   name: Scalars['String'];
   /** Globally Unique Record Identifier */
@@ -1140,6 +1141,16 @@ export type DepartmentsDept_SubjectCollectionArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<Dept_SubjectOrderBy>>;
+};
+
+
+export type DepartmentsFeedbackCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']>;
+  before?: InputMaybe<Scalars['Cursor']>;
+  filter?: InputMaybe<FeedbackFilter>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<FeedbackOrderBy>>;
 };
 
 
@@ -1479,12 +1490,17 @@ export type Feedback = Node & {
   __typename?: 'feedback';
   batch: Scalars['Int'];
   created_at?: Maybe<Scalars['Datetime']>;
+  department_id: Scalars['BigInt'];
+  departments?: Maybe<Departments>;
   feedback_questionsCollection?: Maybe<Feedback_QuestionsConnection>;
   id: Scalars['BigInt'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID'];
+  regulation_id: Scalars['BigInt'];
+  regulations?: Maybe<Regulations>;
   responseCollection?: Maybe<ResponseConnection>;
-  sem?: Maybe<Scalars['Int']>;
+  section?: Maybe<Scalars['String']>;
+  sem: Scalars['Int'];
   staff_mappingCollection?: Maybe<Staff_MappingConnection>;
 };
 
@@ -1541,14 +1557,20 @@ export type FeedbackEdge = {
 export type FeedbackFilter = {
   batch?: InputMaybe<IntFilter>;
   created_at?: InputMaybe<DatetimeFilter>;
+  department_id?: InputMaybe<BigIntFilter>;
   id?: InputMaybe<BigIntFilter>;
   nodeId?: InputMaybe<IdFilter>;
+  regulation_id?: InputMaybe<BigIntFilter>;
+  section?: InputMaybe<StringFilter>;
   sem?: InputMaybe<IntFilter>;
 };
 
 export type FeedbackInsertInput = {
   batch?: InputMaybe<Scalars['Int']>;
   created_at?: InputMaybe<Scalars['Datetime']>;
+  department_id?: InputMaybe<Scalars['BigInt']>;
+  regulation_id?: InputMaybe<Scalars['BigInt']>;
+  section?: InputMaybe<Scalars['String']>;
   sem?: InputMaybe<Scalars['Int']>;
 };
 
@@ -1563,13 +1585,19 @@ export type FeedbackInsertResponse = {
 export type FeedbackOrderBy = {
   batch?: InputMaybe<OrderByDirection>;
   created_at?: InputMaybe<OrderByDirection>;
+  department_id?: InputMaybe<OrderByDirection>;
   id?: InputMaybe<OrderByDirection>;
+  regulation_id?: InputMaybe<OrderByDirection>;
+  section?: InputMaybe<OrderByDirection>;
   sem?: InputMaybe<OrderByDirection>;
 };
 
 export type FeedbackUpdateInput = {
   batch?: InputMaybe<Scalars['Int']>;
   created_at?: InputMaybe<Scalars['Datetime']>;
+  department_id?: InputMaybe<Scalars['BigInt']>;
+  regulation_id?: InputMaybe<Scalars['BigInt']>;
+  section?: InputMaybe<Scalars['String']>;
   sem?: InputMaybe<Scalars['Int']>;
 };
 
@@ -1877,6 +1905,7 @@ export type Regulations = Node & {
   __typename?: 'regulations';
   created_at: Scalars['Datetime'];
   dept_subjectCollection?: Maybe<Dept_SubjectConnection>;
+  feedbackCollection?: Maybe<FeedbackConnection>;
   id: Scalars['BigInt'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID'];
@@ -1892,6 +1921,16 @@ export type RegulationsDept_SubjectCollectionArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<Dept_SubjectOrderBy>>;
+};
+
+
+export type RegulationsFeedbackCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']>;
+  before?: InputMaybe<Scalars['Cursor']>;
+  filter?: InputMaybe<FeedbackFilter>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<FeedbackOrderBy>>;
 };
 
 
@@ -2052,13 +2091,13 @@ export type Staff_Mapping = Node & {
   __typename?: 'staff_mapping';
   created_at?: Maybe<Scalars['Datetime']>;
   feedback?: Maybe<Feedback>;
-  feedback_id?: Maybe<Scalars['BigInt']>;
+  feedback_id: Scalars['BigInt'];
   id: Scalars['BigInt'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID'];
-  staff_id?: Maybe<Scalars['UUID']>;
+  staff_id: Scalars['UUID'];
   staff_profile?: Maybe<Staff_Profile>;
-  sub_id?: Maybe<Scalars['BigInt']>;
+  sub_id: Scalars['BigInt'];
   subject?: Maybe<Subject>;
 };
 

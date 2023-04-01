@@ -1,13 +1,27 @@
 import FeedbackCard from "@ui/FeedbackCard";
 import { FC } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const DashBoard: FC = () => {
   const title = "Student Feedback Form";
+
+  const navigate = useNavigate();
   return (
     <main className="space-y-8">
-      <FeedbackCard title={title} subtitle="(Course)" action={() => {}} />
-      <FeedbackCard title={title} subtitle="(Lab)" action={() => {}} />
+      <FeedbackCard
+        title={title}
+        subtitle="(Course)"
+        action={() => {
+          navigate("/stud/feedback-list/course");
+        }}
+      />
+      <FeedbackCard
+        title={title}
+        subtitle="(Lab)"
+        action={() => {
+          navigate("/stud/feedback-list/lab");
+        }}
+      />
     </main>
   );
 };

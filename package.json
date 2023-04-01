@@ -7,7 +7,7 @@
     "build": "tsc && vite build",
     "codegen:graphql": "graphql-codegen",
     "codegen:supabase": "supabase gen types typescript --project-id \"uncwjombmjfpeoigszsb\" --schema public > src/supabase_types.d.ts",
-    "codegen": "run-s codegen:*",
+    "codegen": "run-p codegen:*",
     "preview": "vite preview"
   },
   "dependencies": {

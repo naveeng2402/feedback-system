@@ -38,7 +38,10 @@ function App() {
         <Route path="profile/" element={<StudentProfile />} />
         <Route element={<StudentBase />}>
           <Route path="dashboard/" element={<DashBoard />} />
-          <Route path="feedback-list/" element={<FeedbackList />} />
+          <Route
+            path="feedback-list/:feedbackType"
+            element={<FeedbackList />}
+          />
         </Route>
       </Route>
       <Route path="/staff/" element={<ProtectedRoute roles={["staff"]} />}>

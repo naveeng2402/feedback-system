@@ -173,6 +173,7 @@ export interface Database {
           created_at: string | null
           department_id: number
           id: number
+          is_published: boolean
           regulation_id: number
           section: string | null
           sem: number
@@ -182,6 +183,7 @@ export interface Database {
           created_at?: string | null
           department_id: number
           id?: number
+          is_published?: boolean
           regulation_id: number
           section?: string | null
           sem: number
@@ -191,6 +193,7 @@ export interface Database {
           created_at?: string | null
           department_id?: number
           id?: number
+          is_published?: boolean
           regulation_id?: number
           section?: string | null
           sem?: number
@@ -359,6 +362,7 @@ export interface Database {
           isNewUser: boolean
           name: string | null
           roll_no: number | null
+          section: string | null
           updated_at: string | null
         }
         Insert: {
@@ -368,6 +372,7 @@ export interface Database {
           isNewUser?: boolean
           name?: string | null
           roll_no?: number | null
+          section?: string | null
           updated_at?: string | null
         }
         Update: {
@@ -377,6 +382,7 @@ export interface Database {
           isNewUser?: boolean
           name?: string | null
           roll_no?: number | null
+          section?: string | null
           updated_at?: string | null
         }
       }

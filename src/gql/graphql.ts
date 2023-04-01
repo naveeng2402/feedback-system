@@ -1494,11 +1494,11 @@ export type Feedback = Node & {
   departments?: Maybe<Departments>;
   feedback_questionsCollection?: Maybe<Feedback_QuestionsConnection>;
   id: Scalars['BigInt'];
+  is_published: Scalars['Boolean'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID'];
   regulation_id: Scalars['BigInt'];
   regulations?: Maybe<Regulations>;
-  responseCollection?: Maybe<ResponseConnection>;
   section?: Maybe<Scalars['String']>;
   sem: Scalars['Int'];
   staff_mappingCollection?: Maybe<Staff_MappingConnection>;
@@ -1512,16 +1512,6 @@ export type FeedbackFeedback_QuestionsCollectionArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<Feedback_QuestionsOrderBy>>;
-};
-
-
-export type FeedbackResponseCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']>;
-  before?: InputMaybe<Scalars['Cursor']>;
-  filter?: InputMaybe<ResponseFilter>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Array<ResponseOrderBy>>;
 };
 
 
@@ -1559,6 +1549,7 @@ export type FeedbackFilter = {
   created_at?: InputMaybe<DatetimeFilter>;
   department_id?: InputMaybe<BigIntFilter>;
   id?: InputMaybe<BigIntFilter>;
+  is_published?: InputMaybe<BooleanFilter>;
   nodeId?: InputMaybe<IdFilter>;
   regulation_id?: InputMaybe<BigIntFilter>;
   section?: InputMaybe<StringFilter>;
@@ -1569,6 +1560,7 @@ export type FeedbackInsertInput = {
   batch?: InputMaybe<Scalars['Int']>;
   created_at?: InputMaybe<Scalars['Datetime']>;
   department_id?: InputMaybe<Scalars['BigInt']>;
+  is_published?: InputMaybe<Scalars['Boolean']>;
   regulation_id?: InputMaybe<Scalars['BigInt']>;
   section?: InputMaybe<Scalars['String']>;
   sem?: InputMaybe<Scalars['Int']>;
@@ -1587,6 +1579,7 @@ export type FeedbackOrderBy = {
   created_at?: InputMaybe<OrderByDirection>;
   department_id?: InputMaybe<OrderByDirection>;
   id?: InputMaybe<OrderByDirection>;
+  is_published?: InputMaybe<OrderByDirection>;
   regulation_id?: InputMaybe<OrderByDirection>;
   section?: InputMaybe<OrderByDirection>;
   sem?: InputMaybe<OrderByDirection>;
@@ -1596,6 +1589,7 @@ export type FeedbackUpdateInput = {
   batch?: InputMaybe<Scalars['Int']>;
   created_at?: InputMaybe<Scalars['Datetime']>;
   department_id?: InputMaybe<Scalars['BigInt']>;
+  is_published?: InputMaybe<Scalars['Boolean']>;
   regulation_id?: InputMaybe<Scalars['BigInt']>;
   section?: InputMaybe<Scalars['String']>;
   sem?: InputMaybe<Scalars['Int']>;
@@ -2006,11 +2000,11 @@ export type Response = Node & {
   __typename?: 'response';
   answerCollection?: Maybe<AnswerConnection>;
   created_at?: Maybe<Scalars['Datetime']>;
-  feedback?: Maybe<Feedback>;
   feedback_id?: Maybe<Scalars['BigInt']>;
   id: Scalars['BigInt'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID'];
+  staff_mapping?: Maybe<Staff_Mapping>;
   student_id?: Maybe<Scalars['UUID']>;
 };
 
@@ -2095,10 +2089,21 @@ export type Staff_Mapping = Node & {
   id: Scalars['BigInt'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID'];
+  responseCollection?: Maybe<ResponseConnection>;
   staff_id: Scalars['UUID'];
   staff_profile?: Maybe<Staff_Profile>;
   sub_id: Scalars['BigInt'];
   subject?: Maybe<Subject>;
+};
+
+
+export type Staff_MappingResponseCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']>;
+  before?: InputMaybe<Scalars['Cursor']>;
+  filter?: InputMaybe<ResponseFilter>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<ResponseOrderBy>>;
 };
 
 export type Staff_MappingConnection = {
@@ -2276,6 +2281,7 @@ export type Student_Profile = Node & {
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID'];
   roll_no?: Maybe<Scalars['BigInt']>;
+  section?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['Datetime']>;
 };
 
@@ -2307,6 +2313,7 @@ export type Student_ProfileFilter = {
   name?: InputMaybe<StringFilter>;
   nodeId?: InputMaybe<IdFilter>;
   roll_no?: InputMaybe<BigIntFilter>;
+  section?: InputMaybe<StringFilter>;
   updated_at?: InputMaybe<DatetimeFilter>;
 };
 
@@ -2317,6 +2324,7 @@ export type Student_ProfileInsertInput = {
   isNewUser?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
   roll_no?: InputMaybe<Scalars['BigInt']>;
+  section?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['Datetime']>;
 };
 
@@ -2335,6 +2343,7 @@ export type Student_ProfileOrderBy = {
   isNewUser?: InputMaybe<OrderByDirection>;
   name?: InputMaybe<OrderByDirection>;
   roll_no?: InputMaybe<OrderByDirection>;
+  section?: InputMaybe<OrderByDirection>;
   updated_at?: InputMaybe<OrderByDirection>;
 };
 
@@ -2345,6 +2354,7 @@ export type Student_ProfileUpdateInput = {
   isNewUser?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
   roll_no?: InputMaybe<Scalars['BigInt']>;
+  section?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['Datetime']>;
 };
 
@@ -2541,6 +2551,15 @@ export type EmployerResponseResultQueryQueryVariables = Exact<{
 
 export type EmployerResponseResultQueryQuery = { __typename?: 'Query', employer_responseCollection?: { __typename?: 'employer_responseConnection', edges: Array<{ __typename?: 'employer_responseEdge', node: { __typename?: 'employer_response', employer_name?: string | null, company?: string | null, created_at?: any | null, employer_answersCollection?: { __typename?: 'employer_answersConnection', edges: Array<{ __typename?: 'employer_answersEdge', node: { __typename?: 'employer_answers', answer?: number | null, question?: { __typename?: 'question', question_no?: number | null, question?: string | null } | null } }> } | null } }> } | null };
 
+export type GetStudFeedbackListQueryVariables = Exact<{
+  batch: Scalars['Int'];
+  dept: Scalars['BigInt'];
+  section?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetStudFeedbackListQuery = { __typename?: 'Query', feedbackCollection?: { __typename?: 'feedbackConnection', edges: Array<{ __typename?: 'feedbackEdge', node: { __typename?: 'feedback', id: any, sem: number, staff_mappingCollection?: { __typename?: 'staff_mappingConnection', edges: Array<{ __typename?: 'staff_mappingEdge', node: { __typename?: 'staff_mapping', id: any, subject?: { __typename?: 'subject', code: string, short_name?: string | null, name: string, id: any, is_theory: boolean } | null, responseCollection?: { __typename?: 'responseConnection', edges: Array<{ __typename?: 'responseEdge', node: { __typename?: 'response', id: any } }> } | null, staff_profile?: { __typename?: 'staff_profile', name?: string | null, departments?: { __typename?: 'departments', short_name: string, id: any } | null } | null } }> } | null } }> } | null };
+
 export type RegsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2562,5 +2581,6 @@ export const MyQueryDocument = {"kind":"Document","definitions":[{"kind":"Operat
 export const DeptSubjectQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"deptSubjectQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dept"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"BigInt"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"reg"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"BigInt"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"sem"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"BigInt"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dept_subjectCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"dept_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dept"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"reg_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"reg"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"sem"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"sem"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"subject"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"is_theory"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"category"}}]}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"sem"}},{"kind":"Field","name":{"kind":"Name","value":"departments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"short_name"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<DeptSubjectQueryQuery, DeptSubjectQueryQueryVariables>;
 export const EmployerFeedbackQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"EmployerFeedbackQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"questionCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"feedback_type"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"StringValue","value":"E","block":false}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"question_no"},"value":{"kind":"EnumValue","value":"AscNullsLast"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"question_no"}},{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"no_of_options"}}]}}]}}]}}]}}]} as unknown as DocumentNode<EmployerFeedbackQueryQuery, EmployerFeedbackQueryQueryVariables>;
 export const EmployerResponseResultQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"EmployerResponseResultQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"BigInt"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"employer_responseCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"employer_name"}},{"kind":"Field","name":{"kind":"Name","value":"company"}},{"kind":"Field","name":{"kind":"Name","value":"employer_answersCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"question"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"question_no"}},{"kind":"Field","name":{"kind":"Name","value":"question"}}]}},{"kind":"Field","name":{"kind":"Name","value":"answer"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}}]}}]}}]}}]}}]} as unknown as DocumentNode<EmployerResponseResultQueryQuery, EmployerResponseResultQueryQueryVariables>;
+export const GetStudFeedbackListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetStudFeedbackList"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"batch"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dept"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"BigInt"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"section"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}},"defaultValue":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"feedbackCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"batch"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"batch"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"department_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dept"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"section"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"section"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"staff_mappingCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"subject"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"short_name"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"is_theory"}}]}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"responseCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"staff_profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"departments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"short_name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"sem"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetStudFeedbackListQuery, GetStudFeedbackListQueryVariables>;
 export const RegsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"regs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"regulationsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"reg"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}}]}}]}}]}}]}}]} as unknown as DocumentNode<RegsQuery, RegsQueryVariables>;
 export const StaffListQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"staffListQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"staff_profileCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"staff_no"}},{"kind":"Field","name":{"kind":"Name","value":"departments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"short_name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"designation"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]} as unknown as DocumentNode<StaffListQueryQuery, StaffListQueryQueryVariables>;

@@ -6,10 +6,20 @@ import { supabase } from "@/supabase";
 import { Roles } from "@/types";
 import useLocalStorage from "@/hooks/useLocalStorage";
 
+type IProfile = {
+  batch: number | null;
+  dept_id: number | null;
+  id: string;
+  isNewUser: boolean;
+  section: string | null;
+  name: string | null;
+  roll_no: number | null;
+  updated_at: string | null;
+};
 export type IAuth = {
   user: User | null;
   session: Session | null;
-  profile?: any;
+  profile?: IProfile | null;
 };
 
 export interface IAuthContext {
@@ -31,6 +41,7 @@ export const AuthContext = createContext<IAuthContext | null>(null);
 
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [auth, setAuth] = useLocalStorage<IAuth>("auth", {
+    profile: null,
     user: null,
     session: null,
   });
@@ -68,7 +79,12 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
       alert(res.error.message);
       return res.error;
     }
-    setAuth(res.data);
+    const profile = await supabase
+      .from("student_profile")
+      .select("*")
+      .eq("id", res.data.user?.id)
+      .single();
+    setAuth({ ...res.data, profile: profile.data });
 
     return redirect();
   };

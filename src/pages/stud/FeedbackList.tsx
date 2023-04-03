@@ -30,6 +30,9 @@ const FeedbackList: FC = () => {
               <button
                 key={val.id}
                 disabled={!(val.responses?.length === 0)}
+                onClick={() =>
+                  navigate(`/stud/provide-feedback/${feedbackType}/${val.id}`)
+                }
                 className="flex w-full justify-between gap-4 rounded-xl border border-blue-200 stroke-blue-600 p-4 text-blue-800 disabled:cursor-not-allowed disabled:border-blue-100 disabled:bg-blue-50 disabled:stroke-blue-300 disabled:text-blue-400"
               >
                 <p className="text-base">{`${val.subject.name} (${val.subject.code})`}</p>

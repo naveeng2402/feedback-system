@@ -56,11 +56,11 @@ const getStudFeedbackList = graphql(`
 export const useGetStudFeedbackList = (
   batch: number,
   dept: number,
-  section: string
+  section?: string
 ) => {
   const [res, reExecuteQuery] = useQuery({
     query: getStudFeedbackList,
-    variables: { batch, dept, section },
+    variables: { batch, dept, section: section || "" },
   });
   const { fetching, data, error } = res;
 

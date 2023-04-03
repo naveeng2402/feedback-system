@@ -11,7 +11,7 @@ const StudentBase: FC = () => {
 
   const [showLogout, setShowLogout] = useState(false);
   useEffect(() => {
-    loc.pathname === "/stud/dashboard"
+    loc.pathname.includes("/stud/dashboard")
       ? setShowLogout(true)
       : setShowLogout(false);
   }, [loc]);

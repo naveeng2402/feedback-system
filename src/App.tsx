@@ -20,6 +20,7 @@ import Error403 from "./components/global/Error403";
 import ResponseResult from "./pages/admin/ResponseResult";
 import AlumniFeedback from "./pages/common/AlumniFeedback";
 import PublishFeedback from "./pages/admin/PublishFeedback";
+import Feedback from "./pages/stud/Feedback";
 
 function App() {
   return (
@@ -36,6 +37,10 @@ function App() {
 
       <Route path="/stud/" element={<ProtectedRoute roles={["stud"]} />}>
         <Route path="profile/" element={<StudentProfile />} />
+        <Route
+          path="provide-feedback/:feedbackType/:feedbackId"
+          element={<Feedback />}
+        />
         <Route element={<StudentBase />}>
           <Route path="dashboard/" element={<DashBoard />} />
           <Route

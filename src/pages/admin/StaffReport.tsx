@@ -5,9 +5,13 @@ import { ReactComponent as Print } from "@icons/Print.svg";
 import FeedbackDetails from "@/components/ui/FeedbackDetails";
 import BarChart from "@/components/ui/BarChart";
 import { ReactComponent as Star } from "@icons/Star.svg";
-import { HorizontalBarChart } from "@/components/ui/HorizontalBarChart";
+import HorizontalBarChart from "@/components/ui/HorizontalBarChart";
 import questions from "@/data/_staffQuestions.json";
 import { data, options } from "@/data/_staffReportBarChart.json";
+import {
+  Horizontaldata,
+  Horizontaloptions,
+} from "@/data/_staffReportHorizontalBar.json";
 
 const StaffReport: FC = () => {
   const rating = [
@@ -86,7 +90,10 @@ const StaffReport: FC = () => {
               >
                 <p className="font-semibold text-blue-800">{ques.question}</p>
                 <div className="max-w-[10rem]">
-                  <HorizontalBarChart />
+                  <HorizontalBarChart
+                    data={Horizontaldata}
+                    options={Horizontaloptions}
+                  />
                 </div>
               </div>
             );

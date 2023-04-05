@@ -439,7 +439,7 @@ export interface Database {
       }
       get_alumni_response_year_options_function: {
         Args: Record<PropertyKey, never>
-        Returns: string[]
+        Returns: unknown
       }
       get_employer_response_list: {
         Args: {
@@ -456,7 +456,7 @@ export interface Database {
       }
       get_employer_response_year_options_function: {
         Args: Record<PropertyKey, never>
-        Returns: string[]
+        Returns: unknown
       }
     }
     Enums: {

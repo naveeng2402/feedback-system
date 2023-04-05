@@ -7,6 +7,7 @@ const getStudFeedbackList = graphql(`
     $batch: Int!
     $dept: BigInt!
     $section: String = ""
+    $stud_id: UUID!
   ) {
     feedbackCollection(
       filter: {
@@ -28,7 +29,7 @@ const getStudFeedbackList = graphql(`
                   is_theory
                 }
                 id
-                responseCollection {
+                responseCollection(filter: { student_id: { eq: $stud_id } }) {
                   edges {
                     node {
                       id
@@ -56,11 +57,12 @@ const getStudFeedbackList = graphql(`
 export const useGetStudFeedbackList = (
   batch: number,
   dept: number,
+  stud_id: string,
   section?: string
 ) => {
   const [res, reExecuteQuery] = useQuery({
     query: getStudFeedbackList,
-    variables: { batch, dept, section: section || "" },
+    variables: { batch, dept, section: section || "", stud_id },
   });
   const { fetching, data, error } = res;
 

@@ -1,8 +1,9 @@
 import { FC, useContext, useEffect } from "react";
 import { ReactComponent as ArrowLong } from "@icons/ArrowLong.svg";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { AuthContext, IAuthContext } from "@/context/auth";
 import { useGetStudFeedbackList } from "@/graphql/queries/getStudFeedbackList";
+import { Button } from "@/components/ui";
 
 const FeedbackList: FC = () => {
   const { auth } = useContext(AuthContext) as IAuthContext;
@@ -12,6 +13,7 @@ const FeedbackList: FC = () => {
   const { data } = useGetStudFeedbackList(
     auth.profile?.batch!,
     auth.profile?.dept_id!,
+    auth.user?.id!,
     auth.profile?.section!
   );
 
@@ -23,7 +25,7 @@ const FeedbackList: FC = () => {
 
   return (
     <main className="space-y-4">
-      {data &&
+      {data && data.length > 0 ? (
         data[0].staffMapping?.map(
           (val) =>
             val.subject.type === feedbackType && (
@@ -39,7 +41,17 @@ const FeedbackList: FC = () => {
                 <ArrowLong className="h-8 w-8 -translate-y-0.5 " />
               </button>
             )
-        )}
+        )
+      ) : (
+        <div className="mx-auto w-fit space-y-4">
+          <p className="text-3xl font-semibold text-blue-800">
+            No Pending Feedbacks
+          </p>
+          <Button as={NavLink} className="mx-auto w-fit" to="/stud/dashboard">
+            Go Home
+          </Button>
+        </div>
+      )}
     </main>
   );
 };

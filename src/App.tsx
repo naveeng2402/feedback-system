@@ -21,11 +21,12 @@ import ResponseResult from "./pages/admin/ResponseResult";
 import AlumniFeedback from "./pages/common/AlumniFeedback";
 import PublishFeedback from "./pages/admin/PublishFeedback";
 import Feedback from "./pages/stud/Feedback";
+import UnProtectedRoute from "./components/global/UnProtectedRoute";
 
 function App() {
   return (
     <Routes>
-      <Route path="/">
+      <Route path="/" element={<UnProtectedRoute />}>
         <Route path="auth/" element={<AuthBase />}>
           <Route path="sign-up" element={<SignUp />} />
           <Route path="sign-in" element={<SignIn />} />

@@ -4,7 +4,7 @@ import Button from "@ui/Button";
 import { ReactComponent as Print } from "@icons/Print.svg";
 import FeedbackDetails from "@/components/ui/FeedbackDetails";
 import BarChart from "@/components/ui/BarChart";
-import { ReactComponent as Star } from "@icons/Star.svg";
+import { ReactComponent as Star } from "@icons/star.svg";
 import HorizontalBarChart from "@/components/ui/HorizontalBarChart";
 import questions from "@/data/_staffQuestions.json";
 import { data, options } from "@/data/_staffReportBarChart.json";

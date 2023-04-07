@@ -7,5 +7,5 @@
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
-  "cSpell.words": ["uncwjombmjfpeoigszsb"]
+  "cSpell.words": ["rgba", "uncwjombmjfpeoigszsb"]
 }

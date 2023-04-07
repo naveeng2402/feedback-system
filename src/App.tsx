@@ -23,6 +23,7 @@ import PublishFeedback from "./pages/admin/PublishFeedback";
 import Feedback from "./pages/stud/Feedback";
 import UnProtectedRoute from "./components/global/UnProtectedRoute";
 import ManageFeedbackList from "./pages/admin/ManageFeedbackList";
+import StaffReport from "./pages/admin/StaffReport";
 
 function App() {
   return (
@@ -70,15 +71,15 @@ function App() {
               path="response-list/:responseType"
               element={<ResponseList />}
             />
-            <Route path="reports/">
-              <Route
+            <Route path="reports/" element={<StaffReport />}>
+              {/* <Route
                 path="stud_course/"
                 element={<FeedbackResult report="stud_course" />}
               />
               <Route
                 path="stud_lab/"
                 element={<FeedbackResult report="stud_lab" />}
-              />
+              /> */}
             </Route>
           </Route>
         </Route>

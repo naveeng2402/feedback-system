@@ -37,5 +37,5 @@ export const useManageFeedbackList = () => {
     }));
   }, [data]);
 
-  return { data: dataNorm, fetching, error };
+  return { data: dataNorm, fetching, error, reExecuteQuery };
 };

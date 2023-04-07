@@ -51,6 +51,7 @@ export const useAlumniResponseYearOptionsQuery = (id?: string | number) => {
         alert(res.error.message);
         return;
       }
+      // @ts-ignore
       const dataNorm = res.data.map((year) => ({ id: year, text: year }));
 
       setYears(dataNorm);

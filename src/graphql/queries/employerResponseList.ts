@@ -23,6 +23,7 @@ export const useEmployerResponseQuery = (
           alert(res.error.message);
           return;
         }
+        // @ts-ignore
         const dataNorm: ResponseListQueryResult[] = res.data.map((val) => ({
           id: val.id,
           title: val.employer_name,
@@ -51,6 +52,7 @@ export const useEmployerResponseYearOptionsQuery = (id?: string | number) => {
         alert(res.error.message);
         return;
       }
+      // @ts-ignore
       const dataNorm = res.data.map((year) => ({ id: year, text: year }));
 
       setYears(dataNorm);

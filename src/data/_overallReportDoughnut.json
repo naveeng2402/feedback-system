@@ -1,0 +1,31 @@
+{
+  "Doughnutdata": {
+    "labels": ["Excellent", "Very Good", "Good", "Fair", "Poor"],
+    "datasets": [
+      {
+        "label": "# of Votes",
+        "data": [20, 20, 20, 20, 20],
+        "backgroundColor": [
+          "rgb(65,205,96)",
+          "rgb(142, 150, 255)",
+          "rgb(47, 128, 251)",
+          "rgb(255, 171, 75)",
+          "rgb(255, 94, 200)"
+        ],
+        "borderColor": [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(255, 159, 64, 1)"
+        ],
+        "borderWidth": 2,
+        "hoverOffset": 4
+      }
+    ]
+  },
+  "Doughnutoptions": {
+    "aspectRatio": 0.5,
+    "padAngle": 10
+  }
+}

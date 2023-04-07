@@ -22,6 +22,7 @@ import AlumniFeedback from "./pages/common/AlumniFeedback";
 import PublishFeedback from "./pages/admin/PublishFeedback";
 import Feedback from "./pages/stud/Feedback";
 import UnProtectedRoute from "./components/global/UnProtectedRoute";
+import ManageFeedbackList from "./pages/admin/ManageFeedbackList";
 
 function App() {
   return (
@@ -63,6 +64,7 @@ function App() {
             path="response-result/:responseType/:id"
             element={<ResponseResult />}
           />
+          <Route path="manage-feedback/" element={<ManageFeedbackList />} />
           <Route element={<AdminReportNav />}>
             <Route
               path="response-list/:responseType"

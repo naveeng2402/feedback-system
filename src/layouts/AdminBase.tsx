@@ -66,6 +66,8 @@ const AdminBase: FC = () => {
       setTitle("Responses");
     } else if (pathname.includes("/admin/response-result/")) {
       setTitle("Response Result");
+    } else if (pathname.includes("/admin/manage-feedback")) {
+      setTitle("Manage Feedback");
     }
   }, [pathname]);
 

@@ -15,6 +15,7 @@ const manageFeedbackList = graphql(
             batch
             created_at
             id
+            sem
           }
         }
       }
@@ -30,6 +31,7 @@ export const useManageFeedbackList = () => {
     return data?.feedbackCollection?.edges.map((item) => ({
       id: item.node.id,
       batch: item.node.batch,
+      sem: item.node.sem.toString(),
       created_at: strftime("%d-%m-%Y", new Date(item.node.created_at)),
       department: item.node.departments?.short_name,
     }));

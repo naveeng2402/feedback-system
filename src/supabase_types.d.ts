@@ -458,6 +458,12 @@ export interface Database {
         Args: Record<PropertyKey, never>
         Returns: unknown
       }
+      get_feedback_status: {
+        Args: {
+          _feedback_id: number
+        }
+        Returns: Json
+      }
     }
     Enums: {
       [_ in never]: never

@@ -6,6 +6,7 @@ import {
   BarElement,
 } from "chart.js";
 import { Bar, ChartProps } from "react-chartjs-2";
+import { chooseBarColor } from "./HorizontalBarChart";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement);
 
@@ -26,27 +27,21 @@ const BarChart: FC<BarChartProps> = ({ data }) => {
         grid: { display: false },
         beginAtZero: true,
         min: 0,
-        max: 5,
+        suggestedMax: 3,
         ticks: { stepSize: 1 },
       },
     },
   };
+
+  const { backgroundColor, borderColor } = chooseBarColor(data);
 
   const chartData: ChartProps<"bar">["data"] = {
     labels: data.map((item, idx) => `Q${idx + 1}`),
     datasets: [
       {
         data: data,
-        borderColor: [
-          "rgb(79, 186, 102)",
-          "rgb(234, 93, 102)",
-          "rgb(0, 89, 210)",
-        ],
-        backgroundColor: [
-          "rgb(79, 186, 102,0.5)",
-          "rgb(234, 93, 102,0.5)",
-          "rgb(0, 89, 210,0.5)",
-        ],
+        borderColor,
+        backgroundColor,
         barPercentage: 1,
         borderRadius: 3,
       },

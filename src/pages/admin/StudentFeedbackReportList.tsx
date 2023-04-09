@@ -39,7 +39,7 @@ const FilterModal: FC<FilterModalProps> = ({ isOpen, setIsOpen }) => {
   );
 };
 
-const FeedbackResult: FC<FeedbackResultProps> = ({ report }) => {
+const StudentFeedbackReportList: FC<FeedbackResultProps> = ({ report }) => {
   const [filterOpen, setFilterOpen] = useState(false);
 
   return (
@@ -59,4 +59,4 @@ const FeedbackResult: FC<FeedbackResultProps> = ({ report }) => {
   );
 };
 
-export default FeedbackResult;
+export default StudentFeedbackReportList;

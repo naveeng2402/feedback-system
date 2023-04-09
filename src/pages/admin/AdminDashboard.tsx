@@ -30,7 +30,7 @@ const AdminDashboard: FC = ({}) => {
       <Admin className="mx-auto pb-4" />
 
       <div className="mx-6 grid grid-cols-2 place-items-center items-stretch gap-x-10  gap-y-8 py-6 ">
-        <NavLink to="/admin/reports/stud_course" className="h-full w-full">
+        <NavLink to="/admin/reports/stud" className="h-full w-full">
           <NavigationCard icons={<Reports />} navigationTo="View Reports" />
         </NavLink>
         <NavLink to="/admin/response-list/employer" className="h-full w-full">

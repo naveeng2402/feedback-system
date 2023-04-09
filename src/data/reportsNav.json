@@ -1,12 +1,12 @@
 [
   {
-    "text": "Student(Course)",
-    "to": "/admin/reports/stud_course",
+    "text": "Student",
+    "to": "/admin/reports/stud",
     "icon": ""
   },
   {
-    "text": "Student(Lab)",
-    "to": "/admin/reports/stud_lab",
+    "text": "Staff",
+    "to": "/admin/reports/staff",
     "icon": ""
   }
 ]

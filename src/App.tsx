@@ -9,7 +9,7 @@ import StudentProfile from "./pages/auth/StudentProfile";
 import StudentBase from "./layouts/StudentBase";
 import { FeedbackList } from "@/pages/stud";
 import AdminBase, { AdminReportNav } from "./layouts/AdminBase";
-import { FeedbackResult } from "./pages/admin";
+import { StudentFeedbackReportList } from "./pages/admin";
 import StaffManagement from "./pages/admin/StaffManagement";
 import LandingPage from "./pages/common/LandingPage";
 import EmployerFeedback from "./pages/common/EmployerFeedback";
@@ -73,12 +73,12 @@ function App() {
             />
             <Route path="reports/">
               <Route
-                path="stud_course/"
-                element={<FeedbackResult report="stud_course" />}
+                path="stud/"
+                element={<StudentFeedbackReportList report="stud_course" />}
               />
               <Route
-                path="stud_lab/"
-                element={<FeedbackResult report="stud_lab" />}
+                path="staff/"
+                element={<StudentFeedbackReportList report="stud_lab" />}
               />
             </Route>
           </Route>

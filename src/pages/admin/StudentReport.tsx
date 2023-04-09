@@ -40,7 +40,7 @@ const StudentReport: FC = () => {
             return (
               <div
                 key={ques.question_no}
-                className="flex items-center justify-between overflow-scroll rounded-md bg-blue-100 px-4 py-3"
+                className="flex items-center justify-between overflow-auto rounded-md bg-blue-100 px-4 py-3"
               >
                 <p className="font-semibold text-blue-800">
                   {ques.question_no} {ques.question}

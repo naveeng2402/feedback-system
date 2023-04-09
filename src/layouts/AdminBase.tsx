@@ -1,4 +1,4 @@
-import reportsNav from "@/data/reportsNav.json";
+import reportsNav from "@/data/reportsNav";
 import responseNav from "@/data/responsesNav.json";
 import { ReactComponent as LeftArrow } from "@icons/LeftArrow.svg";
 import { FC, useEffect, useState } from "react";
@@ -24,7 +24,11 @@ const AdminReportNav: FC = () => {
 
   return (
     <>
-      <section className="flex w-full gap-4 border-y py-2 px-4 text-gray-500">
+      <section
+        className={`flex w-full gap-4 px-4 text-gray-500 ${
+          navLinks?.length === 0 ? "" : "border-y py-2"
+        } `}
+      >
         {navLinks?.map((nav, idx) => (
           <NavLink
             key={idx}

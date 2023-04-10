@@ -1,50 +1,30 @@
 import { BaseDropdown, Button } from "@/components/ui";
+import FilterModal from "@/components/ui/FilterModal";
+import { useDeptsQuery } from "@/graphql/queries/deptOptions";
+import { useGetStudentFeedbackBatch } from "@/graphql/queries/getStudentFeedbackBatch";
 import { Dialog } from "@headlessui/react";
-import FeedbackCard from "@ui/FeedbackCard";
-import { ReactComponent as XMark } from "@icons/XMark.svg";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
-interface FeedbackResultProps {
-  report: "stud_course" | "stud_lab";
-}
-
-interface FilterModalProps {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const FilterModal: FC<FilterModalProps> = ({ isOpen, setIsOpen }) => {
-  return (
-    <Dialog open={isOpen} onClose={setIsOpen} className="fixed inset-0">
-      <Dialog.Overlay className="fixed inset-0 bg-gray-700/80" />
-      <Dialog.Panel className="relative ml-auto flex h-screen w-3/4 flex-col gap-4 rounded-tl-3xl rounded-bl-3xl bg-white p-2 pt-8 text-gray-50 ">
-        <h2 className="text-4xl text-blue-800">Filters</h2>
-
-        <div className="">
-          <p>Add Filters</p>
-        </div>
-
-        <div className="mt-auto mb-4 flex w-full gap-4 px-2">
-          <Button
-            onClick={() => setIsOpen(false)}
-            className="w-full"
-            intent="inactive"
-          >
-            Close
-          </Button>
-          <Button className="w-full">Apply</Button>
-        </div>
-      </Dialog.Panel>
-    </Dialog>
-  );
-};
-
-const StudentFeedbackReportList: FC<FeedbackResultProps> = ({ report }) => {
+const StudentFeedbackReportList: FC = () => {
   const [filterOpen, setFilterOpen] = useState(false);
+
+  const batchOptions = useGetStudentFeedbackBatch({});
+  const { data: _deptsOptions } = useDeptsQuery();
+  const [deptOptions, setDeptOptions] = useState(_deptsOptions);
+  useEffect(() => {
+    if (_deptsOptions.length > 1) {
+      setDeptOptions([{ id: "", text: "---" }, ..._deptsOptions]);
+    }
+  }, [_deptsOptions]);
+
+  const [batch, setBatch] = useState(batchOptions[0]);
+  const [dept, setDept] = useState(deptOptions[0]);
+
+  const onModalApply = () => {};
 
   return (
     <>
-      <div className="w-full">
+      <div className="my-2 w-full">
         <Button
           onClick={() => setFilterOpen(true)}
           intent="inactive"
@@ -54,7 +34,26 @@ const StudentFeedbackReportList: FC<FeedbackResultProps> = ({ report }) => {
         </Button>
       </div>
 
-      <FilterModal isOpen={filterOpen} setIsOpen={setFilterOpen} />
+      <FilterModal
+        isOpen={filterOpen}
+        setIsOpen={setFilterOpen}
+        onApply={onModalApply}
+      >
+        <div className="space-y-2">
+          <BaseDropdown
+            label="Batch"
+            value={batch}
+            setValue={setBatch}
+            options={batchOptions}
+          />
+          <BaseDropdown
+            label="Department"
+            value={dept}
+            setValue={setDept}
+            options={deptOptions}
+          />
+        </div>
+      </FilterModal>
     </>
   );
 };

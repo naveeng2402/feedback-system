@@ -7,7 +7,7 @@
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
-  "cSpell.words": ["rgba", "uncwjombmjfpeoigszsb"],
+  "cSpell.words": ["Depts", "rgba", "uncwjombmjfpeoigszsb"],
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
   }

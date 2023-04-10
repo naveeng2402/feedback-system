@@ -474,6 +474,23 @@ export interface Database {
         }
         Returns: Json
       }
+      get_student_feedback_batch_list:
+        | {
+            Args: {
+              dept_id: number
+            }
+            Returns: unknown
+          }
+        | {
+            Args: Record<PropertyKey, never>
+            Returns: unknown
+          }
+        | {
+            Args: {
+              dept_id: number
+            }
+            Returns: unknown
+          }
     }
     Enums: {
       [_ in never]: never

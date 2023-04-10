@@ -45,7 +45,6 @@ const AdminDashboard: FC = ({}) => {
             navigationTo="Add staff & designation"
           />
         </NavLink>
-        <NavigationCard icons={<Graph />} navigationTo="View Staff Reports" />
         <NavLink to="/admin/publish-feedback" className="w-full">
           <NavigationCard icons={<Publish />} navigationTo="Publish Forms" />
         </NavLink>

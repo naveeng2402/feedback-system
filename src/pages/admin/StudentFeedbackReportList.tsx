@@ -105,10 +105,23 @@ const StudentFeedbackReportList: FC = () => {
   const [batch, setBatch] = useState(batchOptions[0]);
   const [dept, setDept] = useState(deptOptions[0]);
   const [params, setParams] = useState({});
+  useEffect(() => {
+    let val = {};
+    if (batch) {
+      val = { ...val, batch: parseInt(batch.text) };
+      if (dept) {
+        val = { ...val, dept: parseInt(dept.id) };
+      }
+    }
+
+    setParams(val);
+  }, [batch, dept]);
 
   const { data: response } = useManageFeedbackList(false, params);
 
-  const onModalApply = () => {};
+  const onModalApply = () => {
+    setFilterOpen(false);
+  };
 
   const [selectedFeedbackId, setSelectedFeedbackId] = useState<number>();
   const [selectedFeedback, setSelectedFeedback] =
@@ -157,6 +170,7 @@ const StudentFeedbackReportList: FC = () => {
             <>
               {response.map((resp) => (
                 <ReportListItem
+                  key={resp.id}
                   title={`${resp.department} - ${resp.batch}`}
                   subtitle={resp.sem.toString()}
                   onClick={() => {

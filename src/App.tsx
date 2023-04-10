@@ -72,14 +72,8 @@ function App() {
               element={<ResponseList />}
             />
             <Route path="reports/">
-              <Route
-                path="stud/"
-                element={<StudentFeedbackReportList report="stud_course" />}
-              />
-              <Route
-                path="staff/"
-                element={<StudentFeedbackReportList report="stud_lab" />}
-              />
+              <Route path="stud/" element={<StudentFeedbackReportList />} />
+              <Route path="staff/" element={<StudentFeedbackReportList />} />
             </Route>
           </Route>
           <Route

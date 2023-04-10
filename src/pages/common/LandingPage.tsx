@@ -4,6 +4,7 @@ import { ReactComponent as Logout } from "@icons/Logout.svg";
 import FeedbackCard from "@ui/FeedbackCard";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui";
+import { ReactComponent as JecLogo } from "@/assets/illustrations/jec-logo.svg";
 
 const LandingPage: FC = () => {
   const navigate = useNavigate();
@@ -13,7 +14,8 @@ const LandingPage: FC = () => {
         <Logout />
         Login
       </Button>
-      <header className="space-y-4 text-center text-2xl text-blue-800">
+      <header className="flex items-center justify-between text-center text-2xl text-blue-800">
+        <JecLogo className="h-24 w-24" />
         <h1 className="text-4xl font-semibold text-blue-800">
           Jaya Engineering College
         </h1>

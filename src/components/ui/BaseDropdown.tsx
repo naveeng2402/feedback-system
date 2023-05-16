@@ -44,7 +44,7 @@ const BaseDropdown: FC<DropdownProps> = ({
               )}`}
             />
           </Listbox.Button>
-          <Listbox.Options className="absolute z-10 my-1 flex max-h-32 w-full flex-col gap-2  overflow-scroll rounded-xl border-2 border-blue-500 bg-white px-2 py-4 text-blue-900">
+          <Listbox.Options className="absolute z-10 my-1 flex max-h-32 w-full flex-col gap-2 overflow-y-auto overflow-x-hidden  rounded-xl border-2 border-blue-500 bg-white px-2 py-4 text-blue-900 scrollbar-thin scrollbar-thumb-blue-200/75">
             {options.map((option) => (
               <Listbox.Option
                 key={option.id}

@@ -50,7 +50,10 @@ const ThankYouModal: FC<ThankYouModalProps> = ({ isOpen, setIsOpen }) => {
   );
 };
 
-const FeedbackDataItem: FC<FeedbackDataItemProps> = ({ prompt, value }) => (
+export const FeedbackDataItem: FC<FeedbackDataItemProps> = ({
+  prompt,
+  value,
+}) => (
   <div className="flex w-full gap-2">
     <p className="font-semibold text-[#556085]">{prompt}:</p>
     <p className="flex-grow text-[#556085]">{value}</p>

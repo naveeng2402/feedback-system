@@ -3,6 +3,7 @@ import { ReactComponent as SignInIllustration } from "@/assets/illustrations/Sig
 import { ReactComponent as SignUpIllustration } from "@/assets/illustrations/SignUp.svg";
 import { useContext } from "react";
 import { AuthContext, IAuthContext } from "@/context/auth";
+import { ReactComponent as JecLogo } from "@/assets/illustrations/jec-logo.svg";
 import { signUpAdmin } from "@/utils";
 
 const AuthBase = () => {
@@ -17,9 +18,12 @@ const AuthBase = () => {
     <div>
       <div className="flex  min-h-[96vh] flex-col items-center justify-center gap-4 p-2 ">
         <header className="space-y-4 text-center text-2xl text-blue-800">
-          <h1 className="text-4xl font-semibold text-blue-800">
-            Jaya Engineering College
-          </h1>
+          <div className="mx-4 flex items-center">
+            <JecLogo className="h-24 w-24" />
+            <h1 className="text-4xl font-semibold text-blue-800">
+              Jaya Engineering College
+            </h1>
+          </div>
           <h2 className="font-semibold">Feedback System</h2>
         </header>
         <Illustration className="max-h-[40vh] w-3/4" />

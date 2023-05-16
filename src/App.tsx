@@ -9,7 +9,7 @@ import StudentProfile from "./pages/auth/StudentProfile";
 import StudentBase from "./layouts/StudentBase";
 import { FeedbackList } from "@/pages/stud";
 import AdminBase, { AdminReportNav } from "./layouts/AdminBase";
-import { FeedbackResult } from "./pages/admin";
+import { StudentFeedbackReportList } from "./pages/admin";
 import StaffManagement from "./pages/admin/StaffManagement";
 import LandingPage from "./pages/common/LandingPage";
 import EmployerFeedback from "./pages/common/EmployerFeedback";
@@ -22,6 +22,8 @@ import AlumniFeedback from "./pages/common/AlumniFeedback";
 import PublishFeedback from "./pages/admin/PublishFeedback";
 import Feedback from "./pages/stud/Feedback";
 import UnProtectedRoute from "./components/global/UnProtectedRoute";
+import ManageFeedbackList from "./pages/admin/ManageFeedbackList";
+import StudentReport from "./pages/admin/StudentReport";
 
 function App() {
   return (
@@ -63,22 +65,21 @@ function App() {
             path="response-result/:responseType/:id"
             element={<ResponseResult />}
           />
+          <Route path="manage-feedback/" element={<ManageFeedbackList />} />
           <Route element={<AdminReportNav />}>
             <Route
               path="response-list/:responseType"
               element={<ResponseList />}
             />
             <Route path="reports/">
-              <Route
-                path="stud_course/"
-                element={<FeedbackResult report="stud_course" />}
-              />
-              <Route
-                path="stud_lab/"
-                element={<FeedbackResult report="stud_lab" />}
-              />
+              <Route path="stud/" element={<StudentFeedbackReportList />} />
+              <Route path="staff/" element={<StudentFeedbackReportList />} />
             </Route>
           </Route>
+          <Route
+            path="student-report/:feedbackId"
+            element={<StudentReport />}
+          />
         </Route>
       </Route>
 

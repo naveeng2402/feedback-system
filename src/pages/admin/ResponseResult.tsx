@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { EmployerFeedbackOptions } from "@/pages/common/EmployerFeedback";
 import { useEmployerResponseResultQuery } from "@/graphql/queries/employerReponseResultQuery";
@@ -6,6 +6,7 @@ import { useAlumniResponseResultQuery } from "@/graphql/queries/alumniReponseRes
 import Error404 from "@/components/global/Error404";
 import { Nullable } from "@/types";
 import RatingChip from "@/components/ui/RatingChip";
+import BarChart from "@/components/ui/BarChart";
 
 interface ResponseResultHeaderProps {
   cardTitle: string;
@@ -98,6 +99,11 @@ const ResponseResult: FC = () => {
       setIsErr(true);
   }, [loading]);
 
+  const graphData = useMemo(
+    () => data.answers?.map((item) => item.answer),
+    [data]
+  );
+
   return (
     <>
       {isErr ? (
@@ -115,6 +121,7 @@ const ResponseResult: FC = () => {
             className="mx-4 my-8 ml-auto w-fit"
           />
           <main className="mx-4 my-8 space-y-4">
+            {graphData && <BarChart data={graphData as number[]} />}
             {data.answers?.map((value, idx) => (
               <ResponseResultAnswer key={idx} {...value} />
             ))}

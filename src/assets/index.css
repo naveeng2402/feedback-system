@@ -10,3 +10,7 @@
     @apply bg-blue-700 fill-white stroke-white text-white;
   }
 }
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}

@@ -423,6 +423,16 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
+      generate_student_report: {
+        Args: {
+          _feedback_id: number
+        }
+        Returns: {
+          question_no: number
+          question: string
+          average: number
+        }[]
+      }
       get_alumni_response_list: {
         Args: {
           from_year: number
@@ -458,6 +468,29 @@ export interface Database {
         Args: Record<PropertyKey, never>
         Returns: unknown
       }
+      get_feedback_status: {
+        Args: {
+          _feedback_id: number
+        }
+        Returns: Json
+      }
+      get_student_feedback_batch_list:
+        | {
+            Args: {
+              dept_id: number
+            }
+            Returns: unknown
+          }
+        | {
+            Args: Record<PropertyKey, never>
+            Returns: unknown
+          }
+        | {
+            Args: {
+              dept_id: number
+            }
+            Returns: unknown
+          }
     }
     Enums: {
       [_ in never]: never

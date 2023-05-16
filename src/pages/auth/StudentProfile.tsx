@@ -24,6 +24,7 @@ const StudentProfile = () => {
   const [name, setName] = useState("");
   const [roll_no, setRegNo] = useState("");
   const [batch, setBatch] = useState("2023");
+  const [section, setSection] = useState("");
   const [stream, setStream] = useState(streams[0]);
 
   const navigate = useNavigate();
@@ -33,8 +34,9 @@ const StudentProfile = () => {
       .from("student_profile")
       .update({
         batch: parseInt(batch),
-        roll_no:parseInt(roll_no),
+        roll_no: parseInt(roll_no),
         name,
+        section,
         dept_id: parseInt(stream.id),
         isNewUser: false,
       })
@@ -78,6 +80,14 @@ const StudentProfile = () => {
           name="Batch"
           placeholder="2023"
           type="number"
+        />
+        <Input
+          id="section"
+          value={section}
+          setValue={setSection}
+          name="Section"
+          placeholder=""
+          type="text"
         />
         <BaseDropdown
           label="Stream"

@@ -1,2 +1,2 @@
-import FeedbackResult from "./FeedbackResult";
-export { FeedbackResult };
+import StudentFeedbackReportList from "./StudentFeedbackReportList";
+export { StudentFeedbackReportList };

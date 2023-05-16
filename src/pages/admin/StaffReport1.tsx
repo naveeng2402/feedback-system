@@ -74,7 +74,7 @@ const StaffReport: FC = () => {
         />
       </div>
       <div className="w-full py-4 px-4">
-        <BarChart data={data} options={options} />
+        {/* <BarChart data={data} options={options} /> */}
       </div>
       <div>
         <p className="px-3 text-2xl font-semibold text-blue-800">
@@ -102,7 +102,7 @@ const StaffReport: FC = () => {
                 <div className="max-w-[10rem]">
                   <HorizontalBarChart
                     data={Horizontaldata}
-                    options={Horizontaloptions}
+                    // options={Horizontaloptions}
                   />
                 </div>
               </div>

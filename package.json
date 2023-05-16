@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
     "codegen:graphql": "graphql-codegen",
     "codegen:supabase": "supabase gen types typescript --project-id \"uncwjombmjfpeoigszsb\" --schema public > src/supabase_types.d.ts",
@@ -22,6 +22,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.1",
     "supabase": "^1.42.5",
+    "tailwind-scrollbar": "^3.0.0",
     "urql": "^3.0.3"
   },
   "devDependencies": {
